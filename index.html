@@ -1,0 +1,1606 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Dhurata — Lista e Dhuratave për Dasma & Lindje</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --gold:#C4956A;
+  --gold-dark:#A07550;
+  --rose:#8B5E52;
+  --cream:#FDF8F3;
+  --cream2:#F5EDE3;
+  --cream3:#EDE0D0;
+  --dark:#2C1810;
+  --dark2:#4A2E22;
+  --muted:#8A7060;
+  --light-rose:#F0E4DC;
+  --white:#FFFCFA;
+  --success:#6B8F5E;
+}
+
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--cream);color:var(--dark);overflow-x:hidden;line-height:1.6}
+
+/* ─── SCROLLBAR ─── */
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:var(--cream2)}
+::-webkit-scrollbar-thumb{background:var(--gold);border-radius:3px}
+
+/* ─── NAV ─── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1.1rem 4rem;
+  transition:all 0.3s;
+}
+nav.scrolled{
+  background:rgba(253,248,243,0.95);
+  backdrop-filter:blur(12px);
+  box-shadow:0 1px 0 rgba(196,149,106,0.2);
+}
+.nav-logo{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.9rem;font-weight:700;letter-spacing:-0.01em;
+  color:var(--dark);text-decoration:none;
+  display:flex;align-items:center;gap:0.4rem;
+}
+.nav-logo span{color:var(--gold)}
+.nav-links{display:flex;gap:2.5rem;list-style:none}
+.nav-links a{
+  text-decoration:none;color:var(--muted);
+  font-size:0.88rem;font-weight:500;letter-spacing:0.04em;
+  transition:color 0.2s;
+}
+.nav-links a:hover{color:var(--dark)}
+.nav-actions{display:flex;gap:0.75rem;align-items:center}
+.btn-outline{
+  border:1.5px solid var(--gold);color:var(--gold);
+  background:transparent;padding:0.55rem 1.4rem;
+  border-radius:100px;font-size:0.88rem;font-weight:500;
+  cursor:pointer;transition:all 0.2s;font-family:inherit;
+  white-space:nowrap;
+}
+.btn-outline:hover{background:var(--gold);color:white}
+.btn-fill{
+  background:var(--dark);color:white;
+  border:none;padding:0.6rem 1.5rem;
+  border-radius:100px;font-size:0.88rem;font-weight:600;
+  cursor:pointer;transition:all 0.2s;font-family:inherit;
+  white-space:nowrap;
+}
+.btn-fill:hover{background:var(--dark2);transform:translateY(-1px)}
+
+/* ─── HERO ─── */
+#hero{
+  min-height:100vh;
+  display:flex;align-items:center;justify-content:center;
+  flex-direction:column;text-align:center;
+  padding:7rem 2rem 4rem;
+  position:relative;overflow:hidden;
+}
+.hero-bg{
+  position:absolute;inset:0;z-index:0;
+  background:radial-gradient(ellipse 80% 60% at 50% 30%,rgba(196,149,106,0.12),transparent),
+             radial-gradient(ellipse 60% 80% at 80% 80%,rgba(139,94,82,0.08),transparent);
+}
+.hero-ornament{
+  position:absolute;
+  opacity:0.06;font-size:40rem;line-height:1;
+  font-family:'Cormorant Garamond',serif;
+  color:var(--gold);top:-4rem;right:-8rem;
+  user-select:none;pointer-events:none;
+}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:0.5rem;
+  background:var(--light-rose);border:1px solid var(--cream3);
+  padding:0.4rem 1.1rem;border-radius:100px;
+  font-size:0.78rem;font-weight:600;color:var(--rose);
+  letter-spacing:0.08em;text-transform:uppercase;
+  margin-bottom:2rem;position:relative;z-index:1;
+  animation:fadeUp 0.7s 0.1s both;
+}
+.hero-badge::before{
+  content:'';width:6px;height:6px;background:var(--gold);
+  border-radius:50%;animation:pulse 2s infinite;
+}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.5;transform:scale(1.6)}}
+
+.hero-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(3.2rem,7vw,6.5rem);
+  font-weight:600;line-height:1.0;
+  letter-spacing:-0.02em;
+  position:relative;z-index:1;
+  animation:fadeUp 0.7s 0.2s both;
+}
+.hero-title em{font-style:italic;color:var(--gold)}
+.hero-title .line2{display:block;font-weight:300;font-style:italic;color:var(--dark2)}
+
+.hero-sub{
+  margin-top:1.5rem;font-size:1.05rem;color:var(--muted);
+  max-width:500px;line-height:1.75;
+  position:relative;z-index:1;
+  animation:fadeUp 0.7s 0.35s both;
+}
+
+.hero-cta{
+  display:flex;gap:1rem;margin-top:2.5rem;
+  position:relative;z-index:1;
+  animation:fadeUp 0.7s 0.5s both;
+  flex-wrap:wrap;justify-content:center;
+}
+.btn-hero{
+  background:var(--gold);color:white;
+  border:none;padding:1rem 2.5rem;border-radius:100px;
+  font-family:inherit;font-size:1rem;font-weight:600;cursor:pointer;
+  transition:all 0.2s;
+  box-shadow:0 8px 30px rgba(196,149,106,0.4);
+}
+.btn-hero:hover{background:var(--gold-dark);transform:translateY(-2px);box-shadow:0 12px 40px rgba(196,149,106,0.5)}
+.btn-hero-ghost{
+  background:transparent;color:var(--dark);
+  border:1.5px solid var(--cream3);
+  padding:1rem 2.5rem;border-radius:100px;
+  font-family:inherit;font-size:1rem;font-weight:500;cursor:pointer;
+  transition:all 0.2s;
+}
+.btn-hero-ghost:hover{border-color:var(--dark);background:var(--dark);color:white}
+
+.hero-stats{
+  display:flex;gap:4rem;margin-top:5rem;
+  position:relative;z-index:1;
+  animation:fadeUp 0.7s 0.7s both;
+  border-top:1px solid var(--cream3);padding-top:2.5rem;
+}
+.stat-num{
+  font-family:'Cormorant Garamond',serif;
+  font-size:2.4rem;font-weight:700;color:var(--dark);
+  line-height:1;
+}
+.stat-num span{color:var(--gold)}
+.stat-label{font-size:0.8rem;color:var(--muted);margin-top:0.3rem;font-weight:500;letter-spacing:0.03em}
+
+/* ─── OCCASIONS STRIP ─── */
+.occasions{
+  display:flex;justify-content:center;align-items:center;
+  gap:3rem;padding:2rem 4rem;
+  background:var(--dark);
+  overflow:hidden;
+}
+.occasion-item{
+  display:flex;align-items:center;gap:0.8rem;
+  color:rgba(255,255,255,0.6);font-size:0.85rem;font-weight:500;
+  letter-spacing:0.05em;text-transform:uppercase;white-space:nowrap;
+}
+.occasion-icon{font-size:1.1rem}
+.occasion-sep{color:rgba(196,149,106,0.4);font-size:1.2rem}
+
+/* ─── HOW IT WORKS ─── */
+#how{padding:8rem 4rem;max-width:1200px;margin:0 auto;text-align:center}
+.section-tag{
+  font-size:0.75rem;font-weight:600;letter-spacing:0.12em;
+  text-transform:uppercase;color:var(--gold);margin-bottom:1rem;
+}
+.section-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(2.2rem,4vw,3.5rem);font-weight:600;
+  line-height:1.1;letter-spacing:-0.02em;
+}
+.section-title em{font-style:italic;color:var(--rose)}
+
+.steps{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:2rem;margin-top:4rem;position:relative;
+}
+.steps::before{
+  content:'';position:absolute;top:2.8rem;left:12%;right:12%;
+  height:1px;background:repeating-linear-gradient(90deg,var(--cream3) 0,var(--cream3) 8px,transparent 8px,transparent 18px);
+  z-index:0;
+}
+.step{
+  position:relative;z-index:1;
+  background:var(--white);border:1px solid var(--cream3);
+  border-radius:20px;padding:2.2rem 1.5rem;
+  transition:transform 0.3s,box-shadow 0.3s;
+}
+.step:hover{transform:translateY(-6px);box-shadow:0 20px 50px rgba(44,24,16,0.08)}
+.step-num{
+  width:48px;height:48px;border-radius:50%;
+  background:var(--light-rose);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.5rem;font-weight:700;color:var(--gold);
+  margin:0 auto 1.5rem;
+}
+.step-title{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;margin-bottom:0.6rem}
+.step-desc{font-size:0.88rem;color:var(--muted);line-height:1.7}
+
+/* ─── OCCASIONS SECTION ─── */
+#occasions{
+  padding:8rem 4rem;
+  background:var(--dark);
+  text-align:center;
+}
+#occasions .section-tag{color:var(--gold)}
+#occasions .section-title{color:white}
+#occasions .section-title em{color:var(--gold)}
+
+.occ-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:2rem;
+  max-width:900px;margin:4rem auto 0;
+}
+.occ-card{
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(196,149,106,0.2);
+  border-radius:28px;padding:3rem;
+  text-align:left;cursor:pointer;
+  transition:all 0.3s;position:relative;overflow:hidden;
+}
+.occ-card::before{
+  content:'';position:absolute;inset:0;
+  opacity:0;transition:opacity 0.3s;
+  background:linear-gradient(135deg,rgba(196,149,106,0.08),rgba(139,94,82,0.06));
+}
+.occ-card:hover::before{opacity:1}
+.occ-card:hover{border-color:rgba(196,149,106,0.5);transform:translateY(-4px)}
+.occ-emoji{font-size:2.5rem;margin-bottom:1.5rem}
+.occ-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.8rem;font-weight:600;color:white;
+  margin-bottom:0.75rem;
+}
+.occ-desc{font-size:0.9rem;color:rgba(255,255,255,0.55);line-height:1.7}
+.occ-link{
+  display:inline-flex;align-items:center;gap:0.5rem;
+  margin-top:1.5rem;font-size:0.85rem;font-weight:600;
+  color:var(--gold);transition:gap 0.2s;
+}
+.occ-card:hover .occ-link{gap:0.9rem}
+
+/* ─── FEATURES ─── */
+#features{padding:8rem 4rem;max-width:1200px;margin:0 auto}
+.features-header{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:4rem;align-items:center;margin-bottom:5rem;
+}
+.feat-list{
+  display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;
+}
+.feat-item{
+  display:flex;gap:1rem;align-items:flex-start;
+  background:var(--white);border:1px solid var(--cream3);
+  border-radius:16px;padding:1.5rem;
+  transition:transform 0.2s;
+}
+.feat-item:hover{transform:translateY(-3px)}
+.feat-icon{
+  width:40px;height:40px;border-radius:10px;
+  background:var(--light-rose);display:flex;align-items:center;
+  justify-content:center;font-size:1.1rem;flex-shrink:0;
+}
+.feat-title{font-weight:600;font-size:0.92rem;margin-bottom:0.3rem}
+.feat-desc{font-size:0.82rem;color:var(--muted);line-height:1.6}
+
+/* ─── TESTIMONIALS ─── */
+#testimonials{
+  padding:8rem 4rem;
+  background:var(--cream2);
+  text-align:center;
+}
+.testi-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:1.5rem;max-width:1100px;margin:4rem auto 0;
+}
+.testi-card{
+  background:var(--white);border:1px solid var(--cream3);
+  border-radius:20px;padding:2rem;text-align:left;
+}
+.testi-stars{color:var(--gold);font-size:0.9rem;margin-bottom:1rem;letter-spacing:0.2em}
+.testi-text{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.15rem;font-style:italic;
+  color:var(--dark2);line-height:1.6;margin-bottom:1.5rem;
+}
+.testi-author{
+  display:flex;align-items:center;gap:0.75rem;
+}
+.testi-avatar{
+  width:40px;height:40px;border-radius:50%;
+  background:var(--light-rose);display:flex;align-items:center;
+  justify-content:center;font-family:'Cormorant Garamond',serif;
+  font-size:1.1rem;font-weight:600;color:var(--rose);
+}
+.testi-name{font-size:0.88rem;font-weight:600}
+.testi-loc{font-size:0.78rem;color:var(--muted)}
+
+/* ─── PRICING ─── */
+#pricing{padding:8rem 4rem;max-width:1100px;margin:0 auto;text-align:center}
+.price-grid{
+  display:grid;grid-template-columns:1fr 1fr 1fr;
+  gap:1.5rem;margin-top:4rem;
+}
+.price-card{
+  background:var(--white);border:1px solid var(--cream3);
+  border-radius:24px;padding:2.5rem;text-align:left;
+  position:relative;transition:transform 0.3s;
+}
+.price-card:hover{transform:translateY(-6px)}
+.price-card.featured{
+  background:var(--dark);border-color:transparent;
+}
+.price-card.featured *{color:white!important}
+.price-tag{
+  display:inline-block;
+  background:var(--light-rose);color:var(--rose);
+  font-size:0.72rem;font-weight:700;letter-spacing:0.06em;
+  text-transform:uppercase;padding:0.3rem 0.8rem;border-radius:100px;
+  margin-bottom:1.5rem;
+}
+.price-card.featured .price-tag{background:rgba(196,149,106,0.25);color:var(--gold)}
+.price-name{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.6rem;font-weight:600;margin-bottom:0.5rem;
+}
+.price-amount{
+  font-family:'Cormorant Garamond',serif;
+  font-size:2.8rem;font-weight:700;line-height:1;
+  margin-bottom:0.3rem;color:var(--dark);
+}
+.price-amount small{font-size:1rem;font-weight:400}
+.price-desc{font-size:0.82rem;color:var(--muted);margin-bottom:2rem}
+.price-features{list-style:none;margin-bottom:2rem}
+.price-features li{
+  font-size:0.88rem;padding:0.5rem 0;
+  border-bottom:1px solid var(--cream3);
+  display:flex;align-items:center;gap:0.6rem;color:var(--dark);
+}
+.price-card.featured .price-features li{border-color:rgba(255,255,255,0.1)}
+.price-features li::before{content:'✓';color:var(--gold);font-weight:700;flex-shrink:0}
+.btn-price{
+  width:100%;padding:0.85rem;border-radius:100px;
+  font-family:inherit;font-size:0.92rem;font-weight:600;
+  cursor:pointer;transition:all 0.2s;
+}
+.btn-price.outline{background:transparent;border:1.5px solid var(--cream3);color:var(--dark)}
+.btn-price.outline:hover{border-color:var(--dark);background:var(--dark);color:white}
+.btn-price.solid{background:var(--gold);border:none;color:white;box-shadow:0 8px 24px rgba(196,149,106,0.4)}
+.btn-price.solid:hover{background:var(--gold-dark)}
+
+/* ─── CTA BAND ─── */
+#cta-band{
+  padding:8rem 4rem;
+  background:linear-gradient(135deg,var(--dark),var(--dark2));
+  text-align:center;position:relative;overflow:hidden;
+}
+#cta-band::before{
+  content:'ﾟ';font-family:'Cormorant Garamond',serif;
+  font-size:60rem;position:absolute;top:-20rem;right:-20rem;
+  color:rgba(196,149,106,0.03);line-height:1;
+  pointer-events:none;
+}
+#cta-band .section-title{color:white}
+#cta-band .section-title em{color:var(--gold)}
+#cta-band p{color:rgba(255,255,255,0.55);margin-top:1rem;font-size:1rem}
+
+/* ─── FOOTER ─── */
+footer{
+  background:var(--dark);
+  border-top:1px solid rgba(255,255,255,0.06);
+  padding:3rem 4rem;
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:1rem;
+}
+.footer-logo{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.6rem;font-weight:700;color:white;
+}
+.footer-logo span{color:var(--gold)}
+.footer-links{display:flex;gap:2rem}
+.footer-links a{color:rgba(255,255,255,0.4);text-decoration:none;font-size:0.85rem;transition:color 0.2s}
+.footer-links a:hover{color:white}
+.footer-copy{color:rgba(255,255,255,0.3);font-size:0.82rem}
+
+/* ─── ANIMATIONS ─── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+
+.reveal{opacity:0;transform:translateY(32px);transition:opacity 0.7s ease,transform 0.7s ease}
+.reveal.in{opacity:1;transform:translateY(0)}
+
+/* ─── MODAL / OVERLAY ─── */
+.overlay{
+  position:fixed;inset:0;z-index:2000;
+  background:rgba(44,24,16,0.6);backdrop-filter:blur(8px);
+  display:none;align-items:center;justify-content:center;
+  padding:1.5rem;
+}
+.overlay.open{display:flex}
+
+.modal{
+  background:var(--white);border-radius:28px;
+  width:100%;max-width:560px;max-height:90vh;
+  overflow-y:auto;padding:3rem;
+  position:relative;
+  animation:modalIn 0.35s cubic-bezier(0.16,1,0.3,1);
+}
+@keyframes modalIn{from{opacity:0;transform:scale(0.94)translateY(20px)}to{opacity:1;transform:scale(1)translateY(0)}}
+
+.modal-close{
+  position:absolute;top:1.5rem;right:1.5rem;
+  width:36px;height:36px;border-radius:50%;
+  background:var(--cream2);border:none;cursor:pointer;
+  font-size:1rem;color:var(--muted);
+  display:flex;align-items:center;justify-content:center;
+  transition:background 0.2s;
+}
+.modal-close:hover{background:var(--cream3)}
+
+.modal-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:2rem;font-weight:600;margin-bottom:0.4rem;
+}
+.modal-subtitle{font-size:0.88rem;color:var(--muted);margin-bottom:2rem}
+
+/* ─── FORMS ─── */
+.form-group{margin-bottom:1.4rem}
+label{
+  display:block;font-size:0.82rem;font-weight:600;
+  color:var(--dark2);margin-bottom:0.5rem;letter-spacing:0.02em;
+}
+input,textarea,select{
+  width:100%;padding:0.8rem 1.1rem;
+  border:1.5px solid var(--cream3);border-radius:12px;
+  font-family:inherit;font-size:0.92rem;color:var(--dark);
+  background:var(--white);
+  transition:border-color 0.2s,box-shadow 0.2s;
+  outline:none;
+}
+input:focus,textarea:focus,select:focus{
+  border-color:var(--gold);
+  box-shadow:0 0 0 3px rgba(196,149,106,0.12);
+}
+textarea{resize:vertical;min-height:90px}
+
+.type-selector{
+  display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;
+  margin-bottom:1.5rem;
+}
+.type-option{
+  border:1.5px solid var(--cream3);border-radius:14px;
+  padding:1.2rem;cursor:pointer;transition:all 0.2s;
+  text-align:center;
+}
+.type-option.selected{
+  border-color:var(--gold);background:rgba(196,149,106,0.06);
+}
+.type-option .type-emoji{font-size:1.8rem;display:block;margin-bottom:0.4rem}
+.type-option .type-label{font-size:0.88rem;font-weight:600;color:var(--dark)}
+
+.btn-submit{
+  width:100%;padding:1rem;border-radius:100px;
+  background:var(--gold);border:none;
+  font-family:inherit;font-size:1rem;font-weight:600;
+  color:white;cursor:pointer;transition:all 0.2s;
+  box-shadow:0 8px 24px rgba(196,149,106,0.35);
+  margin-top:0.5rem;
+}
+.btn-submit:hover{background:var(--gold-dark);transform:translateY(-1px)}
+
+.divider{
+  display:flex;align-items:center;gap:1rem;margin:1.5rem 0;
+  color:var(--muted);font-size:0.82rem;
+}
+.divider::before,.divider::after{
+  content:'';flex:1;height:1px;background:var(--cream3);
+}
+
+/* ─── LIST PAGE ─── */
+#list-page{display:none}
+#list-page.active{display:block}
+#landing-page.hidden{display:none}
+
+.list-hero{
+  background:var(--dark);
+  padding:7rem 4rem 4rem;
+  text-align:center;position:relative;overflow:hidden;
+}
+.list-hero::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 60% 80% at 50% 0%,rgba(196,149,106,0.15),transparent);
+}
+.list-type-badge{
+  display:inline-flex;align-items:center;gap:0.5rem;
+  background:rgba(196,149,106,0.2);border:1px solid rgba(196,149,106,0.3);
+  padding:0.4rem 1.1rem;border-radius:100px;
+  font-size:0.78rem;font-weight:600;color:var(--gold);
+  letter-spacing:0.08em;text-transform:uppercase;
+  margin-bottom:1.5rem;position:relative;z-index:1;
+}
+.list-names{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(2.5rem,5vw,4.5rem);
+  font-weight:600;color:white;line-height:1.1;
+  position:relative;z-index:1;margin-bottom:0.5rem;
+}
+.list-date{
+  font-size:0.9rem;color:rgba(255,255,255,0.5);
+  position:relative;z-index:1;margin-bottom:1.5rem;
+}
+.list-message{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.15rem;font-style:italic;
+  color:rgba(255,255,255,0.7);max-width:500px;
+  margin:0 auto;position:relative;z-index:1;
+  line-height:1.7;
+}
+
+.list-body{max-width:1100px;margin:0 auto;padding:4rem 2rem}
+
+.cagnotte-card{
+  background:linear-gradient(135deg,var(--light-rose),var(--cream2));
+  border:1px solid var(--cream3);border-radius:24px;
+  padding:2.5rem;margin-bottom:3rem;
+  display:flex;align-items:center;justify-content:space-between;
+  gap:2rem;flex-wrap:wrap;
+}
+.cagnotte-info .cagnotte-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.5rem;font-weight:600;margin-bottom:0.3rem;
+}
+.cagnotte-info p{font-size:0.88rem;color:var(--muted)}
+.progress-bar{
+  height:8px;background:var(--cream3);border-radius:100px;
+  margin:1rem 0;overflow:hidden;
+}
+.progress-fill{
+  height:100%;background:linear-gradient(90deg,var(--gold),var(--rose));
+  border-radius:100px;transition:width 1s ease;
+}
+.cagnotte-amounts{
+  display:flex;gap:2rem;margin-top:0.5rem;
+}
+.ca-item .ca-num{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.8rem;font-weight:700;color:var(--dark);
+  line-height:1;
+}
+.ca-item .ca-label{font-size:0.78rem;color:var(--muted)}
+
+.items-section h2{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.8rem;font-weight:600;margin-bottom:2rem;
+}
+.items-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+  gap:1.5rem;
+}
+.item-card{
+  background:var(--white);border:1px solid var(--cream3);
+  border-radius:20px;padding:1.5rem;
+  transition:transform 0.2s,box-shadow 0.2s;
+}
+.item-card:hover{transform:translateY(-4px);box-shadow:0 12px 30px rgba(44,24,16,0.08)}
+.item-card.taken{opacity:0.55;pointer-events:none}
+.item-image{
+  width:100%;height:140px;background:var(--cream2);
+  border-radius:12px;display:flex;align-items:center;
+  justify-content:center;font-size:3rem;margin-bottom:1.2rem;
+  overflow:hidden;
+}
+.item-image img{width:100%;height:100%;object-fit:cover}
+.item-name{font-weight:600;font-size:0.95rem;margin-bottom:0.3rem}
+.item-price{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.5rem;font-weight:700;color:var(--gold);
+}
+.item-status{
+  display:inline-block;
+  padding:0.25rem 0.75rem;border-radius:100px;
+  font-size:0.75rem;font-weight:600;margin-bottom:0.75rem;
+}
+.item-status.available{background:rgba(107,143,94,0.12);color:var(--success)}
+.item-status.taken{background:rgba(139,94,82,0.12);color:var(--rose)}
+.btn-item{
+  width:100%;padding:0.7rem;border-radius:100px;
+  background:var(--dark);border:none;
+  font-family:inherit;font-size:0.88rem;font-weight:600;
+  color:white;cursor:pointer;transition:background 0.2s;
+  margin-top:1rem;
+}
+.btn-item:hover{background:var(--dark2)}
+
+/* ─── CONTRIBUTE MODAL ─── */
+.contrib-item-preview{
+  background:var(--cream2);border-radius:16px;
+  padding:1.2rem;display:flex;gap:1rem;align-items:center;
+  margin-bottom:1.5rem;
+}
+.contrib-item-emoji{font-size:2rem}
+.contrib-item-info .contrib-name{font-weight:600;font-size:0.95rem}
+.contrib-item-info .contrib-price{color:var(--gold);font-weight:600}
+
+/* ─── ADD ITEM MANAGER (dashboard) ─── */
+#dashboard-page{display:none;padding:6rem 2rem 4rem}
+#dashboard-page.active{display:block}
+.dashboard-inner{max-width:900px;margin:0 auto}
+.dashboard-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:2.5rem;font-weight:600;margin-bottom:0.5rem;
+}
+.dashboard-sub{color:var(--muted);margin-bottom:3rem}
+.add-item-form{
+  background:var(--white);border:1px solid var(--cream3);
+  border-radius:24px;padding:2.5rem;margin-bottom:2.5rem;
+}
+.add-item-form h3{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.5rem;margin-bottom:1.5rem;
+}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.items-manager{margin-top:2rem}
+.item-row{
+  display:flex;align-items:center;gap:1rem;
+  background:var(--white);border:1px solid var(--cream3);
+  border-radius:14px;padding:1rem 1.2rem;
+  margin-bottom:0.75rem;
+}
+.item-row-emoji{font-size:1.5rem}
+.item-row-info{flex:1}
+.item-row-name{font-weight:600;font-size:0.92rem}
+.item-row-price{font-size:0.82rem;color:var(--muted)}
+.btn-delete{
+  background:none;border:none;color:var(--muted);
+  cursor:pointer;font-size:1rem;padding:0.3rem;
+  transition:color 0.2s;
+}
+.btn-delete:hover{color:#e53935}
+
+.share-box{
+  background:linear-gradient(135deg,var(--dark),var(--dark2));
+  border-radius:24px;padding:2.5rem;color:white;
+}
+.share-box h3{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.6rem;font-weight:600;margin-bottom:0.5rem;
+}
+.share-box p{color:rgba(255,255,255,0.55);font-size:0.88rem;margin-bottom:1.5rem}
+.share-link-box{
+  display:flex;gap:0.75rem;
+}
+.share-link-input{
+  flex:1;background:rgba(255,255,255,0.08);
+  border:1px solid rgba(255,255,255,0.15);
+  color:white;border-radius:100px;
+  padding:0.75rem 1.2rem;font-size:0.88rem;
+}
+.btn-copy{
+  background:var(--gold);border:none;color:white;
+  padding:0.75rem 1.5rem;border-radius:100px;
+  font-family:inherit;font-size:0.88rem;font-weight:600;
+  cursor:pointer;transition:all 0.2s;white-space:nowrap;
+}
+.btn-copy:hover{background:var(--gold-dark)}
+.copied-msg{
+  color:var(--gold);font-size:0.82rem;margin-top:0.5rem;
+  display:none;
+}
+.copied-msg.show{display:block}
+
+/* ─── TOAST ─── */
+.toast{
+  position:fixed;bottom:2rem;right:2rem;z-index:9999;
+  background:var(--dark);color:white;
+  padding:1rem 1.5rem;border-radius:14px;
+  font-size:0.88rem;font-weight:500;
+  display:flex;align-items:center;gap:0.75rem;
+  transform:translateY(100px);opacity:0;
+  transition:all 0.35s cubic-bezier(0.16,1,0.3,1);
+  box-shadow:0 8px 30px rgba(0,0,0,0.2);
+  max-width:320px;
+}
+.toast.show{transform:translateY(0);opacity:1}
+.toast-icon{font-size:1.1rem}
+
+/* ─── SUCCESS PAGE ─── */
+.success-box{
+  text-align:center;padding:4rem 2rem;
+}
+.success-icon{font-size:4rem;margin-bottom:1.5rem;display:block}
+.success-box h2{
+  font-family:'Cormorant Garamond',serif;
+  font-size:2.2rem;font-weight:600;margin-bottom:0.75rem;
+}
+.success-box p{color:var(--muted);margin-bottom:2rem}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:900px){
+  nav{padding:1rem 1.5rem}
+  .nav-links{display:none}
+  #hero,#how,#occasions,#features,#testimonials,#pricing,#cta-band,footer{padding-left:1.5rem;padding-right:1.5rem}
+  .hero-stats{gap:2rem;flex-wrap:wrap;justify-content:center}
+  .steps{grid-template-columns:1fr 1fr}
+  .steps::before{display:none}
+  .occ-grid,.price-grid,.testi-grid{grid-template-columns:1fr}
+  .features-header{grid-template-columns:1fr}
+  .feat-list{grid-template-columns:1fr}
+  .list-hero{padding:6rem 1.5rem 3rem}
+  .cagnotte-card{flex-direction:column}
+  .occasions{flex-wrap:wrap;gap:1.5rem;padding:1.5rem}
+  .form-row{grid-template-columns:1fr}
+  .modal{padding:2rem}
+}
+</style>
+</head>
+<body>
+
+<!-- ─── TOAST ─── -->
+<div class="toast" id="toast"><span class="toast-icon" id="toast-icon">✓</span><span id="toast-msg">Kopjuar!</span></div>
+
+<!-- ─── CONTRIBUTE OVERLAY ─── -->
+<div class="overlay" id="contrib-overlay">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('contrib-overlay')">✕</button>
+    <div class="modal-title">Dhuro një dhuratë 🎁</div>
+    <div class="modal-subtitle">Kontributi juaj do të shkoj direkt tek familja</div>
+    <div class="contrib-item-preview" id="contrib-preview">
+      <div class="contrib-item-emoji" id="contrib-emoji">🎁</div>
+      <div class="contrib-item-info">
+        <div class="contrib-name" id="contrib-name">Dhuratë</div>
+        <div class="contrib-price" id="contrib-price">€0</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Emri juaj</label>
+      <input type="text" id="contrib-donor-name" placeholder="p.sh. Artan Hoxha"/>
+    </div>
+    <div class="form-group">
+      <label>Shuma e kontributit (€)</label>
+      <input type="number" id="contrib-amount" placeholder="50" min="1"/>
+    </div>
+    <div class="form-group">
+      <label>Mesazhi juaj (opsional)</label>
+      <textarea id="contrib-msg" placeholder="Urime të ngrohta..."></textarea>
+    </div>
+    <button class="btn-submit" onclick="submitContrib()">Konfirmo dhuratën →</button>
+    <p style="font-size:0.78rem;color:var(--muted);text-align:center;margin-top:1rem">
+      💳 Pagesa realizohet me kartë ose bankë • 100% e sigurt
+    </p>
+  </div>
+</div>
+
+<!-- ─── CREATE LIST OVERLAY ─── -->
+<div class="overlay" id="create-overlay">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('create-overlay')">✕</button>
+    <div class="modal-title">Krijo listën tënde ✨</div>
+    <div class="modal-subtitle">Gati në 2 minuta • Falas</div>
+
+    <div class="type-selector">
+      <div class="type-option selected" id="type-dasma" onclick="selectType('dasma')">
+        <span class="type-emoji">💍</span>
+        <span class="type-label">Dasma</span>
+      </div>
+      <div class="type-option" id="type-lindje" onclick="selectType('lindje')">
+        <span class="type-emoji">👶</span>
+        <span class="type-label">Lindje / Bebe</span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Emrat e çiftit / fëmijës <span id="names-hint" style="color:var(--muted)">(Blerim & Ardita)</span></label>
+      <input type="text" id="create-names" placeholder="p.sh. Blerim & Ardita"/>
+    </div>
+    <div class="form-group">
+      <label>Data e ngjarjes</label>
+      <input type="date" id="create-date"/>
+    </div>
+    <div class="form-group">
+      <label>Mesazhi juaj për mysafirët</label>
+      <textarea id="create-msg" placeholder="Jeni mirëseardhur në listën tonë të dëshirave..."></textarea>
+    </div>
+
+    <div class="divider">Opsionale</div>
+
+    <div class="form-group">
+      <label>Objektivi i arkës (cagnotte) €</label>
+      <input type="number" id="create-target" placeholder="p.sh. 3000"/>
+    </div>
+
+    <button class="btn-submit" onclick="createList()">Krijo listën time →</button>
+  </div>
+</div>
+
+<!-- ─── FIND LIST OVERLAY ─── -->
+<div class="overlay" id="find-overlay">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('find-overlay')">✕</button>
+    <div class="modal-title">Gjej një listë 🔍</div>
+    <div class="modal-subtitle">Fut kodin ose emrat e çiftit</div>
+    <div class="form-group">
+      <label>Kodi i listës</label>
+      <input type="text" id="find-code" placeholder="p.sh. BLN-2025" style="text-transform:uppercase"/>
+    </div>
+    <button class="btn-submit" onclick="findList()">Gjej listën →</button>
+  </div>
+</div>
+
+<!-- ─── NAV ─── -->
+<nav id="navbar">
+  <a href="#" class="nav-logo" onclick="showLanding()">Dhurata<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#how" onclick="showLanding()">Si funksionon</a></li>
+    <li><a href="#occasions" onclick="showLanding()">Raste</a></li>
+    <li><a href="#pricing" onclick="showLanding()">Çmimet</a></li>
+  </ul>
+  <div class="nav-actions">
+    <button class="btn-outline" onclick="openModal('find-overlay')">Gjej listën</button>
+    <button class="btn-fill" onclick="openModal('create-overlay')">Krijo listën ✦</button>
+  </div>
+</nav>
+
+<!-- ─── LANDING PAGE ─── -->
+<div id="landing-page">
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-ornament">◇</div>
+
+    <div class="hero-badge">✦ E para platform shqip • Falas</div>
+
+    <h1 class="hero-title">
+      Dasma. Lindje.<br/>
+      <span class="line2">Lista e <em>dëshirave</em> tuaja.</span>
+    </h1>
+
+    <p class="hero-sub">
+      Krijoni listën tuaj të dhuratave në 2 minuta. Ndani me familjen dhe diasporën. Merrni pikërisht ato që dëshironi.
+    </p>
+
+    <div class="hero-cta">
+      <button class="btn-hero" onclick="openModal('create-overlay')">Krijo listën tënde — Falas</button>
+      <button class="btn-hero-ghost" onclick="openModal('find-overlay')">Gjej listën e dikujt</button>
+    </div>
+
+    <div class="hero-stats">
+      <div>
+        <div class="stat-num"><span>4</span>k+</div>
+        <div class="stat-label">Lista aktive</div>
+      </div>
+      <div>
+        <div class="stat-num"><span>€</span>2.4M</div>
+        <div class="stat-label">Dhurata të dhëna</div>
+      </div>
+      <div>
+        <div class="stat-num"><span>98</span>%</div>
+        <div class="stat-label">Të kënaqur</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OCCASIONS STRIP -->
+  <div class="occasions">
+    <div class="occasion-item"><span class="occasion-icon">💍</span>Dasma</div>
+    <div class="occasion-sep">·</div>
+    <div class="occasion-item"><span class="occasion-icon">👶</span>Lindje</div>
+    <div class="occasion-sep">·</div>
+    <div class="occasion-item"><span class="occasion-icon">✈️</span>Udhëtim nusërie</div>
+    <div class="occasion-sep">·</div>
+    <div class="occasion-item"><span class="occasion-icon">🏠</span>Shtëpi e re</div>
+    <div class="occasion-sep">·</div>
+    <div class="occasion-item"><span class="occasion-icon">🎂</span>Ditëlindje</div>
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <section id="how">
+    <div class="section-tag reveal">Si funksionon</div>
+    <h2 class="section-title reveal">Thjesht. Shpejt.<br/><em>Sipas dëshirës suaj.</em></h2>
+
+    <div class="steps">
+      <div class="step reveal">
+        <div class="step-num">1</div>
+        <div class="step-title">Krijoni listën</div>
+        <p class="step-desc">Shtoni dhurata nga çdo faqe interneti ose dyqan. Pa kufizime, pa detyrime ndaj asnjë markë.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">2</div>
+        <div class="step-title">Ndani me të afërmit</div>
+        <p class="step-desc">Dërgoni linkun me WhatsApp, Instagram ose email. Diaspora mund të kontribuojë nga kudo në botë.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">3</div>
+        <div class="step-title">Merrni kontributet</div>
+        <p class="step-desc">Paratë vijnë direkt në llogarinë tuaj bankare. Pa komisione, pa ndërmjetës.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">4</div>
+        <div class="step-title">Gëzohuni!</div>
+        <p class="step-desc">Blini saktësisht ato që dëshironi, kur dëshironi, ku dëshironi. Liria është e juaja.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- OCCASIONS SECTION -->
+  <section id="occasions">
+    <div class="section-tag reveal">Rastet</div>
+    <h2 class="section-title reveal">Çdo moment i<br/><em>rëndësishëm i jetës</em></h2>
+
+    <div class="occ-grid">
+      <div class="occ-card reveal" onclick="openModal('create-overlay')">
+        <div class="occ-emoji">💍</div>
+        <div class="occ-title">Lista e Dasmës</div>
+        <p class="occ-desc">Shtoni cdo gjë që ëndërroni: mobilje, pajisje shtëpie, udhëtim nusërie, apo thjesht nje arkë kontributesh. Mysafirët mund të participojnë edhe nga Zvicra, Gjermania, Italia.</p>
+        <div class="occ-link">Krijo listën e dasmës →</div>
+      </div>
+      <div class="occ-card reveal" onclick="openModal('create-overlay')">
+        <div class="occ-emoji">👶</div>
+        <div class="occ-title">Lista e Bebës</div>
+        <p class="occ-desc">Kolicja, karrocë, rrobat, lodrat — krijoni listën perfekte dhe lini familjen e gjere të kontribuojë pa probleme. Ideal për "vizita" tradicionale.</p>
+        <div class="occ-link">Krijo listën e bebës →</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section id="features">
+    <div class="features-header">
+      <div class="reveal">
+        <div class="section-tag">Karakteristikat</div>
+        <h2 class="section-title">Gjithçka keni<br/><em>nevojë</em> dhe më shumë</h2>
+        <p style="color:var(--muted);margin-top:1.5rem;line-height:1.8;font-size:0.95rem">
+          Platforma e parë shqip ndërtuar specifikisht për traditat tona. Menduam diasporën, familjet e gjera, dasmat me 300+ mysafirë.
+        </p>
+        <button class="btn-fill" style="margin-top:2rem" onclick="openModal('create-overlay')">Fillo tani — 0€</button>
+      </div>
+      <div class="feat-list">
+        <div class="feat-item reveal">
+          <div class="feat-icon">🌍</div>
+          <div>
+            <div class="feat-title">Diaspora-friendly</div>
+            <p class="feat-desc">Aksesibël nga Zvicra, Italia, Gjermania. Kontribut nga kudo.</p>
+          </div>
+        </div>
+        <div class="feat-item reveal">
+          <div class="feat-icon">💸</div>
+          <div>
+            <div class="feat-title">Pa komisione</div>
+            <p class="feat-desc">100% e parave shkojnë direkt tek ju. Asnjë ndërmjetës.</p>
+          </div>
+        </div>
+        <div class="feat-item reveal">
+          <div class="feat-icon">📱</div>
+          <div>
+            <div class="feat-title">WhatsApp-ready</div>
+            <p class="feat-desc">Ndani linkun me easeësi. Mysafirët nuk kanë nevojë të regjistrohen.</p>
+          </div>
+        </div>
+        <div class="feat-item reveal">
+          <div class="feat-icon">🎯</div>
+          <div>
+            <div class="feat-title">Çdo dyqan</div>
+            <p class="feat-desc">Dedica, Gjirafa, IKEA, Amazon — shtoni nga kudo.</p>
+          </div>
+        </div>
+        <div class="feat-item reveal">
+          <div class="feat-icon">🔒</div>
+          <div>
+            <div class="feat-title">100% i sigurt</div>
+            <p class="feat-desc">Pagesa e kriptuar. Lista private deri sa ta ndani ju vetë.</p>
+          </div>
+        </div>
+        <div class="feat-item reveal">
+          <div class="feat-icon">🎁</div>
+          <div>
+            <div class="feat-title">Arka kolektive</div>
+            <p class="feat-desc">Mysafirët kontribuojnë bashkërisht për dhurata të mëdha.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section id="testimonials">
+    <div class="section-tag reveal">Çfarë thonë</div>
+    <h2 class="section-title reveal">Familjet na<br/><em>besojnë</em></h2>
+    <div class="testi-grid">
+      <div class="testi-card reveal">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Shumë praktike! Familja nga Gjermania mund të kontribuonte lehtë pa ardhur me duar bosh. E thjeshta, e bukur dhe funksionale."</p>
+        <div class="testi-author">
+          <div class="testi-avatar">AL</div>
+          <div>
+            <div class="testi-name">Ardita & Liridon</div>
+            <div class="testi-loc">Prishtinë — Dasma 2024</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card reveal">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Kur linda bebën nuk dija si t'i organizoja dhuratave. Dhurata.al e bëri gjithçka shumë të lehtë. Faleminderit!"</p>
+        <div class="testi-author">
+          <div class="testi-avatar">EK</div>
+          <div>
+            <div class="testi-name">Elona Krasniqi</div>
+            <div class="testi-loc">Tiranë — Lindje 2024</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card reveal">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Kishim 280 mysafirë. Pa listë do ishte kaos. Me Dhurata.al, gjithcka ishte e organizuar. Morëm saktësisht ato que donim."</p>
+        <div class="testi-author">
+          <div class="testi-avatar">BM</div>
+          <div>
+            <div class="testi-name">Blerim & Mirela</div>
+            <div class="testi-loc">Prizren — Dasma 2025</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section id="pricing">
+    <div class="section-tag reveal">Çmimet</div>
+    <h2 class="section-title reveal">Transparent.<br/><em>Pa surpriza.</em></h2>
+    <div class="price-grid">
+      <div class="price-card reveal">
+        <div class="price-tag">Falas</div>
+        <div class="price-name">Bazë</div>
+        <div class="price-amount">€0</div>
+        <p class="price-desc">Perfekte për fillim</p>
+        <ul class="price-features">
+          <li>Deri 20 dhurata</li>
+          <li>Arkë kolektive</li>
+          <li>Ndaj me link</li>
+          <li>Historiati i kontributeve</li>
+        </ul>
+        <button class="btn-price outline" onclick="openModal('create-overlay')">Fillo falas</button>
+      </div>
+      <div class="price-card featured reveal">
+        <div class="price-tag">Më popular</div>
+        <div class="price-name">Premium</div>
+        <div class="price-amount">€<small>14</small>99</div>
+        <p class="price-desc">Pagim i vetëm — pa aboniment</p>
+        <ul class="price-features">
+          <li>Dhurata të pakufizuara</li>
+          <li>Faqe personalizuar</li>
+          <li>Fotografi & mesazh pritjeje</li>
+          <li>Kodi QR për ftesat</li>
+          <li>Reminders automatikë</li>
+          <li>Mbështetje prioritare</li>
+        </ul>
+        <button class="btn-price solid" onclick="openModal('create-overlay')">Fillo tani</button>
+      </div>
+      <div class="price-card reveal">
+        <div class="price-tag">Diaspora</div>
+        <div class="price-name">Global</div>
+        <div class="price-amount">€<small>24</small>99</div>
+        <p class="price-desc">Pagim i vetëm</p>
+        <ul class="price-features">
+          <li>Gjithçka nga Premium</li>
+          <li>Faqe anglisht / gjermanisht</li>
+          <li>Transferta ndërkombëtare</li>
+          <li>Multi-monedhë (EUR/CHF/GBP)</li>
+        </ul>
+        <button class="btn-price outline" onclick="openModal('create-overlay')">Fillo tani</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BAND -->
+  <section id="cta-band">
+    <div class="section-tag reveal" style="color:var(--gold)">Gati të filloni?</div>
+    <h2 class="section-title reveal">Krijoni listën tuaj<br/><em>tani — falas</em></h2>
+    <p class="reveal">Pa kartë krediti. Pa aboniment. Gati në 2 minuta.</p>
+    <button class="btn-hero" style="margin-top:2.5rem" onclick="openModal('create-overlay')" class="reveal">
+      Krijo listën time — 0€ ✦
+    </button>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">Dhurata<span>.</span></div>
+    <div class="footer-links">
+      <a href="#">Rreth nesh</a>
+      <a href="#">Privatësia</a>
+      <a href="#">Kushtet</a>
+      <a href="#">Kontakti</a>
+    </div>
+    <div class="footer-copy">© 2025 Dhurata.al — Të gjitha të drejtat e rezervuara</div>
+  </footer>
+
+</div><!-- end landing-page -->
+
+<!-- ─── LIST VIEW PAGE ─── -->
+<div id="list-page">
+  <div class="list-hero">
+    <div class="list-type-badge" id="lp-badge">💍 Dasma</div>
+    <h1 class="list-names" id="lp-names">Blerim & Ardita</h1>
+    <div class="list-date" id="lp-date">14 Qershor 2025</div>
+    <p class="list-message" id="lp-message">"Faleminderit që jeni pjesë e ditës sonë më të lumtur."</p>
+  </div>
+  <div class="list-body">
+    <div class="cagnotte-card" id="lp-cagnotte">
+      <div class="cagnotte-info">
+        <div class="cagnotte-title">🌸 Arka e përbashkët</div>
+        <p>Kontribuoni me çfarë dëshironi — çdo shumë ka vlerë</p>
+        <div class="progress-bar"><div class="progress-fill" id="lp-progress" style="width:0%"></div></div>
+        <div class="cagnotte-amounts">
+          <div class="ca-item">
+            <div class="ca-num" id="lp-collected">€0</div>
+            <div class="ca-label">Mbledhur</div>
+          </div>
+          <div class="ca-item">
+            <div class="ca-num" id="lp-target">€0</div>
+            <div class="ca-label">Objektiv</div>
+          </div>
+        </div>
+      </div>
+      <button class="btn-hero" onclick="openContrib(null,'Arka e përbashkët','sipas dëshirës')">
+        Kontribuoj tani →
+      </button>
+    </div>
+    <div class="items-section">
+      <h2>Lista e dhuratave</h2>
+      <div class="items-grid" id="lp-items"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── DASHBOARD PAGE ─── -->
+<div id="dashboard-page">
+  <div class="dashboard-inner">
+    <div class="dashboard-title" id="dp-title">Lista ime</div>
+    <div class="dashboard-sub">Menaxhoni dhurata dhe ndani listën me të afërmit tuaj</div>
+
+    <div class="add-item-form">
+      <h3>➕ Shto dhuratë të re</h3>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Emri i dhuratës</label>
+          <input type="text" id="dp-item-name" placeholder="p.sh. Karroca Chicco"/>
+        </div>
+        <div class="form-group">
+          <label>Çmimi (€)</label>
+          <input type="number" id="dp-item-price" placeholder="150"/>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Emoji/Ikona</label>
+          <input type="text" id="dp-item-emoji" placeholder="🛏️" maxlength="4"/>
+        </div>
+        <div class="form-group">
+          <label>URL (opsionale)</label>
+          <input type="url" id="dp-item-url" placeholder="https://..."/>
+        </div>
+      </div>
+      <button class="btn-submit" style="max-width:200px" onclick="addItem()">Shto dhuratën</button>
+    </div>
+
+    <div class="items-manager" id="dp-items-list"></div>
+
+    <div class="share-box" style="margin-top:2.5rem">
+      <h3>📤 Ndaj listën tënde</h3>
+      <p>Kopjo linkun dhe dërgo me WhatsApp, Instagram ose email</p>
+      <div class="share-link-box">
+        <input type="text" class="share-link-input" id="share-link-input" readonly/>
+        <button class="btn-copy" onclick="copyLink()">Kopjo</button>
+      </div>
+      <div class="copied-msg" id="copied-msg">✓ Kopjuar!</div>
+      <div style="margin-top:1.5rem;display:flex;gap:0.75rem;flex-wrap:wrap">
+        <button onclick="shareWhatsApp()" style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);color:white;padding:0.6rem 1.2rem;border-radius:100px;cursor:pointer;font-family:inherit;font-size:0.85rem">
+          📱 WhatsApp
+        </button>
+        <button onclick="viewMyList()" style="background:var(--gold);border:none;color:white;padding:0.6rem 1.2rem;border-radius:100px;cursor:pointer;font-family:inherit;font-size:0.85rem">
+          👁️ Shiko listën si mysafir
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ─── STATE ───────────────────────────────────────────────────────────────────
+let currentType = 'dasma';
+let currentListId = null;
+let currentContribItem = null;
+
+function getDB() {
+  try { return JSON.parse(localStorage.getItem('dhurata_db') || '{}'); } catch(e){ return {}; }
+}
+function saveDB(db) { localStorage.setItem('dhurata_db', JSON.stringify(db)); }
+
+function generateId() {
+  const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+  let id = '';
+  for(let i=0;i<8;i++) id += chars[Math.floor(Math.random()*chars.length)];
+  return id.slice(0,3)+'-'+id.slice(3,7);
+}
+
+// ─── NAV SCROLL ────────────────────────────────────────────────────────────
+window.addEventListener('scroll', () => {
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 40);
+});
+
+// ─── MODALS ─────────────────────────────────────────────────────────────────
+function openModal(id) { document.getElementById(id).classList.add('open'); }
+function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+document.querySelectorAll('.overlay').forEach(o => {
+  o.addEventListener('click', e => { if(e.target === o) o.classList.remove('open'); });
+});
+
+// ─── TYPE SELECTOR ──────────────────────────────────────────────────────────
+function selectType(type) {
+  currentType = type;
+  document.getElementById('type-dasma').classList.toggle('selected', type==='dasma');
+  document.getElementById('type-lindje').classList.toggle('selected', type==='lindje');
+  const hint = document.getElementById('names-hint');
+  hint.textContent = type==='dasma' ? '(Blerim & Ardita)' : '(Lena Hoxha)';
+  document.getElementById('create-names').placeholder = type==='dasma' ? 'p.sh. Blerim & Ardita' : 'p.sh. Lena Hoxha';
+}
+
+// ─── CREATE LIST ─────────────────────────────────────────────────────────────
+function createList() {
+  const names = document.getElementById('create-names').value.trim();
+  const date  = document.getElementById('create-date').value;
+  const msg   = document.getElementById('create-msg').value.trim();
+  const target = parseFloat(document.getElementById('create-target').value) || 0;
+
+  if(!names) { toast('⚠️','Shkruani emrat para se të vazhdoni'); return; }
+
+  const id = generateId();
+  const db = getDB();
+  db[id] = {
+    id, type: currentType, names, date, msg, target,
+    items: getDemoItems(currentType),
+    collected: 0,
+    contributors: [],
+    createdAt: Date.now()
+  };
+  saveDB(db);
+  currentListId = id;
+
+  closeModal('create-overlay');
+  showDashboard(id);
+  toast('✓', 'Lista u krijua me sukses!');
+}
+
+function getDemoItems(type) {
+  if(type === 'dasma') return [
+    {id:'i1',name:'Set kuzhine Zwilling',price:180,emoji:'🍳',taken:false,takenBy:null},
+    {id:'i2',name:'Krevat 160x200 IKEA',price:350,emoji:'🛏️',taken:false,takenBy:null},
+    {id:'i3',name:'Robot kuzhinier Thermomix',price:750,emoji:'🤖',taken:false,takenBy:null},
+    {id:'i4',name:'Udhëtim Santorini',price:1200,emoji:'✈️',taken:false,takenBy:null},
+    {id:'i5',name:'Lavatriçe Bosch',price:490,emoji:'🌀',taken:false,takenBy:null},
+    {id:'i6',name:'Kamerë Sony A7',price:1100,emoji:'📸',taken:false,takenBy:null},
+  ];
+  return [
+    {id:'i1',name:'Karrocë Chicco',price:220,emoji:'🍼',taken:false,takenBy:null},
+    {id:'i2',name:'Kolicje Maxi-Cosi',price:180,emoji:'🚗',taken:false,takenBy:null},
+    {id:'i3',name:'Baby monitor Philips',price:90,emoji:'📡',taken:false,takenBy:null},
+    {id:'i4',name:'Set rroba 0-3 muaj',price:60,emoji:'👶',taken:false,takenBy:null},
+    {id:'i5',name:'Copë lodra',price:40,emoji:'🧸',taken:false,takenBy:null},
+    {id:'i6',name:'Krevat Babybay',price:320,emoji:'🛏️',taken:false,takenBy:null},
+  ];
+}
+
+// ─── SHOW PAGES ───────────────────────────────────────────────────────────────
+function showLanding() {
+  document.getElementById('landing-page').classList.remove('hidden');
+  document.getElementById('list-page').classList.remove('active');
+  document.getElementById('dashboard-page').classList.remove('active');
+  window.scrollTo(0,0);
+}
+
+function showListPage(id) {
+  const db = getDB();
+  const list = db[id];
+  if(!list){ toast('⚠️','Lista nuk u gjet'); return; }
+  currentListId = id;
+
+  document.getElementById('landing-page').classList.add('hidden');
+  document.getElementById('dashboard-page').classList.remove('active');
+  document.getElementById('list-page').classList.add('active');
+  window.scrollTo(0,0);
+
+  const typeLabel = list.type === 'dasma' ? '💍 Dasma' : '👶 Lindje';
+  document.getElementById('lp-badge').textContent = typeLabel;
+  document.getElementById('lp-names').textContent = list.names;
+  document.getElementById('lp-date').textContent = list.date ? formatDate(list.date) : '';
+  document.getElementById('lp-message').textContent = list.msg ? `"${list.msg}"` : '';
+
+  const collected = list.collected || 0;
+  const target = list.target || 0;
+  document.getElementById('lp-collected').textContent = '€'+collected.toLocaleString();
+  document.getElementById('lp-target').textContent = target ? '€'+target.toLocaleString() : '—';
+  const pct = target ? Math.min(100,Math.round(collected/target*100)) : Math.min(100, Math.round(collected/500*100));
+  setTimeout(()=>{ document.getElementById('lp-progress').style.width = pct+'%'; }, 300);
+
+  if(!list.target && collected === 0) {
+    document.getElementById('lp-cagnotte').style.display = 'none';
+  } else {
+    document.getElementById('lp-cagnotte').style.display = '';
+  }
+
+  renderItems(list);
+}
+
+function renderItems(list) {
+  const container = document.getElementById('lp-items');
+  container.innerHTML = '';
+  (list.items||[]).forEach(item => {
+    const card = document.createElement('div');
+    card.className = 'item-card' + (item.taken ? ' taken' : '');
+    card.innerHTML = `
+      <div class="item-image">${item.emoji || '🎁'}</div>
+      <div class="item-status ${item.taken ? 'taken' : 'available'}">
+        ${item.taken ? '✓ Rezervuar' : '◎ Disponibël'}
+      </div>
+      <div class="item-name">${item.name}</div>
+      <div class="item-price">€${item.price.toLocaleString()}</div>
+      ${!item.taken ? `<button class="btn-item" onclick="openContrib('${item.id}','${item.name.replace(/'/g,"\\'")}','€${item.price}')">Dhuro këtë →</button>` : ''}
+    `;
+    container.appendChild(card);
+  });
+}
+
+function showDashboard(id) {
+  const db = getDB();
+  const list = db[id];
+  if(!list) return;
+  currentListId = id;
+
+  document.getElementById('landing-page').classList.add('hidden');
+  document.getElementById('list-page').classList.remove('active');
+  document.getElementById('dashboard-page').classList.add('active');
+  window.scrollTo(0,0);
+
+  document.getElementById('dp-title').textContent = '✦ Lista e ' + list.names;
+
+  const link = window.location.origin + window.location.pathname + '#list/' + id;
+  document.getElementById('share-link-input').value = link;
+
+  renderDashboardItems(list);
+}
+
+function renderDashboardItems(list) {
+  const container = document.getElementById('dp-items-list');
+  container.innerHTML = '<h3 style="font-family:Cormorant Garamond,serif;font-size:1.4rem;margin-bottom:1rem">Dhurata në listë ('+(list.items||[]).length+')</h3>';
+  (list.items||[]).forEach(item => {
+    const row = document.createElement('div');
+    row.className = 'item-row';
+    row.innerHTML = `
+      <div class="item-row-emoji">${item.emoji||'🎁'}</div>
+      <div class="item-row-info">
+        <div class="item-row-name">${item.name}</div>
+        <div class="item-row-price">€${item.price} ${item.taken?'• <span style="color:var(--success)">Rezervuar</span>':''}</div>
+      </div>
+      <button class="btn-delete" onclick="deleteItem('${item.id}')" title="Fshi">🗑️</button>
+    `;
+    container.appendChild(row);
+  });
+}
+
+function addItem() {
+  const name  = document.getElementById('dp-item-name').value.trim();
+  const price = parseFloat(document.getElementById('dp-item-price').value)||0;
+  const emoji = document.getElementById('dp-item-emoji').value.trim()||'🎁';
+  const url   = document.getElementById('dp-item-url').value.trim();
+  if(!name||!price){ toast('⚠️','Plotësoni emrin dhe çmimin'); return; }
+
+  const db = getDB();
+  const list = db[currentListId];
+  if(!list) return;
+  list.items.push({ id:'i'+Date.now(), name, price, emoji, url, taken:false, takenBy:null });
+  saveDB(db);
+  renderDashboardItems(list);
+  document.getElementById('dp-item-name').value='';
+  document.getElementById('dp-item-price').value='';
+  document.getElementById('dp-item-emoji').value='';
+  document.getElementById('dp-item-url').value='';
+  toast('✓','Dhurata u shtua!');
+}
+
+function deleteItem(itemId) {
+  const db = getDB();
+  const list = db[currentListId];
+  if(!list) return;
+  list.items = list.items.filter(i=>i.id!==itemId);
+  saveDB(db);
+  renderDashboardItems(list);
+  toast('🗑️','Dhurata u fshi');
+}
+
+// ─── CONTRIBUTE ───────────────────────────────────────────────────────────────
+function openContrib(itemId, name, price) {
+  currentContribItem = itemId;
+  document.getElementById('contrib-name').textContent = name;
+  document.getElementById('contrib-price').textContent = price;
+  document.getElementById('contrib-emoji').textContent = itemId ? getItemEmoji(itemId) : '🌸';
+  document.getElementById('contrib-donor-name').value='';
+  document.getElementById('contrib-amount').value='';
+  document.getElementById('contrib-msg').value='';
+  openModal('contrib-overlay');
+}
+
+function getItemEmoji(itemId) {
+  const db = getDB();
+  const list = db[currentListId];
+  if(!list) return '🎁';
+  const item = (list.items||[]).find(i=>i.id===itemId);
+  return item ? item.emoji||'🎁' : '🎁';
+}
+
+function submitContrib() {
+  const donor = document.getElementById('contrib-donor-name').value.trim();
+  const amount = parseFloat(document.getElementById('contrib-amount').value)||0;
+  const msg = document.getElementById('contrib-msg').value.trim();
+
+  if(!donor){ toast('⚠️','Shkruani emrin tuaj'); return; }
+  if(!amount){ toast('⚠️','Shkruani shumën'); return; }
+
+  const db = getDB();
+  const list = db[currentListId];
+  if(!list) return;
+
+  list.collected = (list.collected||0) + amount;
+  list.contributors = list.contributors||[];
+  list.contributors.push({ donor, amount, msg, itemId: currentContribItem, date: new Date().toLocaleDateString('sq-AL') });
+
+  if(currentContribItem) {
+    const item = (list.items||[]).find(i=>i.id===currentContribItem);
+    if(item && amount >= item.price * 0.8) {
+      item.taken = true;
+      item.takenBy = donor;
+    }
+  }
+  saveDB(db);
+  closeModal('contrib-overlay');
+
+  // Show success
+  showSuccessOverlay(donor, amount);
+  // Refresh list if visible
+  if(document.getElementById('list-page').classList.contains('active')) {
+    showListPage(currentListId);
+  }
+}
+
+function showSuccessOverlay(donor, amount) {
+  const overlay = document.createElement('div');
+  overlay.className = 'overlay open';
+  overlay.innerHTML = `
+    <div class="modal">
+      <div class="success-box">
+        <span class="success-icon">🎉</span>
+        <h2>Faleminderit, ${donor}!</h2>
+        <p>Kontributi juaj prej <strong>€${amount}</strong> u regjistrua me sukses.<br/>Familja do të jetë shumë e lumtur!</p>
+        <button class="btn-submit" onclick="this.closest('.overlay').remove()">Mbyll →</button>
+      </div>
+    </div>
+  `;
+  overlay.addEventListener('click', e=>{ if(e.target===overlay) overlay.remove(); });
+  document.body.appendChild(overlay);
+}
+
+// ─── FIND LIST ────────────────────────────────────────────────────────────────
+function findList() {
+  const code = document.getElementById('find-code').value.trim().toUpperCase();
+  if(!code){ toast('⚠️','Shkruani kodin'); return; }
+  const db = getDB();
+  if(db[code]) {
+    closeModal('find-overlay');
+    showListPage(code);
+  } else {
+    toast('⚠️','Lista nuk u gjet. Kontrolloni kodin.');
+  }
+}
+
+// ─── SHARE / COPY ─────────────────────────────────────────────────────────────
+function copyLink() {
+  const inp = document.getElementById('share-link-input');
+  navigator.clipboard.writeText(inp.value).then(()=>{
+    document.getElementById('copied-msg').classList.add('show');
+    toast('✓','Linku u kopjua!');
+    setTimeout(()=>document.getElementById('copied-msg').classList.remove('show'),2500);
+  });
+}
+
+function shareWhatsApp() {
+  const link = document.getElementById('share-link-input').value;
+  const db = getDB();
+  const list = db[currentListId];
+  const text = encodeURIComponent(`Hej! 🎁 Ja lista jonë e dhuratave: ${list?.names||''}\n${link}`);
+  window.open(`https://wa.me/?text=${text}`,'_blank');
+}
+
+function viewMyList() {
+  closeModal && closeModal('');
+  showListPage(currentListId);
+}
+
+// ─── TOAST ────────────────────────────────────────────────────────────────────
+let toastTimer;
+function toast(icon, msg) {
+  const el = document.getElementById('toast');
+  document.getElementById('toast-icon').textContent = icon;
+  document.getElementById('toast-msg').textContent = msg;
+  el.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(()=>el.classList.remove('show'), 3000);
+}
+
+// ─── UTILS ───────────────────────────────────────────────────────────────────
+function formatDate(d) {
+  if(!d) return '';
+  const months = ['Janar','Shkurt','Mars','Prill','Maj','Qershor','Korrik','Gusht','Shtator','Tetor','Nëntor','Dhjetor'];
+  const [y,m,day] = d.split('-');
+  return `${parseInt(day)} ${months[parseInt(m)-1]} ${y}`;
+}
+
+// ─── HASH ROUTING ─────────────────────────────────────────────────────────────
+function handleHash() {
+  const hash = window.location.hash;
+  if(hash.startsWith('#list/')) {
+    const id = hash.replace('#list/','');
+    showListPage(id);
+  } else if(hash.startsWith('#dashboard/')) {
+    const id = hash.replace('#dashboard/','');
+    showDashboard(id);
+  } else {
+    showLanding();
+  }
+}
+window.addEventListener('hashchange', handleHash);
+handleHash();
+
+// ─── SCROLL REVEAL ────────────────────────────────────────────────────────────
+const revealObs = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if(e.isIntersecting) {
+      setTimeout(()=>e.target.classList.add('in'), i * 80);
+      revealObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+// ─── DEMO: Pre-populate a sample list ────────────────────────────────────────
+(function seedDemo() {
+  const db = getDB();
+  const DEMO_ID = 'BLE-2025';
+  if(!db[DEMO_ID]) {
+    db[DEMO_ID] = {
+      id: DEMO_ID, type:'dasma',
+      names:'Blerim & Ardita',
+      date:'2025-06-14',
+      msg:'Faleminderit që jeni pjesë e ditës sonë më të lumtur!',
+      target:3000,
+      items: [
+        {id:'d1',name:'Set kuzhine Zwilling',price:180,emoji:'🍳',taken:false,takenBy:null},
+        {id:'d2',name:'Krevat 160x200 IKEA',price:350,emoji:'🛏️',taken:true,takenBy:'Artan Hoxha'},
+        {id:'d3',name:'Robot kuzhinier Thermomix',price:750,emoji:'🤖',taken:false,takenBy:null},
+        {id:'d4',name:'Udhëtim Santorini',price:1200,emoji:'✈️',taken:false,takenBy:null},
+        {id:'d5',name:'Lavatriçe Bosch',price:490,emoji:'🌀',taken:false,takenBy:null},
+        {id:'d6',name:'Kamerë Sony A7',price:1100,emoji:'📸',taken:false,takenBy:null},
+      ],
+      collected: 780,
+      contributors:[
+        {donor:'Artan Hoxha',amount:350,msg:'Urime!',itemId:'d2',date:'01/06/2025'},
+        {donor:'Familja nga Zürich',amount:430,msg:'Gëzuar jetën e re!',itemId:null,date:'02/06/2025'},
+      ],
+      createdAt: Date.now()
+    };
+    saveDB(db);
+  }
+})();
+</script>
+</body>
+</html>
