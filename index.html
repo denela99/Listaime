@@ -1,949 +1,1503 @@
 <!DOCTYPE html>
-<html lang="sq" data-lang="sq">
+<html lang="sq">
 <head>
 <meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<meta name="description" content="Lista Ime - Lista e dhuratave për dasma, lindje dhe çdo festë shqiptare. Ndaj me familjen kudo në botë."/>
-<title>Lista Ime — Dhurata për çdo festë</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5"/>
+<meta name="theme-color" content="#FEF8EC"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="description" content="Lista Ime — Krijo listën tënde të dhuratave për dasma, lindje dhe çdo festë. Pa dhurata të dyfishta më."/>
+<title>Lista Ime 🎁</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 <style>
-/* ── RESET & VARIABLES ─────────────────────────────────── */
+/* ─── RESET ──────────────────────────────────────────────── */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --pom:#A82020; --pom2:#C83030; --pom3:#E84040;
-  --saf:#C97A18; --saf2:#E89020;
-  --gold:#BF961E; --gold2:#D4AE2A;
-  --grn:#1E7D3A; --grn2:#25A24B;
-  --cream:#FEF8EC; --cream2:#F8EDDA; --cream3:#EDD8B8; --cream4:#DEC49A;
-  --dark:#160603; --dark2:#2A100A; --muted:#7A5848; --muted2:#A07860;
-  --white:#FFFCF4;
-  --r-sm:10px; --r-md:16px; --r-lg:24px; --r-xl:32px;
-}
-html{scroll-behavior:smooth;font-size:16px}
-body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--dark);overflow-x:hidden;line-height:1.6}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;font-size:16px}
+body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--dark);overflow-x:hidden;line-height:1.6;-webkit-font-smoothing:antialiased}
 img{display:block;max-width:100%}
 a{text-decoration:none;color:inherit}
-button{font-family:inherit;cursor:pointer}
-input,textarea,select{font-family:inherit}
-::-webkit-scrollbar{width:5px}
+button,input,textarea,select{font-family:inherit;-webkit-appearance:none;appearance:none}
+::-webkit-scrollbar{width:4px}
 ::-webkit-scrollbar-track{background:var(--cream2)}
-::-webkit-scrollbar-thumb{background:var(--pom);border-radius:3px}
+::-webkit-scrollbar-thumb{background:var(--r);border-radius:2px}
 
-/* ── TYPOGRAPHY ─────────────────────────────────────────── */
-.display{font-family:'Playfair Display',serif}
-.t-pom{color:var(--pom)}
-.t-saf{color:var(--saf)}
-.t-gold{color:var(--gold)}
-.t-muted{color:var(--muted)}
+/* ─── TOKENS ─────────────────────────────────────────────── */
+:root{
+  --r:#A82020; --r2:#C83030; --r3:#8B1A1A;
+  --g:#B8861A; --g2:#D4A030; --g3:#8C6510;
+  --cream:#FEF8EC; --cream2:#F5E8CC; --cream3:#E8D0A8; --cream4:#D4B880;
+  --dark:#180805; --dark2:#2C120A; --dark3:#3D1C10;
+  --muted:#7A5040; --muted2:#A87860;
+  --white:#FFFDF5;
+  --grn:#1A6B32; --grn2:#22903F;
+  --rad:14px; --rad-sm:8px; --rad-lg:22px; --rad-xl:32px;
+  --sh:0 2px 16px rgba(24,8,5,.1);
+  --sh-lg:0 8px 40px rgba(24,8,5,.16);
+  --sh-xl:0 16px 60px rgba(24,8,5,.2);
+}
 
-/* ── LANGUAGE TOGGLE ────────────────────────────────────── */
-[data-lang="sq"] .en{display:none}
-[data-lang="en"] .sq{display:none}
+/* ─── PAGES ──────────────────────────────────────────────── */
+.page{display:none!important}
+.page.active{display:block!important}
 
-/* ── ANIMATIONS ──────────────────────────────────────────── */
-@keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
-@keyframes floatShape{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-18px) rotate(8deg)}}
-@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.6;transform:scale(1.4)}}
-@keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
-@keyframes progressFill{from{width:0}to{width:var(--target-w)}}
-@keyframes confettiFall{0%{transform:translateY(-20px) rotate(0deg);opacity:0}10%{opacity:1}100%{transform:translateY(60px) rotate(360deg);opacity:0}}
+/* ─── LANG ───────────────────────────────────────────────── */
+[data-lang="sq"] .en{display:none!important}
+[data-lang="en"] .sq{display:none!important}
 
-.reveal{opacity:0;transform:translateY(24px);transition:opacity .65s ease,transform .65s ease}
+/* ─── ANIM ───────────────────────────────────────────────── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
+@keyframes pulse2{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
+@keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+@keyframes confettiFall{0%{transform:translateY(-10px) rotate(0deg);opacity:1}100%{transform:translateY(65px) rotate(360deg);opacity:0}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
 .reveal.in{opacity:1;transform:translateY(0)}
 
-/* ── BUTTONS ─────────────────────────────────────────────── */
-.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.7rem 1.6rem;border-radius:100px;font-size:.9rem;font-weight:600;border:none;transition:all .2s;white-space:nowrap}
-.btn-primary{background:var(--pom);color:#fff;box-shadow:0 6px 20px rgba(168,32,32,.3)}
-.btn-primary:hover{background:var(--pom2);transform:translateY(-2px);box-shadow:0 10px 28px rgba(168,32,32,.38)}
-.btn-secondary{background:transparent;color:var(--dark);border:1.5px solid var(--cream3)}
-.btn-secondary:hover{border-color:var(--dark);background:var(--dark);color:#fff}
-.btn-whatsapp{background:#25D366;color:#fff;box-shadow:0 6px 20px rgba(37,211,102,.3)}
-.btn-whatsapp:hover{background:#20BD59;transform:translateY(-2px)}
-.btn-gold{background:linear-gradient(135deg,var(--saf),var(--gold));color:#fff;box-shadow:0 6px 20px rgba(201,122,24,.3)}
-.btn-gold:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(201,122,24,.4)}
-.btn-lg{padding:.95rem 2.2rem;font-size:1rem}
-.btn-sm{padding:.45rem 1rem;font-size:.82rem}
-.btn-full{width:100%;justify-content:center}
+/* ─── FOLK PATTERN (SVG inline) ─────────────────────────── */
+.folk-bg{
+  position:absolute;inset:0;opacity:.06;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Cg fill='%23A82020'%3E%3Cpolygon points='30,4 34,14 44,14 36,20 39,30 30,24 21,30 24,20 16,14 26,14'/%3E%3Ccircle cx='10' cy='10' r='3'/%3E%3Ccircle cx='50' cy='10' r='3'/%3E%3Ccircle cx='10' cy='50' r='3'/%3E%3Ccircle cx='50' cy='50' r='3'/%3E%3C/g%3E%3C/svg%3E");
+  pointer-events:none;
+}
+.folk-bg-gold{
+  position:absolute;inset:0;opacity:.05;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Cg fill='%23B8861A'%3E%3Crect x='18' y='2' width='4' height='36' rx='2'/%3E%3Crect x='2' y='18' width='36' height='4' rx='2'/%3E%3Crect x='8' y='8' width='4' height='4' rx='1'/%3E%3Crect x='28' y='8' width='4' height='4' rx='1'/%3E%3Crect x='8' y='28' width='4' height='4' rx='1'/%3E%3Crect x='28' y='28' width='4' height='4' rx='1'/%3E%3C/g%3E%3C/svg%3E");
+  pointer-events:none;
+}
 
-/* ── BADGES ──────────────────────────────────────────────── */
-.badge{display:inline-flex;align-items:center;gap:.4rem;padding:.3rem .9rem;border-radius:100px;font-size:.75rem;font-weight:600;letter-spacing:.05em}
-.badge-pom{background:rgba(168,32,32,.1);color:var(--pom);border:1px solid rgba(168,32,32,.2)}
-.badge-saf{background:rgba(201,122,24,.1);color:var(--saf);border:1px solid rgba(201,122,24,.2)}
-.badge-grn{background:rgba(30,125,58,.1);color:var(--grn);border:1px solid rgba(30,125,58,.2)}
+/* ─── TOP NAV ────────────────────────────────────────────── */
+.top-nav{
+  position:sticky;top:0;z-index:600;
+  background:rgba(254,248,236,.96);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--cream3);
+  padding:.85rem 1.25rem;
+  display:flex;align-items:center;justify-content:space-between;gap:.75rem;
+}
+.nav-logo{
+  font-family:'Cormorant',serif;font-size:1.6rem;font-weight:700;
+  letter-spacing:-.01em;display:flex;align-items:baseline;gap:2px;
+  color:var(--dark);
+}
+.nav-logo span{color:var(--r)}
+.nav-right{display:flex;align-items:center;gap:.5rem}
+.lang-tog{
+  border:1.5px solid var(--cream3);background:transparent;
+  padding:.38rem .75rem;border-radius:100px;
+  font-size:.78rem;font-weight:600;color:var(--muted);
+  cursor:pointer;transition:all .2s;min-height:36px;
+}
+.lang-tog:hover{border-color:var(--r);color:var(--r)}
+.nav-find{
+  border:1.5px solid var(--cream3);background:transparent;
+  padding:.38rem .9rem;border-radius:100px;
+  font-size:.78rem;font-weight:600;color:var(--dark);
+  cursor:pointer;transition:all .2s;min-height:36px;
+  display:none;
+}
+.nav-find:hover{border-color:var(--dark);background:var(--dark);color:white}
+@media(min-width:480px){.nav-find{display:inline-flex;align-items:center}}
+
+/* ─── FAB ────────────────────────────────────────────────── */
+.fab{
+  position:fixed;bottom:1.75rem;right:1.25rem;z-index:500;
+  width:58px;height:58px;border-radius:50%;
+  background:var(--r);color:white;border:none;
+  font-size:1.6rem;cursor:pointer;
+  box-shadow:0 6px 24px rgba(168,32,32,.45);
+  display:flex;align-items:center;justify-content:center;
+  transition:transform .2s,box-shadow .2s;
+  -webkit-tap-highlight-color:transparent;
+  animation:pulse2 3s ease-in-out infinite;
+}
+.fab:active{transform:scale(.93)}
+.fab:hover{transform:scale(1.07);box-shadow:0 10px 32px rgba(168,32,32,.5);animation:none}
+.fab-hidden{display:none!important}
+
+/* ─── BUTTONS ────────────────────────────────────────────── */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;
+  gap:.45rem;border:none;border-radius:100px;
+  font-size:.92rem;font-weight:600;cursor:pointer;
+  transition:all .2s;-webkit-tap-highlight-color:transparent;
+  padding:.75rem 1.6rem;min-height:48px;white-space:nowrap;
+}
+.btn:active{transform:scale(.96)}
+.btn-r{background:var(--r);color:white;box-shadow:0 4px 16px rgba(168,32,32,.3)}
+.btn-r:hover{background:var(--r2)}
+.btn-g{background:linear-gradient(135deg,var(--g),var(--g2));color:white;box-shadow:0 4px 16px rgba(184,134,26,.3)}
+.btn-out{background:transparent;border:2px solid var(--cream3);color:var(--dark)}
+.btn-out:hover{border-color:var(--dark);background:var(--dark);color:white}
+.btn-wa{background:#25D366;color:white;box-shadow:0 4px 16px rgba(37,211,102,.3)}
+.btn-wa:hover{background:#20BD59}
+.btn-full{width:100%}
+.btn-lg{padding:.9rem 2rem;font-size:1rem;min-height:54px}
+.btn-sm{padding:.5rem 1.1rem;font-size:.82rem;min-height:38px}
+.btn-dark{background:var(--dark);color:white}
+.btn-dark:hover{background:var(--dark2)}
+
+/* ─── FORMS ──────────────────────────────────────────────── */
+.field{margin-bottom:1rem}
+.field label{display:block;font-size:.8rem;font-weight:600;color:var(--dark2);margin-bottom:.4rem;letter-spacing:.01em}
+.field input,.field textarea,.field select{
+  width:100%;padding:.8rem 1rem;border:2px solid var(--cream3);
+  border-radius:var(--rad-sm);font-size:1rem;color:var(--dark);
+  background:var(--white);outline:none;transition:border-color .2s,box-shadow .2s;
+}
+.field input:focus,.field textarea:focus,.field select:focus{
+  border-color:var(--r);box-shadow:0 0 0 3px rgba(168,32,32,.1);
+}
+.field input::placeholder,.field textarea::placeholder{color:var(--muted2);font-size:.9rem}
+.field textarea{resize:vertical;min-height:80px;line-height:1.5}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+@media(max-width:400px){.field-row{grid-template-columns:1fr}}
+
+/* ─── OVERLAY / BOTTOM SHEET ────────────────────────────── */
+.overlay{
+  position:fixed;inset:0;z-index:700;
+  background:rgba(24,8,5,.55);
+  backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);
+  display:none;align-items:flex-end;
+  padding:0;
+}
+.overlay.open{display:flex}
+.sheet{
+  background:var(--white);
+  border-radius:var(--rad-xl) var(--rad-xl) 0 0;
+  padding:0 1.5rem calc(1.5rem + env(safe-area-inset-bottom));
+  width:100%;max-height:92vh;overflow-y:auto;
+  animation:slideUp .32s cubic-bezier(.16,1,.3,1);
+  position:relative;
+}
+.sheet-drag{width:44px;height:4px;background:var(--cream3);border-radius:2px;margin:1rem auto 1.5rem}
+.sheet-title{font-family:'Cormorant',serif;font-size:1.65rem;font-weight:700;margin-bottom:.3rem;line-height:1.15}
+.sheet-sub{font-size:.88rem;color:var(--muted);margin-bottom:1.5rem;line-height:1.6}
+.sheet-close{
+  position:absolute;top:1.1rem;right:1.25rem;
+  width:34px;height:34px;border-radius:50%;
+  background:var(--cream2);border:none;cursor:pointer;
+  font-size:.9rem;color:var(--muted);
+  display:flex;align-items:center;justify-content:center;
+  transition:background .2s;min-height:auto;
+}
+.sheet-close:hover{background:var(--cream3)}
+.divider{display:flex;align-items:center;gap:.75rem;color:var(--muted);font-size:.8rem;margin:1.1rem 0}
+.divider::before,.divider::after{content:'';flex:1;height:1px;background:var(--cream3)}
+
+/* ─── TOAST ──────────────────────────────────────────────── */
+.toast{
+  position:fixed;bottom:90px;left:50%;
+  transform:translateX(-50%) translateY(12px);
+  z-index:9000;background:var(--dark);color:white;
+  padding:.8rem 1.3rem;border-radius:var(--rad);
+  font-size:.88rem;font-weight:500;
+  opacity:0;transition:all .3s cubic-bezier(.16,1,.3,1);
+  box-shadow:var(--sh-lg);pointer-events:none;
+  white-space:nowrap;max-width:90vw;text-align:center;
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* ─── CONFETTI ───────────────────────────────────────────── */
+.confetti-wrap{position:fixed;inset:0;z-index:8999;pointer-events:none;overflow:hidden}
+.confetti-piece{
+  position:absolute;top:0;width:10px;height:10px;
+  border-radius:2px;opacity:0;
+  animation:confettiFall .8s ease-out forwards;
+}
+
+/* ─── BADGES ─────────────────────────────────────────────── */
+.badge{display:inline-flex;align-items:center;gap:.35rem;padding:.3rem .85rem;border-radius:100px;font-size:.73rem;font-weight:700;letter-spacing:.04em}
+.badge-r{background:rgba(168,32,32,.1);color:var(--r);border:1px solid rgba(168,32,32,.2)}
+.badge-g{background:rgba(184,134,26,.1);color:var(--g);border:1px solid rgba(184,134,26,.2)}
+.badge-grn{background:rgba(26,107,50,.12);color:var(--grn);border:1px solid rgba(26,107,50,.2)}
 .badge-dark{background:var(--dark);color:var(--cream2)}
 
-/* ── CARDS ───────────────────────────────────────────────── */
-.card{background:var(--white);border:1px solid var(--cream3);border-radius:var(--r-lg);padding:1.75rem;transition:transform .25s,box-shadow .25s}
-.card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(22,6,3,.1)}
+/* ═══════════════════════════════════════════════════════════
+   PAGE: LANDING
+═══════════════════════════════════════════════════════════ */
+#p-home{}
 
-/* ── FORMS ───────────────────────────────────────────────── */
-.field{margin-bottom:1.1rem}
-.field label{display:block;font-size:.82rem;font-weight:600;color:var(--dark2);margin-bottom:.4rem}
-.field input,.field textarea,.field select{width:100%;padding:.75rem 1rem;border:1.5px solid var(--cream3);border-radius:var(--r-sm);font-size:.92rem;color:var(--dark);background:var(--white);outline:none;transition:border-color .2s,box-shadow .2s}
-.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--pom);box-shadow:0 0 0 3px rgba(168,32,32,.1)}
-.field textarea{resize:vertical;min-height:80px}
-.field-row{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+/* HERO */
+.hero{
+  padding:2.5rem 1.5rem 2.5rem;
+  text-align:center;
+  position:relative;overflow:hidden;
+  background:linear-gradient(180deg,rgba(168,32,32,.05) 0,transparent 60%);
+  min-height:calc(100vh - 58px);
+  display:flex;flex-direction:column;justify-content:center;align-items:center;
+}
+.hero-badge{margin-bottom:1.25rem;animation:fadeUp .5s .1s both}
+.hero-title{
+  font-family:'Cormorant',serif;
+  font-size:clamp(2.6rem,8vw,4.5rem);
+  font-weight:700;line-height:1.05;
+  letter-spacing:-.02em;
+  margin-bottom:1rem;
+  animation:fadeUp .5s .2s both;
+}
+.hero-title em{display:block;font-style:italic;color:var(--r)}
+.hero-prob{
+  display:inline-flex;align-items:center;gap:.5rem;
+  background:rgba(168,32,32,.07);border:1px solid rgba(168,32,32,.18);
+  border-radius:var(--rad);padding:.65rem 1.1rem;
+  font-size:.9rem;color:var(--dark2);font-weight:500;
+  margin-bottom:1.75rem;line-height:1.4;text-align:left;
+  animation:fadeUp .5s .3s both;
+  max-width:360px;
+}
+.hero-ctas{
+  display:flex;flex-direction:column;gap:.65rem;
+  width:100%;max-width:360px;
+  animation:fadeUp .5s .4s both;
+  margin-bottom:2.5rem;
+}
+.hero-stats{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:.5rem;width:100%;max-width:380px;
+  padding-top:2rem;border-top:1px solid var(--cream3);
+  animation:fadeUp .5s .55s both;
+}
+.hs-item{text-align:center}
+.hs-num{font-family:'Cormorant',serif;font-size:1.9rem;font-weight:700;color:var(--r);line-height:1}
+.hs-lbl{font-size:.68rem;color:var(--muted);font-weight:500;margin-top:.15rem;line-height:1.3}
 
-/* ── NAV ─────────────────────────────────────────────────── */
-nav{position:fixed;top:0;left:0;right:0;z-index:900;padding:1rem 3rem;display:flex;align-items:center;justify-content:space-between;transition:all .3s}
-nav.scrolled{background:rgba(254,248,236,.96);backdrop-filter:blur(16px);box-shadow:0 1px 0 rgba(168,32,32,.12)}
-.nav-logo{font-family:'Playfair Display',serif;font-size:1.65rem;font-weight:700;color:var(--dark);display:flex;align-items:baseline;gap:3px}
-.nav-logo span{color:var(--pom)}
-.nav-links{display:flex;gap:2.5rem;list-style:none}
-.nav-links a{font-size:.88rem;font-weight:500;color:var(--muted);transition:color .2s}
-.nav-links a:hover{color:var(--dark)}
-.nav-right{display:flex;align-items:center;gap:.75rem}
-.lang-btn{padding:.4rem .85rem;border-radius:100px;border:1.5px solid var(--cream3);background:transparent;font-size:.8rem;font-weight:600;color:var(--muted);transition:all .2s;cursor:pointer}
-.lang-btn:hover{border-color:var(--pom);color:var(--pom)}
+@media(min-width:600px){
+  .hero{padding:4rem 2rem}
+  .hero-ctas{flex-direction:row;justify-content:center}
+  .hero-ctas .btn{flex:none}
+  .hero-title{font-size:clamp(3rem,6vw,5rem)}
+}
 
-/* ── FOLK ORNAMENT ───────────────────────────────────────── */
-.ornament{position:absolute;pointer-events:none;user-select:none;opacity:.06}
-.shape{position:absolute;pointer-events:none;animation:floatShape 7s ease-in-out infinite}
+/* OCCASIONS STRIP */
+.occ-strip{
+  background:var(--dark2);padding:1rem;
+  display:flex;gap:.65rem;overflow-x:auto;
+  padding-left:1.25rem;
+  -webkit-overflow-scrolling:touch;
+}
+.occ-strip::-webkit-scrollbar{display:none}
+.occ-chip{
+  display:inline-flex;align-items:center;gap:.4rem;
+  background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);
+  border-radius:100px;padding:.38rem .85rem;
+  white-space:nowrap;flex-shrink:0;
+  font-size:.78rem;color:rgba(255,255,255,.72);font-weight:500;
+}
 
-/* ── HERO ────────────────────────────────────────────────── */
-#hero{min-height:100vh;display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center;padding:8rem 2rem 5rem;position:relative;overflow:hidden}
-.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 20%,rgba(168,32,32,.07),transparent),radial-gradient(ellipse 50% 70% at 85% 85%,rgba(201,122,24,.08),transparent);z-index:0}
-.hero-content{position:relative;z-index:1}
-.hero-badge{animation:fadeUp .6s .1s both}
-.hero-title{font-family:'Playfair Display',serif;font-size:clamp(3rem,7vw,6.2rem);font-weight:700;line-height:1.05;letter-spacing:-.02em;margin:1.5rem 0;animation:fadeUp .6s .25s both}
-.hero-title .line-italic{font-style:italic;color:var(--pom)}
-.hero-sub{font-size:1.08rem;color:var(--muted);max-width:520px;margin:0 auto;line-height:1.75;animation:fadeUp .6s .4s both}
-.hero-ctas{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap;margin-top:2.5rem;animation:fadeUp .6s .55s both}
-.hero-stats{display:flex;gap:3.5rem;justify-content:center;margin-top:4.5rem;padding-top:2.5rem;border-top:1px solid var(--cream3);animation:fadeUp .6s .7s both}
-.stat-num{font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:700;color:var(--dark);line-height:1}
-.stat-label{font-size:.78rem;color:var(--muted);margin-top:.25rem;font-weight:500}
+/* SECTION */
+.sec{padding:2.75rem 1.5rem;max-width:700px;margin:0 auto}
+.sec-full{padding:2.75rem 0}
+.sec-tag{font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--g);margin-bottom:.5rem}
+.sec-title{font-family:'Cormorant',serif;font-size:clamp(1.9rem,5vw,2.8rem);font-weight:700;line-height:1.1;letter-spacing:-.02em;margin-bottom:1.1rem}
+.sec-title em{font-style:italic;color:var(--r)}
+.sec-sub{font-size:.92rem;color:var(--muted);line-height:1.75;max-width:480px}
 
-/* ── OCCASIONS STRIP ─────────────────────────────────────── */
-.occ-strip{background:var(--dark);padding:1.5rem 3rem;display:flex;justify-content:center;align-items:center;gap:3rem;overflow-x:auto;flex-wrap:wrap}
-.occ-item{display:flex;align-items:center;gap:.65rem;color:rgba(255,255,255,.55);font-size:.85rem;font-weight:500;letter-spacing:.04em;white-space:nowrap}
-.occ-item .dot{width:6px;height:6px;border-radius:50%;background:var(--saf2);flex-shrink:0}
-.occ-sep{color:rgba(201,122,24,.35);font-size:1.4rem}
+/* HOW */
+.steps-list{display:flex;flex-direction:column;gap:.85rem;margin-top:1.75rem}
+.step-row{
+  display:flex;gap:1rem;align-items:flex-start;
+  background:var(--white);border:1px solid var(--cream3);
+  border-radius:var(--rad);padding:1.1rem;
+}
+.step-n{
+  width:38px;height:38px;border-radius:50%;
+  background:var(--r);color:white;
+  display:flex;align-items:center;justify-content:center;
+  font-size:.88rem;font-weight:700;flex-shrink:0;
+}
+.step-body .step-t{font-weight:600;font-size:.95rem;margin-bottom:.2rem}
+.step-body .step-d{font-size:.82rem;color:var(--muted);line-height:1.6}
 
-/* ── SECTION BASE ────────────────────────────────────────── */
-.section{padding:7rem 3rem;max-width:1200px;margin:0 auto}
-.section-full{padding:7rem 3rem}
-.section-tag{font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--saf);margin-bottom:.75rem}
-.section-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3.2rem);font-weight:700;line-height:1.1;letter-spacing:-.02em}
-.section-title em{font-style:italic;color:var(--pom)}
-.section-sub{color:var(--muted);font-size:1rem;line-height:1.75;margin-top:1rem;max-width:500px}
+/* OCCASIONS */
+.occ-sec{background:var(--dark3);padding:2.75rem 1.5rem;position:relative;overflow:hidden}
+.occ-cards{display:flex;flex-direction:column;gap:1.1rem;margin-top:1.75rem;max-width:700px;margin-left:auto;margin-right:auto}
+.occ-card{
+  border-radius:var(--rad-lg);padding:1.75rem;cursor:pointer;
+  border:1px solid rgba(255,255,255,.08);
+  transition:transform .2s,border-color .2s;
+  -webkit-tap-highlight-color:transparent;
+  position:relative;overflow:hidden;
+}
+.occ-card:active{transform:scale(.98)}
+.occ-card.wed{background:linear-gradient(135deg,rgba(168,32,32,.35),rgba(100,0,0,.25))}
+.occ-card.bir{background:linear-gradient(135deg,rgba(184,134,26,.32),rgba(120,80,0,.2))}
+.occ-card.oth{background:linear-gradient(135deg,rgba(26,107,50,.32),rgba(10,60,25,.22))}
+.occ-illus{font-size:3.5rem;margin-bottom:1rem;display:block;animation:float 4s ease-in-out infinite}
+.occ-title{font-family:'Cormorant',serif;font-size:1.75rem;font-weight:700;color:white;margin-bottom:.4rem}
+.occ-desc{font-size:.84rem;color:rgba(255,255,255,.58);line-height:1.7}
+.occ-cta{
+  margin-top:1.25rem;display:inline-flex;align-items:center;gap:.4rem;
+  font-size:.84rem;font-weight:600;color:rgba(255,255,255,.75);
+  transition:gap .2s,color .2s;
+}
+.occ-card:hover .occ-cta,.occ-card:active .occ-cta{gap:.8rem;color:white}
 
-/* ── HOW IT WORKS ────────────────────────────────────────── */
-#how{text-align:center}
-.steps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-top:4rem;position:relative}
-.steps-grid::before{content:'';position:absolute;top:2.5rem;left:16%;right:16%;height:1px;background:repeating-linear-gradient(90deg,var(--cream3) 0,var(--cream3) 8px,transparent 8px,transparent 18px)}
-.step-card{position:relative;z-index:1;background:var(--white);border:1px solid var(--cream3);border-radius:var(--r-lg);padding:2.2rem 1.75rem;text-align:center;transition:transform .3s,box-shadow .3s}
-.step-card:hover{transform:translateY(-6px);box-shadow:0 20px 48px rgba(22,6,3,.09)}
-.step-icon{width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,rgba(168,32,32,.1),rgba(201,122,24,.08));display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;font-size:1.5rem;border:1px solid rgba(168,32,32,.12)}
-.step-num{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--pom);color:#fff;width:28px;height:28px;border-radius:50%;font-size:.8rem;font-weight:700;display:flex;align-items:center;justify-content:center}
-.step-title{font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:600;margin-bottom:.6rem}
-.step-desc{font-size:.88rem;color:var(--muted);line-height:1.7}
+/* DIASPORA BAND */
+.diaspora-band{
+  background:linear-gradient(135deg,var(--dark),var(--dark2));
+  padding:2.5rem 1.5rem;text-align:center;position:relative;overflow:hidden;
+}
+.diaspora-flags{display:flex;justify-content:center;gap:.65rem;flex-wrap:wrap;margin:1rem 0}
+.flag-chip{
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);
+  border-radius:100px;padding:.35rem .85rem;
+  font-size:.8rem;color:rgba(255,255,255,.65);font-weight:500;
+}
+.diaspora-stat{
+  font-family:'Cormorant',serif;font-size:2.4rem;font-weight:700;
+  color:var(--g2);line-height:1;margin:.75rem 0 .3rem;
+}
 
-/* ── OCCASIONS ───────────────────────────────────────────── */
-#occasions{background:var(--dark);padding:7rem 3rem}
-.occ-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.75rem;max-width:1200px;margin:4rem auto 0}
-.occ-card{border-radius:var(--r-xl);padding:2.5rem 2rem;cursor:pointer;border:1px solid rgba(255,255,255,.07);position:relative;overflow:hidden;transition:transform .3s,border-color .3s;text-align:left}
-.occ-card::before{content:'';position:absolute;inset:0;opacity:0;transition:opacity .3s}
-.occ-card:hover{transform:translateY(-6px);border-color:rgba(255,255,255,.18)}
-.occ-card:hover::before{opacity:1}
-.occ-card.wedding{background:linear-gradient(135deg,rgba(168,32,32,.25),rgba(139,0,0,.15))}
-.occ-card.wedding::before{background:linear-gradient(135deg,rgba(168,32,32,.15),transparent)}
-.occ-card.birth{background:linear-gradient(135deg,rgba(201,122,24,.22),rgba(160,90,10,.15))}
-.occ-card.birth::before{background:linear-gradient(135deg,rgba(201,122,24,.15),transparent)}
-.occ-card.other{background:linear-gradient(135deg,rgba(30,125,58,.22),rgba(20,80,40,.15))}
-.occ-card.other::before{background:linear-gradient(135deg,rgba(30,125,58,.15),transparent)}
-.occ-emoji{font-size:3rem;margin-bottom:1.5rem}
-.occ-title{font-family:'Playfair Display',serif;font-size:1.7rem;font-weight:700;color:#fff;margin-bottom:.6rem}
-.occ-desc{font-size:.88rem;color:rgba(255,255,255,.55);line-height:1.7;margin-bottom:1.5rem}
-.occ-link{font-size:.83rem;font-weight:600;color:rgba(255,255,255,.7);display:flex;align-items:center;gap:.4rem;transition:gap .2s}
-.occ-card:hover .occ-link{gap:.8rem;color:#fff}
+/* TESTIMONIAL HERO */
+.testi-hero-sec{padding:2.75rem 1.5rem;text-align:center;background:var(--cream2);position:relative;overflow:hidden}
+.testi-big-quote{
+  font-family:'Cormorant',serif;
+  font-size:clamp(1.35rem,4.5vw,2rem);
+  font-style:italic;font-weight:600;
+  color:var(--dark2);line-height:1.45;
+  max-width:600px;margin:1.25rem auto;
+  position:relative;z-index:1;
+}
+.testi-big-quote::before{content:'\201C';font-size:5rem;color:var(--r);opacity:.2;position:absolute;top:-1.5rem;left:-.5rem;line-height:1;font-style:normal}
+.testi-author-big{
+  display:flex;justify-content:center;align-items:center;
+  gap:.75rem;margin-top:1.5rem;
+}
+.tav-big{
+  width:46px;height:46px;border-radius:50%;
+  background:var(--r);color:white;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Cormorant',serif;font-size:1.1rem;font-weight:700;
+}
+.testi-other{
+  display:grid;grid-template-columns:1fr;gap:.85rem;
+  margin-top:2rem;max-width:700px;margin-left:auto;margin-right:auto;
+}
+@media(min-width:580px){.testi-other{grid-template-columns:1fr 1fr}}
+.testi-sm{
+  background:var(--white);border:1px solid var(--cream3);
+  border-radius:var(--rad);padding:1.2rem;text-align:left;
+}
+.testi-stars{color:var(--g);font-size:.82rem;letter-spacing:.15em;margin-bottom:.6rem}
+.testi-text-sm{font-family:'Cormorant',serif;font-size:1rem;font-style:italic;color:var(--dark2);line-height:1.6;margin-bottom:.9rem}
+.testi-auth-sm{display:flex;align-items:center;gap:.6rem}
+.tav-sm{width:32px;height:32px;border-radius:50%;background:rgba(168,32,32,.1);display:flex;align-items:center;justify-content:center;font-family:'Cormorant',serif;font-size:.85rem;font-weight:700;color:var(--r)}
+.testi-nm{font-size:.82rem;font-weight:600}
+.testi-loc{font-size:.72rem;color:var(--muted)}
 
-/* ── FEATURES ────────────────────────────────────────────── */
-#features{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;padding:7rem 3rem;max-width:1200px;margin:0 auto}
-.feat-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.1rem}
-.feat-item{border:1px solid var(--cream3);border-radius:var(--r-md);padding:1.25rem;display:flex;gap:.85rem;align-items:flex-start;background:var(--white);transition:transform .2s,border-color .2s}
-.feat-item:hover{transform:translateY(-3px);border-color:var(--cream4)}
-.feat-icon{width:38px;height:38px;border-radius:var(--r-sm);background:rgba(168,32,32,.08);display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
-.feat-title{font-size:.88rem;font-weight:600;margin-bottom:.25rem}
-.feat-desc{font-size:.78rem;color:var(--muted);line-height:1.55}
-
-/* ── TRUST BAND ──────────────────────────────────────────── */
-.trust-band{background:linear-gradient(135deg,var(--dark),var(--dark2));padding:3rem;display:flex;justify-content:center;align-items:center;gap:4rem;flex-wrap:wrap}
-.trust-item{text-align:center;color:rgba(255,255,255,.5);font-size:.8rem}
-.trust-icon{font-size:1.6rem;margin-bottom:.4rem;display:block}
-.trust-label{font-size:.75rem;font-weight:500;letter-spacing:.04em}
-
-/* ── TESTIMONIALS ────────────────────────────────────────── */
-#testimonials{background:var(--cream2)}
-.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3.5rem}
-.testi-card{background:var(--white);border:1px solid var(--cream3);border-radius:var(--r-lg);padding:1.75rem}
-.testi-stars{color:var(--saf);font-size:.85rem;letter-spacing:.18em;margin-bottom:1rem}
-.testi-text{font-family:'Playfair Display',serif;font-size:1.1rem;font-style:italic;color:var(--dark2);line-height:1.65;margin-bottom:1.5rem}
-.testi-author{display:flex;align-items:center;gap:.75rem}
-.testi-av{width:40px;height:40px;border-radius:50%;background:rgba(168,32,32,.1);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:var(--pom)}
-.testi-name{font-size:.88rem;font-weight:600}
-.testi-loc{font-size:.75rem;color:var(--muted)}
-
-/* ── PRICING ─────────────────────────────────────────────── */
-#pricing{text-align:center}
-.price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3.5rem}
-.price-card{border:1px solid var(--cream3);border-radius:var(--r-xl);padding:2.2rem;text-align:left;background:var(--white);transition:transform .3s}
-.price-card:hover{transform:translateY(-6px)}
+/* PRICING */
+.pricing-sec{padding:2.75rem 1.5rem;max-width:700px;margin:0 auto;text-align:center}
+.price-cards{display:flex;flex-direction:column;gap:1rem;margin-top:2rem}
+@media(min-width:580px){.price-cards{flex-direction:row}}
+.price-card{
+  flex:1;border:1.5px solid var(--cream3);border-radius:var(--rad-lg);
+  padding:1.75rem;text-align:left;background:var(--white);
+  transition:transform .25s,box-shadow .25s;
+}
+.price-card:hover{transform:translateY(-4px);box-shadow:var(--sh-lg)}
 .price-card.featured{background:var(--dark);border-color:transparent}
-.price-card.featured *:not(button){color:#fff}
+.price-card.featured *{color:white}
 .price-card.featured .price-feat li{border-color:rgba(255,255,255,.1)}
-.price-plan{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem}
-.price-card.featured .price-plan{color:var(--saf2)}
-.price-amount{font-family:'Playfair Display',serif;font-size:2.8rem;font-weight:700;line-height:1;color:var(--dark);margin-bottom:.25rem}
+.price-plan{font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem}
+.price-card.featured .price-plan{color:var(--g2)}
+.price-amt{font-family:'Cormorant',serif;font-size:3rem;font-weight:700;line-height:1;color:var(--dark);margin-bottom:.2rem}
 .price-period{font-size:.82rem;color:var(--muted);margin-bottom:1.5rem}
 .price-feat{list-style:none;margin-bottom:1.75rem}
-.price-feat li{padding:.45rem 0;border-bottom:1px solid var(--cream3);font-size:.88rem;display:flex;align-items:center;gap:.6rem;color:var(--dark)}
-.price-feat li::before{content:'✓';color:var(--pom);font-weight:700;font-size:.85rem;flex-shrink:0}
-.price-card.featured .price-feat li::before{color:var(--saf2)}
+.price-feat li{
+  padding:.4rem 0;border-bottom:1px solid var(--cream3);
+  font-size:.86rem;display:flex;align-items:flex-start;gap:.6rem;color:var(--dark);
+}
+.price-feat li::before{content:'✓';color:var(--r);font-weight:700;font-size:.8rem;flex-shrink:0;margin-top:.1rem}
+.price-card.featured .price-feat li::before{color:var(--g2)}
+.prem-badge{
+  display:inline-block;background:var(--r);color:white;
+  font-size:.62rem;font-weight:700;padding:.15rem .45rem;border-radius:4px;margin-left:.35rem;vertical-align:middle;letter-spacing:.04em;
+}
 
-/* ── CTA BAND ────────────────────────────────────────────── */
-.cta-band{background:var(--pom);padding:6rem 3rem;text-align:center;position:relative;overflow:hidden}
-.cta-band::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 50% 0,rgba(255,255,255,.08),transparent)}
+/* CTA BAND */
+.cta-band{background:var(--r);padding:3.5rem 1.5rem;text-align:center;position:relative;overflow:hidden}
+.cta-band::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 80% at 50% 0,rgba(255,255,255,.07),transparent)}
 
-/* ── FOOTER ──────────────────────────────────────────────── */
-footer{background:var(--dark2);padding:2.5rem 3rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
-.footer-logo{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;color:rgba(255,255,255,.85)}
-.footer-logo span{color:var(--saf2)}
-.footer-links{display:flex;gap:2rem}
+/* FOOTER */
+footer{background:var(--dark2);padding:2rem 1.5rem;display:flex;flex-direction:column;gap:1rem;align-items:center;text-align:center}
+@media(min-width:600px){footer{flex-direction:row;justify-content:space-between;text-align:left}}
+.footer-logo{font-family:'Cormorant',serif;font-size:1.4rem;font-weight:700;color:rgba(255,255,255,.85)}
+.footer-logo span{color:var(--g2)}
+.footer-links{display:flex;gap:1.5rem;flex-wrap:wrap;justify-content:center}
 .footer-links a{color:rgba(255,255,255,.4);font-size:.82rem;transition:color .2s}
 .footer-links a:hover{color:rgba(255,255,255,.8)}
-.footer-copy{color:rgba(255,255,255,.25);font-size:.78rem}
+.footer-copy{color:rgba(255,255,255,.25);font-size:.75rem}
 
-/* ── OVERLAY / MODAL ─────────────────────────────────────── */
-.overlay{position:fixed;inset:0;z-index:1000;background:rgba(22,6,3,.55);backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center;padding:1.5rem}
-.overlay.open{display:flex}
-.modal{background:var(--white);border-radius:var(--r-xl);padding:2.5rem;width:100%;max-width:520px;max-height:90vh;overflow-y:auto;position:relative;animation:fadeUp .35s cubic-bezier(.16,1,.3,1)}
-.modal-close{position:absolute;top:1.25rem;right:1.25rem;width:34px;height:34px;border-radius:50%;background:var(--cream2);border:none;cursor:pointer;font-size:.95rem;color:var(--muted);display:flex;align-items:center;justify-content:center;transition:background .2s}
-.modal-close:hover{background:var(--cream3)}
-.modal-title{font-family:'Playfair Display',serif;font-size:1.75rem;font-weight:700;margin-bottom:.35rem}
-.modal-sub{font-size:.88rem;color:var(--muted);margin-bottom:1.75rem}
-.divider-text{display:flex;align-items:center;gap:.85rem;color:var(--muted);font-size:.8rem;margin:1.25rem 0}
-.divider-text::before,.divider-text::after{content:'';flex:1;height:1px;background:var(--cream3)}
-
-/* ── TYPE SELECTOR ───────────────────────────────────────── */
-.type-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.65rem;margin-bottom:1.5rem}
-.type-opt{border:1.5px solid var(--cream3);border-radius:var(--r-md);padding:1rem .75rem;text-align:center;cursor:pointer;transition:all .2s}
-.type-opt:hover{border-color:var(--pom);background:rgba(168,32,32,.04)}
-.type-opt.sel{border-color:var(--pom);background:rgba(168,32,32,.07)}
-.type-opt .to-emoji{font-size:1.5rem;display:block;margin-bottom:.35rem}
-.type-opt .to-label{font-size:.8rem;font-weight:600;color:var(--dark)}
-
-/* ── TOAST ───────────────────────────────────────────────── */
-.toast{position:fixed;bottom:1.75rem;right:1.75rem;z-index:2000;background:var(--dark);color:#fff;padding:.9rem 1.4rem;border-radius:var(--r-md);font-size:.85rem;font-weight:500;display:flex;align-items:center;gap:.65rem;box-shadow:0 8px 28px rgba(0,0,0,.25);transform:translateY(100px);opacity:0;transition:all .3s cubic-bezier(.16,1,.3,1);max-width:300px}
-.toast.show{transform:translateY(0);opacity:1}
-
-/* ── PAGES ───────────────────────────────────────────────── */
-#page-landing{display:block}
-#page-list{display:none}
-#page-dashboard{display:none}
-#page-landing.active{display:block}
-#page-list.active{display:block}
-#page-dashboard.active{display:block}
-
-/* ── LIST PAGE ───────────────────────────────────────────── */
-.list-hero{background:var(--dark);padding:7rem 3rem 4rem;text-align:center;position:relative;overflow:hidden}
-.list-hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 60% 70% at 50% 0,rgba(168,32,32,.2),transparent)}
-.list-badge{position:relative;z-index:1;margin-bottom:1.25rem}
-.list-names{font-family:'Playfair Display',serif;font-size:clamp(2.2rem,5vw,4rem);font-weight:700;color:#fff;line-height:1.1;position:relative;z-index:1;margin-bottom:.5rem}
-.list-date{font-size:.9rem;color:rgba(255,255,255,.45);position:relative;z-index:1;margin-bottom:1.25rem}
-.list-msg{font-family:'Playfair Display',serif;font-size:1.1rem;font-style:italic;color:rgba(255,255,255,.6);max-width:480px;margin:0 auto;position:relative;z-index:1;line-height:1.65}
-.list-body{max-width:1100px;margin:0 auto;padding:3.5rem 2rem 5rem}
-
-/* ── CAGNOTTE ────────────────────────────────────────────── */
-.cagnotte{background:linear-gradient(135deg,rgba(168,32,32,.07),rgba(201,122,24,.06));border:1px solid var(--cream3);border-radius:var(--r-xl);padding:2.25rem;margin-bottom:3rem;display:flex;justify-content:space-between;align-items:center;gap:2rem;flex-wrap:wrap}
-.cagnotte-info h3{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:600;margin-bottom:.3rem}
-.cagnotte-info p{font-size:.85rem;color:var(--muted);margin-bottom:1rem}
-.progress-bar{height:8px;background:var(--cream3);border-radius:100px;overflow:hidden;margin-bottom:.75rem;width:280px;max-width:100%}
-.progress-fill{height:100%;background:linear-gradient(90deg,var(--pom),var(--saf));border-radius:100px;transition:width 1.2s ease}
-.cagnotte-nums{display:flex;gap:2rem}
-.cn-num{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;line-height:1}
-.cn-label{font-size:.75rem;color:var(--muted);margin-top:.15rem}
-
-/* ── ITEMS GRID ──────────────────────────────────────────── */
-.items-title{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:600;margin-bottom:1.75rem}
-.items-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1.25rem}
-.item-card{background:var(--white);border:1px solid var(--cream3);border-radius:var(--r-lg);padding:1.5rem;transition:transform .2s,box-shadow .2s}
-.item-card:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(22,6,3,.09)}
-.item-card.taken{opacity:.55}
-.item-img{width:100%;height:120px;background:var(--cream2);border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;font-size:2.5rem;margin-bottom:1rem}
-.item-status{display:inline-block;font-size:.72rem;font-weight:600;padding:.2rem .65rem;border-radius:100px;margin-bottom:.65rem}
-.status-avail{background:rgba(30,125,58,.1);color:var(--grn)}
-.status-taken{background:rgba(168,32,32,.1);color:var(--pom)}
-.item-name{font-weight:600;font-size:.92rem;margin-bottom:.3rem}
-.item-price{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;color:var(--pom);margin-bottom:.75rem}
-
-/* ── CONTRIBUTORS ────────────────────────────────────────── */
-.contributors{margin-top:3.5rem}
-.contrib-title{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:600;margin-bottom:1.5rem}
-.contrib-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.85rem}
-.contrib-item{background:var(--white);border:1px solid var(--cream3);border-radius:var(--r-md);padding:.9rem 1.1rem;display:flex;align-items:center;gap:.75rem}
-.contrib-av{width:36px;height:36px;border-radius:50%;background:rgba(168,32,32,.1);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:.9rem;font-weight:700;color:var(--pom);flex-shrink:0}
-.contrib-name{font-size:.85rem;font-weight:600}
-.contrib-amount{font-size:.78rem;color:var(--muted)}
-
-/* ── DASHBOARD ───────────────────────────────────────────── */
-.dashboard{max-width:900px;margin:0 auto;padding:7rem 2rem 5rem}
-.dash-header{margin-bottom:2.5rem}
-.dash-title{font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:700}
-.dash-sub{color:var(--muted);font-size:.92rem;margin-top:.35rem}
-.dash-share{background:linear-gradient(135deg,var(--dark),var(--dark2));border-radius:var(--r-xl);padding:2rem;margin-bottom:2.5rem}
-.dash-share h3{font-family:'Playfair Display',serif;font-size:1.35rem;color:#fff;margin-bottom:.35rem}
-.dash-share p{font-size:.83rem;color:rgba(255,255,255,.5);margin-bottom:1.25rem}
-.link-row{display:flex;gap:.65rem}
-.link-input{flex:1;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:100px;padding:.65rem 1.1rem;color:#fff;font-size:.85rem;outline:none}
-.dash-add{background:var(--white);border:1px solid var(--cream3);border-radius:var(--r-xl);padding:2rem;margin-bottom:2rem}
-.dash-add h3{font-family:'Playfair Display',serif;font-size:1.35rem;margin-bottom:1.5rem}
-.items-list{margin-top:1.25rem}
-.item-row{display:flex;align-items:center;gap:.85rem;background:var(--white);border:1px solid var(--cream3);border-radius:var(--r-md);padding:.85rem 1.1rem;margin-bottom:.6rem}
-.item-row-emoji{font-size:1.4rem}
-.item-row-name{flex:1;font-size:.9rem;font-weight:600}
-.item-row-price{font-size:.85rem;color:var(--muted)}
-.btn-del{background:none;border:none;color:var(--muted);font-size:1rem;padding:.25rem;cursor:pointer;transition:color .15s}
-.btn-del:hover{color:var(--pom)}
-.dash-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:2.5rem}
-.stat-box{background:var(--white);border:1px solid var(--cream3);border-radius:var(--r-lg);padding:1.25rem;text-align:center}
-.stat-big{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:var(--pom)}
-.stat-lbl{font-size:.78rem;color:var(--muted);margin-top:.2rem}
-
-/* ── SUCCESS ─────────────────────────────────────────────── */
-.success-wrap{text-align:center;padding:3rem 1.5rem}
-.success-emoji{font-size:3.5rem;display:block;margin-bottom:1.25rem}
-.success-title{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;margin-bottom:.6rem}
-.success-sub{color:var(--muted);font-size:.95rem;margin-bottom:2rem;line-height:1.7}
-
-/* ── RESPONSIVE ──────────────────────────────────────────── */
-@media(max-width:900px){
-  nav{padding:.9rem 1.5rem}
-  .nav-links{display:none}
-  .section,.section-full,.#features{padding-left:1.5rem;padding-right:1.5rem}
-  #features{grid-template-columns:1fr;gap:2.5rem;padding:4rem 1.5rem}
-  .steps-grid,.occ-grid,.price-grid,.testi-grid{grid-template-columns:1fr}
-  .steps-grid::before{display:none}
-  .hero-stats{gap:2rem;flex-wrap:wrap}
-  .cagnotte{flex-direction:column}
-  .progress-bar{width:100%}
-  .field-row{grid-template-columns:1fr}
-  .type-grid{grid-template-columns:repeat(3,1fr)}
-  .dash-stats{grid-template-columns:1fr 1fr}
-  footer{flex-direction:column;gap:.75rem;text-align:center}
-  .occ-strip{gap:1.5rem;padding:1.25rem}
-  .trust-band{gap:2rem;padding:2.5rem 1.5rem}
-  .list-hero{padding:6rem 1.5rem 3rem}
-  .dashboard{padding:5.5rem 1.5rem 4rem}
-  .modal{padding:2rem}
+/* ═══════════════════════════════════════════════════════════
+   PAGE: LIST (public)
+═══════════════════════════════════════════════════════════ */
+.list-hero{
+  padding:2.5rem 1.5rem 2rem;text-align:center;
+  position:relative;overflow:hidden;
 }
+.list-hero.colored .folk-bg{opacity:.08}
+.list-names{
+  font-family:'Cormorant',serif;
+  font-size:clamp(2.2rem,7vw,3.5rem);font-weight:700;
+  color:white;line-height:1.1;margin:.75rem 0 .4rem;
+  position:relative;z-index:1;
+}
+.list-date{font-size:.88rem;color:rgba(255,255,255,.5);position:relative;z-index:1;margin-bottom:1rem}
+.list-msg{font-family:'Cormorant',serif;font-size:1.1rem;font-style:italic;color:rgba(255,255,255,.65);max-width:440px;margin:0 auto;line-height:1.65;position:relative;z-index:1}
+.list-hero-photo{width:100%;max-height:260px;object-fit:cover;position:absolute;inset:0;z-index:0;opacity:.35}
+.list-hero-overlay{position:absolute;inset:0;z-index:0;background:linear-gradient(180deg,rgba(0,0,0,.3) 0,rgba(0,0,0,.6) 100%)}
+
+.list-body{padding:1.75rem 1.5rem;max-width:700px;margin:0 auto}
+
+/* cagnotte */
+.cagnotte{
+  background:linear-gradient(135deg,rgba(168,32,32,.07),rgba(184,134,26,.05));
+  border:1px solid var(--cream3);border-radius:var(--rad-lg);
+  padding:1.5rem;margin-bottom:2rem;
+}
+.cag-title{font-family:'Cormorant',serif;font-size:1.3rem;font-weight:600;margin-bottom:.25rem}
+.cag-sub{font-size:.82rem;color:var(--muted);margin-bottom:1rem}
+.progress-bar{height:9px;background:var(--cream3);border-radius:100px;overflow:hidden;margin-bottom:.85rem}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--r),var(--g2));border-radius:100px;transition:width 1.2s ease}
+.cag-nums{display:flex;gap:2rem;margin-bottom:1.25rem}
+.cn-num{font-family:'Cormorant',serif;font-size:1.7rem;font-weight:700;color:var(--r);line-height:1}
+.cn-lbl{font-size:.72rem;color:var(--muted);margin-top:.15rem}
+
+/* items */
+.items-title{font-family:'Cormorant',serif;font-size:1.4rem;font-weight:600;margin-bottom:1.25rem}
+.items-grid{display:grid;grid-template-columns:1fr 1fr;gap:.85rem}
+@media(min-width:480px){.items-grid{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:680px){.items-grid{grid-template-columns:repeat(4,1fr)}}
+.item-card{
+  background:var(--white);border:1px solid var(--cream3);
+  border-radius:var(--rad);padding:1rem .85rem;
+  text-align:center;transition:transform .2s,box-shadow .2s;
+  cursor:pointer;-webkit-tap-highlight-color:transparent;
+}
+.item-card:hover{transform:translateY(-3px);box-shadow:var(--sh)}
+.item-card.taken{opacity:.52;pointer-events:none}
+.item-img{
+  font-size:2.4rem;margin-bottom:.65rem;
+  display:flex;align-items:center;justify-content:center;
+  height:70px;border-radius:var(--rad-sm);
+  background:var(--cream2);
+}
+.item-img img{width:100%;height:100%;object-fit:cover;border-radius:var(--rad-sm)}
+.item-status{display:inline-block;font-size:.66rem;font-weight:700;padding:.18rem .55rem;border-radius:100px;margin-bottom:.45rem}
+.s-avail{background:rgba(26,107,50,.1);color:var(--grn)}
+.s-taken{background:rgba(168,32,32,.1);color:var(--r)}
+.item-name{font-size:.8rem;font-weight:600;margin-bottom:.3rem;line-height:1.3}
+.item-price{font-family:'Cormorant',serif;font-size:1.2rem;font-weight:700;color:var(--r);margin-bottom:.6rem}
+
+/* contributors */
+.contribs{margin-top:2rem}
+.contribs-title{font-family:'Cormorant',serif;font-size:1.4rem;font-weight:600;margin-bottom:1rem}
+.contrib-list{display:flex;flex-direction:column;gap:.6rem}
+.contrib-row{
+  display:flex;align-items:center;gap:.75rem;
+  background:var(--white);border:1px solid var(--cream3);
+  border-radius:var(--rad-sm);padding:.75rem 1rem;
+}
+.contrib-av{
+  width:36px;height:36px;border-radius:50%;flex-shrink:0;
+  background:rgba(168,32,32,.1);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Cormorant',serif;font-size:.9rem;font-weight:700;color:var(--r);
+}
+.contrib-name{font-weight:600;font-size:.88rem}
+.contrib-detail{font-size:.75rem;color:var(--muted)}
+
+/* sticky wa button */
+.sticky-wa{
+  position:sticky;bottom:1.25rem;z-index:400;
+  display:flex;justify-content:center;
+  padding:0 1.5rem;margin-top:1.5rem;
+  pointer-events:none;
+}
+.sticky-wa .btn{pointer-events:all;box-shadow:0 6px 24px rgba(37,211,102,.4)}
+
+/* ═══════════════════════════════════════════════════════════
+   PAGE: DASHBOARD
+═══════════════════════════════════════════════════════════ */
+.dash{padding:1.5rem;max-width:700px;margin:0 auto}
+.dash-title{font-family:'Cormorant',serif;font-size:1.9rem;font-weight:700;margin-bottom:.2rem}
+.dash-sub{font-size:.85rem;color:var(--muted);margin-bottom:1.5rem}
+
+/* stats */
+.stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem;margin-bottom:1.5rem}
+.stat-box{background:var(--white);border:1px solid var(--cream3);border-radius:var(--rad);padding:1rem;text-align:center}
+.stat-n{font-family:'Cormorant',serif;font-size:1.9rem;font-weight:700;color:var(--r);line-height:1}
+.stat-l{font-size:.7rem;color:var(--muted);font-weight:500;margin-top:.2rem}
+
+/* add item */
+.add-card{background:var(--white);border:1px solid var(--cream3);border-radius:var(--rad-lg);padding:1.5rem;margin-bottom:1.25rem}
+.add-card-title{font-family:'Cormorant',serif;font-size:1.25rem;font-weight:600;margin-bottom:1.1rem}
+.url-paste-area{
+  border:2px dashed var(--cream3);border-radius:var(--rad);
+  padding:1.1rem;background:var(--cream2);
+  margin-bottom:1rem;transition:border-color .2s;
+}
+.url-paste-area:focus-within{border-color:var(--r)}
+.url-paste-label{font-size:.8rem;font-weight:600;color:var(--dark2);margin-bottom:.4rem;display:block}
+.url-paste-input{
+  width:100%;border:none;background:transparent;
+  font-size:.95rem;color:var(--dark);outline:none;padding:.1rem 0;
+}
+.url-paste-input::placeholder{color:var(--muted2);font-size:.88rem}
+.url-detect-btn{
+  width:100%;padding:.7rem;border-radius:var(--rad-sm);
+  background:var(--r);color:white;border:none;
+  font-size:.9rem;font-weight:600;cursor:pointer;
+  transition:background .2s;margin-top:.6rem;
+  display:flex;align-items:center;justify-content:center;gap:.5rem;
+  min-height:44px;
+}
+.url-detect-btn:hover{background:var(--r2)}
+.url-detect-btn:disabled{opacity:.5;pointer-events:none}
+.url-preview{
+  background:var(--cream2);border:1px solid var(--cream3);
+  border-radius:var(--rad-sm);padding:.85rem;
+  display:flex;gap:.75rem;align-items:center;margin-bottom:.85rem;
+  display:none;
+}
+.url-preview.show{display:flex}
+.url-prev-emoji{font-size:1.8rem;flex-shrink:0}
+.url-prev-site{font-size:.72rem;color:var(--muted)}
+.url-prev-name{font-size:.92rem;font-weight:600}
+.url-prev-price{font-size:.85rem;color:var(--r);font-weight:600}
+
+/* item list in dash */
+.item-rows{margin-top:.85rem}
+.item-row-d{
+  display:flex;align-items:center;gap:.75rem;
+  background:var(--white);border:1px solid var(--cream3);
+  border-radius:var(--rad-sm);padding:.75rem 1rem;margin-bottom:.5rem;
+}
+.ir-emoji{font-size:1.3rem;flex-shrink:0}
+.ir-info{flex:1;min-width:0}
+.ir-name{font-size:.9rem;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ir-price{font-size:.78rem;color:var(--muted)}
+.ir-del{background:none;border:none;cursor:pointer;color:var(--muted);font-size:1rem;padding:.2rem;min-height:auto;transition:color .2s}
+.ir-del:hover{color:var(--r)}
+
+/* share */
+.share-card{background:var(--dark);border-radius:var(--rad-lg);padding:1.5rem;margin-bottom:1.25rem}
+.share-card-title{font-family:'Cormorant',serif;font-size:1.2rem;color:white;margin-bottom:.25rem}
+.share-card-sub{font-size:.82rem;color:rgba(255,255,255,.5);margin-bottom:1.1rem}
+.link-row{display:flex;gap:.5rem}
+.link-inp{
+  flex:1;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);
+  border-radius:100px;padding:.6rem 1rem;color:white;font-size:.82rem;outline:none;
+  min-width:0;
+}
+.link-copy-btn{
+  background:var(--g);border:none;color:white;
+  padding:.6rem 1.1rem;border-radius:100px;
+  font-size:.8rem;font-weight:600;cursor:pointer;
+  white-space:nowrap;min-height:auto;transition:background .2s;
+}
+.link-copy-btn:hover{background:var(--g2)}
+.share-btns{display:flex;gap:.6rem;margin-top:.85rem;flex-wrap:wrap}
+.share-btn{
+  padding:.55rem 1.1rem;border-radius:100px;border:1px solid rgba(255,255,255,.15);
+  background:rgba(255,255,255,.06);color:rgba(255,255,255,.75);
+  font-size:.82rem;font-weight:600;cursor:pointer;
+  transition:all .2s;min-height:auto;display:flex;align-items:center;gap:.4rem;
+}
+.share-btn:hover{background:rgba(255,255,255,.14);color:white}
+.share-btn.wa{background:rgba(37,211,102,.15);border-color:rgba(37,211,102,.3);color:#6FDC9F}
+.share-btn.wa:hover{background:rgba(37,211,102,.25)}
+
+/* premium upsell */
+.upsell{
+  background:linear-gradient(135deg,rgba(168,32,32,.08),rgba(184,134,26,.06));
+  border:1.5px solid rgba(168,32,32,.2);border-radius:var(--rad-lg);
+  padding:1.4rem;margin-bottom:1.25rem;
+}
+.upsell-title{font-family:'Cormorant',serif;font-size:1.25rem;font-weight:600;margin-bottom:.3rem}
+.upsell-feats{display:flex;flex-direction:column;gap:.4rem;margin:.75rem 0}
+.upsell-feat{display:flex;align-items:center;gap:.5rem;font-size:.86rem;color:var(--dark2)}
+.upsell-feat::before{content:'✦';color:var(--g);font-size:.65rem;flex-shrink:0}
+
+/* ═══════════════════════════════════════════════════════════
+   SHEET: CREATE LIST
+═══════════════════════════════════════════════════════════ */
+.type-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem;margin-bottom:1.25rem}
+.type-opt{
+  border:2px solid var(--cream3);border-radius:var(--rad);
+  padding:.85rem .5rem;text-align:center;cursor:pointer;
+  transition:all .2s;-webkit-tap-highlight-color:transparent;
+}
+.type-opt:hover,.type-opt.sel{border-color:var(--r);background:rgba(168,32,32,.06)}
+.type-opt .te{font-size:1.5rem;display:block;margin-bottom:.3rem}
+.type-opt .tl{font-size:.78rem;font-weight:600;color:var(--dark)}
+
+/* ═══════════════════════════════════════════════════════════
+   SHEET: CONTRIBUTE (2 steps)
+═══════════════════════════════════════════════════════════ */
+.contrib-item-prev{
+  background:var(--cream2);border-radius:var(--rad);
+  padding:.85rem 1rem;display:flex;gap:.75rem;align-items:center;
+  margin-bottom:1.25rem;border:1px solid var(--cream3);
+}
+.cip-emoji{font-size:1.75rem;flex-shrink:0}
+.cip-name{font-weight:600;font-size:.95rem}
+.cip-price{font-size:.85rem;color:var(--r);font-weight:600}
+.amount-pills{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1rem}
+.amount-pill{
+  padding:.45rem 1rem;border-radius:100px;
+  border:1.5px solid var(--cream3);background:var(--white);
+  font-size:.85rem;font-weight:600;cursor:pointer;
+  transition:all .15s;-webkit-tap-highlight-color:transparent;
+  min-height:auto;
+}
+.amount-pill.sel,.amount-pill:hover{border-color:var(--r);background:rgba(168,32,32,.07);color:var(--r)}
+
+/* ─── CONTRIB SUCCESS ─────────────────────────────────────── */
+.success-wrap{text-align:center;padding:1.5rem 0}
+.success-emoji{font-size:3.5rem;display:block;margin-bottom:1rem;animation:float 2s ease-in-out infinite}
+.success-title{font-family:'Cormorant',serif;font-size:2rem;font-weight:700;margin-bottom:.4rem}
+.success-sub{font-size:.9rem;color:var(--muted);line-height:1.7;margin-bottom:1.75rem}
+.success-share-hint{font-size:.82rem;color:var(--muted);margin-top:.75rem}
+
+/* ─── PREMIUM SHEET ───────────────────────────────────────── */
+.premium-feats-list{display:flex;flex-direction:column;gap:.85rem;margin:1.25rem 0}
+.pf-item{display:flex;gap:.85rem;align-items:flex-start;background:var(--cream2);border-radius:var(--rad-sm);padding:.9rem}
+.pf-icon{font-size:1.4rem;flex-shrink:0;margin-top:.05rem}
+.pf-title{font-weight:600;font-size:.9rem;margin-bottom:.18rem}
+.pf-desc{font-size:.8rem;color:var(--muted);line-height:1.55}
+
+/* color picker in premium */
+.color-swatches{display:flex;gap:.65rem;flex-wrap:wrap;margin:.65rem 0}
+.swatch{
+  width:36px;height:36px;border-radius:50%;cursor:pointer;
+  border:3px solid transparent;transition:all .2s;
+  -webkit-tap-highlight-color:transparent;
+}
+.swatch.sel{border-color:var(--dark);transform:scale(1.15)}
+
+/* ═══════════════════════════════════════════════════════════
+   UTILITY
+═══════════════════════════════════════════════════════════ */
+.sep{height:1px;background:var(--cream3);margin:1.25rem 0}
+.text-center{text-align:center}
+.mt-1{margin-top:.75rem}
+.mt-2{margin-top:1.5rem}
+.gap-row{display:flex;gap:.65rem;flex-wrap:wrap}
 </style>
 </head>
-<body>
+<body data-lang="sq">
 
-<!-- TOAST -->
+<!-- ═══ TOAST ════════════════════════════════════════════ -->
 <div class="toast" id="toast"></div>
 
-<!-- ═══ NAV ═══════════════════════════════════════════════ -->
-<nav id="navbar">
-  <a href="#" class="nav-logo display" onclick="showPage('landing');return false">lista<span>.</span>ime</a>
-  <ul class="nav-links">
-    <li><a href="#how" class="sq">Si funksionon</a><a href="#how" class="en">How it works</a></li>
-    <li><a href="#occasions" class="sq">Rastet</a><a href="#occasions" class="en">Occasions</a></li>
-    <li><a href="#pricing" class="sq">Çmimet</a><a href="#pricing" class="en">Pricing</a></li>
-  </ul>
-  <div class="nav-right">
-    <button class="lang-btn" onclick="toggleLang()" id="langBtn">🇬🇧 EN</button>
-    <button class="btn btn-secondary" onclick="openModal('find-overlay')">
-      <span class="sq">Gjej listën</span><span class="en">Find a list</span>
-    </button>
-    <button class="btn btn-primary" onclick="openModal('create-overlay')">
-      <span class="sq">Krijo listën ✦</span><span class="en">Create list ✦</span>
-    </button>
-  </div>
-</nav>
+<!-- ═══ FAB ═════════════════════════════════════════════ -->
+<button class="fab" id="fab" onclick="openSheet('s-create')" title="Krijo listën">＋</button>
 
-<!-- ═══ PAGES ══════════════════════════════════════════════ -->
+<!-- ═══════════════════════════════════════════════════════
+     LANDING PAGE
+════════════════════════════════════════════════════════ -->
+<div id="p-home" class="page active">
 
-<!-- ─── LANDING PAGE ─────────────────────────────────────── -->
-<div id="page-landing" class="active">
+  <!-- TOP NAV -->
+  <nav class="top-nav">
+    <div class="nav-logo">lista<span>.</span>ime</div>
+    <div class="nav-right">
+      <button class="nav-find btn-sm" onclick="openSheet('s-find')">
+        <span class="sq">Gjej listën</span><span class="en">Find list</span>
+      </button>
+      <button class="lang-tog" onclick="toggleLang()" id="lang-btn">🇬🇧 EN</button>
+    </div>
+  </nav>
 
   <!-- HERO -->
-  <section id="hero">
-    <div class="hero-bg"></div>
-    <!-- Floating shapes -->
-    <div class="shape" style="top:12%;left:6%;font-size:2rem;animation-delay:0s;opacity:.12">◇</div>
-    <div class="shape" style="top:25%;right:7%;font-size:1.5rem;animation-delay:-2s;opacity:.1">✦</div>
-    <div class="shape" style="bottom:22%;left:9%;font-size:1.2rem;animation-delay:-4s;opacity:.1">◆</div>
-    <div class="shape" style="top:55%;right:5%;font-size:1.8rem;animation-delay:-1.5s;opacity:.09">❋</div>
-    <div class="shape" style="bottom:30%;right:12%;font-size:1rem;animation-delay:-3s;opacity:.1">✿</div>
-    <div class="hero-content">
-      <div class="hero-badge">
-        <span class="badge badge-pom">
-          <span style="width:6px;height:6px;background:var(--pom3);border-radius:50%;animation:pulse 1.8s infinite"></span>
-          <span class="sq">E para platformë shqipe • Falas</span>
-          <span class="en">First Albanian platform • Free</span>
-        </span>
-      </div>
-      <h1 class="hero-title display">
-        <span class="sq">Lista e dhuratave<br/><span class="line-italic">për çdo festë shqiptare.</span></span>
-        <span class="en">The gift list<br/><span class="line-italic">for every Albanian celebration.</span></span>
-      </h1>
-      <p class="hero-sub">
-        <span class="sq">Dasma, lindje, festë — krijo listën tënde dhe ndaj me familjen kudo në botë. Pa komplikime, pa dyfishim.</span>
-        <span class="en">Weddings, births, parties — create your list and share with family anywhere in the world. No hassle, no duplicates.</span>
-      </p>
-      <div class="hero-ctas">
-        <button class="btn btn-primary btn-lg" onclick="openModal('create-overlay')">
-          <span class="sq">Krijo listën tënde — Falas</span>
-          <span class="en">Create your list — Free</span>
-        </button>
-        <button class="btn btn-secondary btn-lg" onclick="openModal('find-overlay')">
-          <span class="sq">Gjej listën e dikujt →</span>
-          <span class="en">Find someone's list →</span>
-        </button>
-      </div>
-      <div class="hero-stats">
-        <div><div class="stat-num display"><span style="color:var(--pom)">6k+</span></div><div class="stat-label sq">Lista aktive</div><div class="stat-label en">Active lists</div></div>
-        <div><div class="stat-num display"><span style="color:var(--saf)">€3.2M</span></div><div class="stat-label sq">Dhurata të dhëna</div><div class="stat-label en">Gifts given</div></div>
-        <div><div class="stat-num display"><span style="color:var(--grn)">98%</span></div><div class="stat-label sq">Familje të kënaqura</div><div class="stat-label en">Happy families</div></div>
-      </div>
-    </div>
-  </section>
+  <section class="hero">
+    <div class="folk-bg"></div>
 
-  <!-- OCCASIONS STRIP -->
-  <div class="occ-strip">
-    <div class="occ-item"><span class="dot"></span><span class="sq">Dasma</span><span class="en">Wedding</span></div>
-    <div class="occ-sep">·</div>
-    <div class="occ-item"><span class="dot"></span><span class="sq">Lindje & Bebe</span><span class="en">Birth & Baby</span></div>
-    <div class="occ-sep">·</div>
-    <div class="occ-item"><span class="dot"></span><span class="sq">Udhëtim Nusërie</span><span class="en">Honeymoon</span></div>
-    <div class="occ-sep">·</div>
-    <div class="occ-item"><span class="dot"></span><span class="sq">Ditëlindje</span><span class="en">Birthday</span></div>
-    <div class="occ-sep">·</div>
-    <div class="occ-item"><span class="dot"></span><span class="sq">Shtëpi e Re</span><span class="en">New Home</span></div>
-    <div class="occ-sep">·</div>
-    <div class="occ-item"><span class="dot"></span><span class="sq">Diaspora</span><span class="en">Diaspora</span></div>
-  </div>
-
-  <!-- HOW IT WORKS -->
-  <section id="how" class="section" style="text-align:center">
-    <div class="reveal"><div class="section-tag sq">Si funksionon</div><div class="section-tag en" style="display:none">How it works</div></div>
-    <h2 class="section-title display reveal">
-      <span class="sq">Thjesht. Shpejt.<br/><em>Sipas dëshirës tënde.</em></span>
-      <span class="en">Simple. Fast.<br/><em>Exactly as you wish.</em></span>
-    </h2>
-    <div class="steps-grid" style="margin-top:4rem">
-      <div class="step-card reveal">
-        <div class="step-num">1</div>
-        <div class="step-icon">🎁</div>
-        <div class="step-title display sq">Krijo listën</div><div class="step-title display en">Create your list</div>
-        <p class="step-desc sq">Shto dhurata nga çdo dyqan ose faqe interneti. Ose krijo një arkë kolektive. Gati në 3 minuta.</p>
-        <p class="step-desc en">Add gifts from any shop or website. Or create a collective pot. Ready in 3 minutes.</p>
-      </div>
-      <div class="step-card reveal">
-        <div class="step-num">2</div>
-        <div class="step-icon">📱</div>
-        <div class="step-title display sq">Ndaj me familjen</div><div class="step-title display en">Share with family</div>
-        <p class="step-desc sq">Dërgo linkun me WhatsApp, Instagram ose email. Diaspora kontribuon nga Zvicra, Gjermania, Italia.</p>
-        <p class="step-desc en">Send the link via WhatsApp, Instagram or email. Diaspora contributes from Switzerland, Germany, Italy.</p>
-      </div>
-      <div class="step-card reveal">
-        <div class="step-num">3</div>
-        <div class="step-icon">💝</div>
-        <div class="step-title display sq">Merr dhuratën tuaj</div><div class="step-title display en">Receive your gift</div>
-        <p class="step-desc sq">Paratë vijnë direkt në llogarinë tënde. Pa komisione të fshehura. Merrni saktësisht ato që dëshironi.</p>
-        <p class="step-desc en">Money goes directly to your account. No hidden fees. Receive exactly what you want.</p>
-      </div>
+    <div class="hero-badge">
+      <span class="badge badge-r">
+        <span style="width:6px;height:6px;background:var(--r2);border-radius:50%;animation:pulse2 1.5s infinite;flex-shrink:0"></span>
+        <span class="sq">E para platformë shqipe · Falas</span>
+        <span class="en">First Albanian platform · Free</span>
+      </span>
     </div>
-  </section>
 
-  <!-- OCCASIONS -->
-  <section id="occasions" class="section-full">
-    <div style="max-width:1200px;margin:0 auto;text-align:center">
-      <div class="reveal"><div class="section-tag" style="color:var(--saf2)" >Rastet / Occasions</div></div>
-      <h2 class="section-title display reveal" style="color:#fff">
-        <span class="sq">Çdo moment i rëndësishëm<br/><em style="color:var(--saf2)">i jetës tuaj</em></span>
-        <span class="en">Every important moment<br/><em style="color:var(--saf2)">of your life</em></span>
-      </h2>
-    </div>
-    <div class="occ-grid">
-      <div class="occ-card wedding reveal" onclick="openModal('create-overlay')">
-        <div class="occ-emoji">💍</div>
-        <div class="occ-title display sq">Dasma</div><div class="occ-title display en">Wedding</div>
-        <p class="occ-desc sq">Mobilje, pajisje shtëpie, udhëtim nusërie — ose thjesht një arkë kontributesh. Mysafirët nga diaspora kontribuojnë lehtë pa ardhur me duar bosh.</p>
-        <p class="occ-desc en">Furniture, home appliances, honeymoon — or simply a contribution pot. Diaspora guests contribute easily without coming empty-handed.</p>
-        <div class="occ-link sq">Krijo listën e dasmës →</div>
-        <div class="occ-link en">Create wedding list →</div>
-      </div>
-      <div class="occ-card birth reveal" onclick="openModal('create-overlay')">
-        <div class="occ-emoji">👶</div>
-        <div class="occ-title display sq">Lindje & Bebe</div><div class="occ-title display en">Birth & Baby</div>
-        <p class="occ-desc sq">Karrocë, kolicje, rroba, lodra — krijoni listën perfekte dhe lini familjen e gjerë të kontribuojë. Ideal për vizitat tradicionale.</p>
-        <p class="occ-desc en">Pram, car seat, clothes, toys — create the perfect list and let the extended family contribute. Ideal for traditional visits.</p>
-        <div class="occ-link sq">Krijo listën e bebës →</div>
-        <div class="occ-link en">Create baby list →</div>
-      </div>
-      <div class="occ-card other reveal" onclick="openModal('create-overlay')">
-        <div class="occ-emoji">🎉</div>
-        <div class="occ-title display sq">Çdo Festë</div><div class="occ-title display en">Any Occasion</div>
-        <p class="occ-desc sq">Ditëlindje, shtëpi e re, diplomim, fejesa — çdo moment i rëndësishëm meriton dhuratën e duhur nga personat e duhur.</p>
-        <p class="occ-desc en">Birthday, new home, graduation, engagement — every important moment deserves the right gift from the right people.</p>
-        <div class="occ-link sq">Krijo listën tënde →</div>
-        <div class="occ-link en">Create your list →</div>
-      </div>
-    </div>
-  </section>
+    <h1 class="hero-title">
+      <span class="sq">Krijo listën tënde<br/>të dhuratave.<br/><em>Shpejt. Falas.</em></span>
+      <span class="en">Create your gift list.<br/><em>Fast. Free.</em></span>
+    </h1>
 
-  <!-- FEATURES -->
-  <section id="features">
-    <div class="reveal">
-      <div class="section-tag sq">Karakteristikat</div><div class="section-tag en" style="display:none">Features</div>
-      <h2 class="section-title display">
-        <span class="sq">Gjithçka keni<br/>nevojë dhe<br/><em>më shumë</em></span>
-        <span class="en">Everything you<br/>need and<br/><em>more</em></span>
-      </h2>
-      <p class="section-sub sq">Ndërtuar për traditat tona. Menduam diasporën, familjet e gjera dhe dasmat me 300+ mysafirë.</p>
-      <p class="section-sub en">Built for our traditions. We thought of the diaspora, extended families and weddings with 300+ guests.</p>
-      <button class="btn btn-primary" style="margin-top:2rem" onclick="openModal('create-overlay')">
-        <span class="sq">Fillo tani — 0€</span><span class="en">Start now — 0€</span>
+    <div class="hero-prob">
+      <span>🎁</span>
+      <span>
+        <span class="sq"><strong>Pa dhurata të dyfishta më.</strong> Thuaju të gjithëve saktësisht çfarë dëshironi — diaspora mund të kontribuojë nga kudo në botë.</span>
+        <span class="en"><strong>No more duplicate gifts.</strong> Tell everyone exactly what you want — diaspora can contribute from anywhere in the world.</span>
+      </span>
+    </div>
+
+    <div class="hero-ctas">
+      <button class="btn btn-r btn-lg btn-full" onclick="openSheet('s-create')">
+        <span class="sq">✦ Krijo listën tënde falas</span>
+        <span class="en">✦ Create your list free</span>
+      </button>
+      <button class="btn btn-out btn-full" onclick="openSheet('s-find')">
+        <span class="sq">Gjej listën e dikujt →</span>
+        <span class="en">Find someone's list →</span>
       </button>
     </div>
-    <div class="feat-grid reveal">
-      <div class="feat-item">
-        <div class="feat-icon">🌍</div>
-        <div><div class="feat-title sq">Diaspora-friendly</div><div class="feat-title en">Diaspora-friendly</div><p class="feat-desc sq">Aksesibël nga Zvicra, Italia, Gjermania. Kontribut me kartë EU/CHF/GBP.</p><p class="feat-desc en">Accessible from Switzerland, Italy, Germany. Contribute with EU/CHF/GBP card.</p></div>
-      </div>
-      <div class="feat-item">
-        <div class="feat-icon">📱</div>
-        <div><div class="feat-title">WhatsApp-ready</div><p class="feat-desc sq">Ndaj linkun me 1 klik. Mysafirët nuk kanë nevojë të regjistrohen.</p><p class="feat-desc en">Share link in 1 click. Guests don't need to register.</p></div>
-      </div>
-      <div class="feat-item">
-        <div class="feat-icon">💸</div>
-        <div><div class="feat-title sq">Pa komisione</div><div class="feat-title en">No hidden fees</div><p class="feat-desc sq">100% e parave shkojnë direkt tek ju. Asnjë tarifë e fshehur.</p><p class="feat-desc en">100% of the money goes directly to you. No hidden fees.</p></div>
-      </div>
-      <div class="feat-item">
-        <div class="feat-icon">🎯</div>
-        <div><div class="feat-title sq">Çdo dyqan</div><div class="feat-title en">Any shop</div><p class="feat-desc sq">Gjirafa, IKEA, Amazon — shtoni nga kudo në botë.</p><p class="feat-desc en">Gjirafa, IKEA, Amazon — add from anywhere in the world.</p></div>
-      </div>
-      <div class="feat-item">
-        <div class="feat-icon">🔒</div>
-        <div><div class="feat-title sq">100% i sigurt</div><div class="feat-title en">100% secure</div><p class="feat-desc sq">Pagesa e kriptuar me Stripe. Lista private deri sa ta ndani ju.</p><p class="feat-desc en">Encrypted payment with Stripe. List private until you share it.</p></div>
-      </div>
-      <div class="feat-item">
-        <div class="feat-icon">🎁</div>
-        <div><div class="feat-title sq">Arka kolektive</div><div class="feat-title en">Collective pot</div><p class="feat-desc sq">Kontribuoni bashkërisht për dhurata të mëdha. Nuk ka kufi.</p><p class="feat-desc en">Contribute together for big gifts. No limit.</p></div>
-      </div>
+
+    <div class="hero-stats">
+      <div class="hs-item"><div class="hs-num">6k+</div><div class="hs-lbl sq">Lista aktive</div><div class="hs-lbl en">Active lists</div></div>
+      <div class="hs-item"><div class="hs-num">€3.2M</div><div class="hs-lbl sq">Dhurata dhënë</div><div class="hs-lbl en">Gifts given</div></div>
+      <div class="hs-item"><div class="hs-num">98%</div><div class="hs-lbl sq">Familje gëzuara</div><div class="hs-lbl en">Happy families</div></div>
     </div>
   </section>
 
-  <!-- TRUST BAND -->
-  <div class="trust-band">
-    <div class="trust-item"><span class="trust-icon">🔐</span><span class="trust-label sq">Pagesa e sigurt</span><span class="trust-label en">Secure payment</span></div>
-    <div class="trust-item"><span class="trust-icon">⚡</span><span class="trust-label sq">Transfertë e shpejtë</span><span class="trust-label en">Fast transfer</span></div>
-    <div class="trust-item"><span class="trust-icon">🌍</span><span class="trust-label sq">Pagesa ndërkombëtare</span><span class="trust-label en">International payment</span></div>
-    <div class="trust-item"><span class="trust-icon">🛡️</span><span class="trust-label">SSL / HTTPS</span></div>
-    <div class="trust-item"><span class="trust-icon">📧</span><span class="trust-label sq">Konfirmim automatik</span><span class="trust-label en">Auto confirmation</span></div>
+  <!-- STRIP -->
+  <div class="occ-strip">
+    <div class="occ-chip">💍 <span class="sq">Dasma</span><span class="en">Wedding</span></div>
+    <div class="occ-chip">👶 <span class="sq">Lindje & Bebe</span><span class="en">Birth & Baby</span></div>
+    <div class="occ-chip">✈️ <span class="sq">Udhëtim Nusërie</span><span class="en">Honeymoon</span></div>
+    <div class="occ-chip">🏠 <span class="sq">Shtëpi e Re</span><span class="en">New Home</span></div>
+    <div class="occ-chip">🎂 <span class="sq">Ditëlindje</span><span class="en">Birthday</span></div>
+    <div class="occ-chip">🎓 <span class="sq">Diplomim</span><span class="en">Graduation</span></div>
   </div>
 
-  <!-- TESTIMONIALS -->
-  <section id="testimonials" class="section-full">
-    <div style="max-width:1200px;margin:0 auto;text-align:center">
-      <div class="reveal"><div class="section-tag sq">Çfarë thonë</div><div class="section-tag en" style="display:none">What they say</div></div>
-      <h2 class="section-title display reveal">
-        <span class="sq">Familjet na <em>besojnë</em></span>
-        <span class="en">Families <em>trust us</em></span>
-      </h2>
-      <div class="testi-grid">
-        <div class="testi-card reveal">
-          <div class="testi-stars">★★★★★</div>
-          <p class="testi-text sq">"Shumë praktike! Familja nga Gjermania mund të kontribuonte lehtë. Morëm saktësisht ato që donim."</p>
-          <p class="testi-text en">"Very practical! Family from Germany could contribute easily. We got exactly what we wanted."</p>
-          <div class="testi-author"><div class="testi-av">AL</div><div><div class="testi-name">Ardita & Liridon</div><div class="testi-loc sq">Prishtinë — Dasma 2024</div><div class="testi-loc en">Pristina — Wedding 2024</div></div></div>
+  <!-- HOW -->
+  <div class="sec reveal">
+    <div class="sec-tag sq">Si funksionon</div>
+    <div class="sec-tag en" style="display:none">How it works</div>
+    <h2 class="sec-title">
+      <span class="sq">3 hapa. <em>Kaq thjesht.</em></span>
+      <span class="en">3 steps. <em>That simple.</em></span>
+    </h2>
+    <div class="steps-list">
+      <div class="step-row">
+        <div class="step-n">1</div>
+        <div class="step-body">
+          <div class="step-t sq">Krijo listën tënde</div><div class="step-t en">Create your list</div>
+          <div class="step-d sq">Shto dhurata duke ngjitur linkun e produktit nga çdo faqe — Amazon, IKEA, Gjirafa. Ose shto manualisht me çmim dhe emoji.</div>
+          <div class="step-d en">Add gifts by pasting a product link from any site — Amazon, IKEA, Gjirafa. Or add manually with price and emoji.</div>
         </div>
-        <div class="testi-card reveal">
-          <div class="testi-stars">★★★★★</div>
-          <p class="testi-text sq">"Kur linda bebën nuk dija si t'i organizoja dhuratave. Lista Ime e bëri gjithçka shumë të lehtë!"</p>
-          <p class="testi-text en">"When I gave birth I didn't know how to organize gifts. Lista Ime made everything so easy!"</p>
-          <div class="testi-author"><div class="testi-av">EK</div><div><div class="testi-name">Elona Krasniqi</div><div class="testi-loc sq">Tiranë — Lindje 2024</div><div class="testi-loc en">Tirana — Birth 2024</div></div></div>
+      </div>
+      <div class="step-row">
+        <div class="step-n">2</div>
+        <div class="step-body">
+          <div class="step-t sq">Ndaj me 1 klik</div><div class="step-t en">Share in 1 click</div>
+          <div class="step-d sq">Dërgo linkun me WhatsApp, Instagram ose email. Mysafirët nuk kanë nevojë të regjistrohen — hyjnë direkt dhe kontribuojnë.</div>
+          <div class="step-d en">Send the link via WhatsApp, Instagram or email. Guests don't need to register — they access directly and contribute.</div>
         </div>
-        <div class="testi-card reveal">
-          <div class="testi-stars">★★★★★</div>
-          <p class="testi-text sq">"Kishim 280 mysafirë. Pa listë do ishte kaos. Me Lista Ime, gjithçka ishte perfekte."</p>
-          <p class="testi-text en">"We had 280 guests. Without a list it would have been chaos. With Lista Ime, everything was perfect."</p>
-          <div class="testi-author"><div class="testi-av">BM</div><div><div class="testi-name">Blerim & Mirela</div><div class="testi-loc sq">Prizren — Dasma 2025</div><div class="testi-loc en">Prizren — Wedding 2025</div></div></div>
+      </div>
+      <div class="step-row">
+        <div class="step-n">3</div>
+        <div class="step-body">
+          <div class="step-t sq">Merr saktësisht çfarë dëshiron</div><div class="step-t en">Get exactly what you want</div>
+          <div class="step-d sq">Paratë vijnë direkt në llogarinë tënde. Pa dhurata të dyfishta. Pa surpriza të padëshiruara.</div>
+          <div class="step-d en">Money comes directly to your account. No duplicate gifts. No unwanted surprises.</div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+
+  <!-- OCCASIONS -->
+  <div class="occ-sec sec-full reveal">
+    <div class="folk-bg"></div>
+    <div style="padding:0 1.5rem;max-width:700px;margin:0 auto">
+      <div class="sec-tag" style="color:var(--g2)" >
+        <span class="sq">Rastet</span><span class="en">Occasions</span>
+      </div>
+      <h2 class="sec-title" style="color:white">
+        <span class="sq">Çdo festë meriton<br/><em style="color:var(--g2)">dhuratën e duhur</em></span>
+        <span class="en">Every celebration deserves<br/><em style="color:var(--g2)">the right gift</em></span>
+      </h2>
+    </div>
+    <div class="occ-cards" style="padding:0 1.5rem;max-width:700px;margin:1.75rem auto 0">
+      <div class="occ-card wed reveal" onclick="openSheet('s-create')">
+        <div class="folk-bg-gold"></div>
+        <span class="occ-illus">💍</span>
+        <div class="occ-title sq">Dasma</div><div class="occ-title en">Wedding</div>
+        <p class="occ-desc sq">Mobilje, pajisje, udhëtim nusërie — ose arkë kontributesh. Familja nga Zvicra e Gjermania kontribuon lehtë.</p>
+        <p class="occ-desc en">Furniture, appliances, honeymoon — or a contribution pot. Family from Switzerland and Germany contributes easily.</p>
+        <div class="occ-cta sq">Krijo listën e dasmës →</div>
+        <div class="occ-cta en">Create wedding list →</div>
+      </div>
+      <div class="occ-card bir reveal" onclick="openSheet('s-create')">
+        <span class="occ-illus">👶</span>
+        <div class="occ-title sq">Lindje & Bebe</div><div class="occ-title en">Birth & Baby</div>
+        <p class="occ-desc sq">Karrocë, kolicje, rroba, lodra — lista perfekte për vizitat traditionale. Familja e gjerë kontribuon me gëzim.</p>
+        <p class="occ-desc en">Pram, car seat, clothes, toys — the perfect list for traditional visits. The extended family contributes with joy.</p>
+        <div class="occ-cta sq">Krijo listën e bebës →</div>
+        <div class="occ-cta en">Create baby list →</div>
+      </div>
+      <div class="occ-card oth reveal" onclick="openSheet('s-create')">
+        <span class="occ-illus">🎉</span>
+        <div class="occ-title sq">Çdo Rast Tjetër</div><div class="occ-title en">Any Occasion</div>
+        <p class="occ-desc sq">Ditëlindje, shtëpi e re, diplomim, fejesa — çdo moment i rëndësishëm i jetës tuaj.</p>
+        <p class="occ-desc en">Birthday, new home, graduation, engagement — every important moment of your life.</p>
+        <div class="occ-cta sq">Krijo listën tënde →</div>
+        <div class="occ-cta en">Create your list →</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DIASPORA BAND -->
+  <div class="diaspora-band reveal">
+    <div class="folk-bg-gold"></div>
+    <div style="position:relative;z-index:1">
+      <div class="badge badge-g" style="margin-bottom:1rem">
+        <span class="sq">Për shqiptarët kudo</span>
+        <span class="en">For Albanians everywhere</span>
+      </div>
+      <div class="diaspora-stat">1.5 milion+</div>
+      <p style="color:rgba(255,255,255,.6);font-size:.88rem;line-height:1.6;max-width:340px;margin:0 auto .85rem">
+        <span class="sq">shqiptarë jashtë vendit duan të marrin pjesë në festat tuaja. Lista Ime i bashkon.</span>
+        <span class="en">Albanians abroad want to participate in your celebrations. Lista Ime brings them together.</span>
+      </p>
+      <div class="diaspora-flags">
+        <div class="flag-chip">🇨🇭 Zvicër</div>
+        <div class="flag-chip">🇩🇪 Gjermani</div>
+        <div class="flag-chip">🇮🇹 Itali</div>
+        <div class="flag-chip">🇧🇪 Belgjikë</div>
+        <div class="flag-chip">🇺🇸 USA</div>
+        <div class="flag-chip">🇦🇹 Austri</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TESTIMONIAL HERO -->
+  <div class="testi-hero-sec reveal">
+    <div class="folk-bg"></div>
+    <div style="position:relative;z-index:1">
+      <div class="sec-tag">
+        <span class="sq">Çfarë thonë</span><span class="en">What they say</span>
+      </div>
+      <h2 class="sec-title">
+        <span class="sq">Familjet <em>na besojnë</em></span>
+        <span class="en">Families <em>trust us</em></span>
+      </h2>
+
+      <div class="testi-big-quote sq">"Kishim 280 mysafirë. Pa listë do ishte kaos. Me Lista Ime, gjithçka ishte perfekte."</div>
+      <div class="testi-big-quote en">"We had 280 guests. Without a list it would have been chaos. With Lista Ime, everything was perfect."</div>
+      <div class="testi-author-big">
+        <div class="tav-big">BM</div>
+        <div style="text-align:left">
+          <div style="font-weight:600;font-size:.9rem">Blerim & Mirela</div>
+          <div style="font-size:.75rem;color:var(--muted)" class="sq">Prizren — Dasma 2025</div>
+          <div style="font-size:.75rem;color:var(--muted)" class="en">Prizren — Wedding 2025</div>
+        </div>
+      </div>
+
+      <div class="testi-other">
+        <div class="testi-sm">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text-sm sq">"Familja nga Gjermania kontribuoi lehtë. Morëm saktësisht ato që donim!"</p>
+          <p class="testi-text-sm en">"Family from Germany contributed easily. We got exactly what we wanted!"</p>
+          <div class="testi-auth-sm"><div class="tav-sm">AL</div><div><div class="testi-nm">Ardita & Liridon</div><div class="testi-loc sq">Prishtinë 2024</div><div class="testi-loc en">Pristina 2024</div></div></div>
+        </div>
+        <div class="testi-sm">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text-sm sq">"Lista Ime e bëri gjithçka shumë të lehtë kur linda bebën. E rekomandoj fort!"</p>
+          <p class="testi-text-sm en">"Lista Ime made everything so easy when I gave birth. I highly recommend it!"</p>
+          <div class="testi-auth-sm"><div class="tav-sm">EK</div><div><div class="testi-nm">Elona Krasniqi</div><div class="testi-loc sq">Tiranë 2024</div><div class="testi-loc en">Tirana 2024</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- PRICING -->
-  <section id="pricing" class="section">
-    <div class="reveal"><div class="section-tag sq">Çmimet</div><div class="section-tag en" style="display:none">Pricing</div></div>
-    <h2 class="section-title display reveal">
+  <div class="pricing-sec reveal">
+    <div class="sec-tag">
+      <span class="sq">Çmimet</span><span class="en">Pricing</span>
+    </div>
+    <h2 class="sec-title">
       <span class="sq">Transparent.<br/><em>Pa surpriza.</em></span>
       <span class="en">Transparent.<br/><em>No surprises.</em></span>
     </h2>
-    <div class="price-grid">
-      <div class="price-card reveal">
-        <div class="price-plan sq">Falas / Free</div>
-        <div class="price-amount display">€0</div>
-        <div class="price-period sq">Përgjithmonë falas</div><div class="price-period en">Forever free</div>
+    <p class="sec-sub" style="text-align:center;margin:0 auto">
+      <span class="sq">Filloni falas. Kaloni në Premium kur keni nevojë për më shumë.</span>
+      <span class="en">Start free. Upgrade to Premium when you need more.</span>
+    </p>
+
+    <div class="price-cards">
+      <div class="price-card">
+        <div class="price-plan sq">Falas gjithmonë</div>
+        <div class="price-plan en">Forever free</div>
+        <div class="price-amt">€0</div>
+        <div class="price-period sq">Pa kartë krediti</div>
+        <div class="price-period en">No credit card</div>
         <ul class="price-feat">
-          <li class="sq">Deri 20 dhurata</li><li class="en">Up to 20 gifts</li>
+          <li class="sq">Deri 15 dhurata</li><li class="en">Up to 15 gifts</li>
           <li class="sq">Arkë kolektive</li><li class="en">Collective pot</li>
-          <li class="sq">Ndaj me link</li><li class="en">Share with link</li>
+          <li class="sq">Ndaj me link WhatsApp</li><li class="en">Share via WhatsApp link</li>
+          <li class="sq">Shto me link ose manualisht</li><li class="en">Add via link or manually</li>
           <li class="sq">Histori kontributesh</li><li class="en">Contribution history</li>
         </ul>
-        <button class="btn btn-secondary btn-full" onclick="openModal('create-overlay')">
-          <span class="sq">Fillo falas</span><span class="en">Start free</span>
+        <button class="btn btn-out btn-full" onclick="openSheet('s-create')">
+          <span class="sq">Fillo falas →</span><span class="en">Start free →</span>
         </button>
       </div>
-      <div class="price-card featured reveal">
+
+      <div class="price-card featured">
         <div class="price-plan">Premium ✦</div>
-        <div class="price-amount display">€14<span style="font-size:1.4rem;font-weight:400">.99</span></div>
-        <div class="price-period sq">Pagim i vetëm • pa aboniment</div><div class="price-period en">One-time payment • no subscription</div>
+        <div class="price-amt">€14<span style="font-size:1.3rem;font-weight:400">.99</span></div>
+        <div class="price-period sq">Pagesë e vetme · pa aboniment</div>
+        <div class="price-period en">One-time payment · no subscription</div>
         <ul class="price-feat">
-          <li class="sq">Dhurata të pakufizuara</li><li class="en">Unlimited gifts</li>
-          <li class="sq">Faqe e personalizuar</li><li class="en">Personalized page</li>
-          <li class="sq">Fotografi & mesazh pritjeje</li><li class="en">Photo & welcome message</li>
-          <li class="sq">Kodi QR për ftesat</li><li class="en">QR code for invitations</li>
-          <li class="sq">Kujtesë automatike</li><li class="en">Automatic reminders</li>
+          <li>
+            <span class="sq">Dhurata të pakufizuara</span>
+            <span class="en">Unlimited gifts</span>
+          </li>
+          <li>
+            <span class="sq">Email kur dikush rezervon <span class="prem-badge">NEW</span></span>
+            <span class="en">Email when someone reserves <span class="prem-badge">NEW</span></span>
+          </li>
+          <li>
+            <span class="sq">Foto e bukur në faqen tënde <span class="prem-badge">NEW</span></span>
+            <span class="en">Beautiful photo on your page <span class="prem-badge">NEW</span></span>
+          </li>
+          <li>
+            <span class="sq">Personalizim ngjyrash të listës <span class="prem-badge">NEW</span></span>
+            <span class="en">Custom list colors <span class="prem-badge">NEW</span></span>
+          </li>
+          <li>
+            <span class="sq">Kodi QR për ftesat fizike</span>
+            <span class="en">QR code for physical invitations</span>
+          </li>
+          <li>
+            <span class="sq">Mbështetje prioritare</span>
+            <span class="en">Priority support</span>
+          </li>
         </ul>
-        <button class="btn btn-gold btn-full" onclick="openModal('create-overlay')">
-          <span class="sq">Fillo tani</span><span class="en">Start now</span>
-        </button>
-      </div>
-      <div class="price-card reveal">
-        <div class="price-plan sq">Diaspora 🌍</div>
-        <div class="price-amount display">€24<span style="font-size:1.4rem;font-weight:400">.99</span></div>
-        <div class="price-period sq">Pagim i vetëm</div><div class="price-period en">One-time payment</div>
-        <ul class="price-feat">
-          <li class="sq">Gjithçka nga Premium</li><li class="en">Everything in Premium</li>
-          <li class="sq">Faqe anglisht + shqip</li><li class="en">English + Albanian page</li>
-          <li class="sq">Transfertë ndërkombëtare</li><li class="en">International transfer</li>
-          <li class="sq">EUR / CHF / GBP / USD</li><li class="en">EUR / CHF / GBP / USD</li>
-        </ul>
-        <button class="btn btn-secondary btn-full" onclick="openModal('create-overlay')">
-          <span class="sq">Fillo tani</span><span class="en">Start now</span>
+        <button class="btn btn-g btn-full" onclick="openSheet('s-premium')">
+          <span class="sq">Aktivizo Premium →</span><span class="en">Activate Premium →</span>
         </button>
       </div>
     </div>
-  </section>
+  </div>
 
   <!-- CTA BAND -->
-  <div class="cta-band">
-    <div class="reveal" style="text-align:center;position:relative;z-index:1">
-      <div class="section-tag" style="color:rgba(255,255,255,.7)" >✦ Lista Ime</div>
-      <h2 class="section-title display" style="color:#fff;font-size:clamp(2rem,4.5vw,3.4rem);max-width:600px;margin:.75rem auto">
-        <span class="sq">Krijoni listën tuaj tani — <em style="color:var(--saf2)">falas</em></span>
-        <span class="en">Create your list now — <em style="color:var(--saf2)">free</em></span>
+  <div class="cta-band reveal">
+    <div style="position:relative;z-index:1;max-width:480px;margin:0 auto">
+      <div class="sec-tag" style="color:rgba(255,255,255,.65)" >Lista Ime ✦</div>
+      <h2 class="sec-title" style="color:white;font-size:clamp(2rem,6vw,2.8rem)">
+        <span class="sq">Krijoni listën tuaj<br/><em style="color:var(--g2)">tani — falas</em></span>
+        <span class="en">Create your list<br/><em style="color:var(--g2)">now — free</em></span>
       </h2>
-      <p style="color:rgba(255,255,255,.6);margin:1rem auto 2.5rem;max-width:420px;font-size:1rem">
+      <p style="color:rgba(255,255,255,.62);font-size:.9rem;margin:.85rem 0 2rem">
         <span class="sq">Pa kartë krediti. Pa aboniment. Gati në 2 minuta.</span>
         <span class="en">No credit card. No subscription. Ready in 2 minutes.</span>
       </p>
-      <button class="btn btn-gold btn-lg" onclick="openModal('create-overlay')">
-        <span class="sq">Krijo listën time — 0€ ✦</span>
-        <span class="en">Create my list — 0€ ✦</span>
+      <button class="btn btn-g btn-lg btn-full" onclick="openSheet('s-create')">
+        <span class="sq">✦ Krijo listën time — 0€</span>
+        <span class="en">✦ Create my list — 0€</span>
       </button>
     </div>
   </div>
 
   <!-- FOOTER -->
   <footer>
-    <div class="footer-logo display">lista<span>.</span>ime</div>
+    <div class="footer-logo">lista<span>.</span>ime</div>
     <div class="footer-links">
       <a href="#" class="sq">Rreth nesh</a><a href="#" class="en">About</a>
       <a href="#" class="sq">Privatësia</a><a href="#" class="en">Privacy</a>
       <a href="#" class="sq">Kushtet</a><a href="#" class="en">Terms</a>
-      <a href="#" class="sq">Kontakti</a><a href="#" class="en">Contact</a>
+      <a href="#" class="sq">Kontakt</a><a href="#" class="en">Contact</a>
     </div>
     <div class="footer-copy">© 2025 Lista Ime</div>
   </footer>
 </div>
 
-<!-- ─── LIST PAGE (public) ──────────────────────────────────── -->
-<div id="page-list">
-  <nav id="list-nav" style="background:transparent">
-    <a href="#" class="nav-logo display" onclick="showPage('landing');return false">lista<span style="color:var(--saf2)">.</span>ime</a>
+<!-- ═══════════════════════════════════════════════════════
+     LIST PAGE (public)
+════════════════════════════════════════════════════════ -->
+<div id="p-list" class="page">
+  <nav class="top-nav">
+    <div class="nav-logo" style="cursor:pointer" onclick="showPage('home')">lista<span>.</span>ime</div>
     <div class="nav-right">
-      <button class="lang-btn" style="border-color:rgba(255,255,255,.2);color:rgba(255,255,255,.6)" onclick="toggleLang()" id="langBtn2">🇬🇧 EN</button>
-      <button class="btn btn-secondary" style="border-color:rgba(255,255,255,.25);color:rgba(255,255,255,.7)" onclick="openModal('create-overlay')">
+      <button class="lang-tog" onclick="toggleLang()">🇬🇧 EN</button>
+      <button class="btn btn-r btn-sm" onclick="openSheet('s-create')">
         <span class="sq">Krijo listën tënde</span><span class="en">Create your list</span>
       </button>
     </div>
   </nav>
-  <div class="list-hero" id="list-hero-area">
-    <div class="list-hero-bg"></div>
-    <div class="list-badge" id="list-badge-el"></div>
-    <h1 class="list-names display" id="list-names-el">Blerim & Ardita</h1>
-    <div class="list-date" id="list-date-el"></div>
-    <p class="list-msg display" id="list-msg-el"></p>
+
+  <div class="list-hero" id="lh-area">
+    <div class="folk-bg-gold"></div>
+    <div class="list-hero-overlay"></div>
+    <img class="list-hero-photo" id="lh-photo" src="" alt="" style="display:none"/>
+    <div style="position:relative;z-index:2;padding-top:1rem">
+      <div id="lh-badge"></div>
+      <h1 class="list-names" id="lh-names">Blerim & Ardita</h1>
+      <div class="list-date" id="lh-date"></div>
+      <p class="list-msg" id="lh-msg"></p>
+    </div>
   </div>
+
   <div class="list-body">
-    <div id="cagnotte-area"></div>
-    <div id="items-area"></div>
-    <div id="contrib-area"></div>
+    <div id="lh-cagnotte"></div>
+    <div id="lh-items"></div>
+    <div id="lh-contribs"></div>
   </div>
-  <footer style="margin-top:4rem">
-    <div class="footer-logo display">lista<span>.</span>ime</div>
-    <button class="btn btn-primary" onclick="openModal('create-overlay')">
-      <span class="sq">Krijo listën tënde falas</span><span class="en">Create your list free</span>
+
+  <!-- Sticky WhatsApp -->
+  <div class="sticky-wa">
+    <button class="btn btn-wa" id="wa-share-btn" onclick="sharePageWA()">
+      <span>📱</span>
+      <span class="sq">Shpërnda listën me WhatsApp</span>
+      <span class="en">Share list on WhatsApp</span>
+    </button>
+  </div>
+
+  <div style="height:80px"></div>
+  <footer>
+    <div class="footer-logo" style="cursor:pointer" onclick="showPage('home')">lista<span>.</span>ime</div>
+    <button class="btn btn-r" onclick="openSheet('s-create')">
+      <span class="sq">Krijo listën tënde falas →</span>
+      <span class="en">Create your list free →</span>
     </button>
     <div class="footer-copy">© 2025 Lista Ime</div>
   </footer>
 </div>
 
-<!-- ─── DASHBOARD ───────────────────────────────────────────── -->
-<div id="page-dashboard">
-  <nav style="background:rgba(254,248,236,.96);backdrop-filter:blur(16px);box-shadow:0 1px 0 rgba(168,32,32,.12)">
-    <a href="#" class="nav-logo display" onclick="showPage('landing');return false">lista<span style="color:var(--pom)">.</span>ime</a>
+<!-- ═══════════════════════════════════════════════════════
+     DASHBOARD
+════════════════════════════════════════════════════════ -->
+<div id="p-dash" class="page">
+  <nav class="top-nav">
+    <div class="nav-logo" style="cursor:pointer" onclick="showPage('home')">lista<span>.</span>ime</div>
     <div class="nav-right">
-      <button class="lang-btn" onclick="toggleLang()" id="langBtn3">🇬🇧 EN</button>
-      <button class="btn btn-secondary btn-sm" onclick="viewMyList()">
-        <span class="sq">Shiko listën si mysafir</span><span class="en">View list as guest</span>
+      <button class="btn btn-out btn-sm" onclick="viewMyList()">
+        <span class="sq">Shiko si mysafir</span><span class="en">View as guest</span>
       </button>
+      <button class="lang-tog" onclick="toggleLang()">🇬🇧 EN</button>
     </div>
   </nav>
-  <div class="dashboard">
-    <div class="dash-header">
-      <h1 class="dash-title display" id="dash-title">Lista ime</h1>
-      <p class="dash-sub sq">Menaxhoni dhurata dhe ndani listën me të afërmit tuaj</p>
-      <p class="dash-sub en">Manage gifts and share your list with your loved ones</p>
-    </div>
+
+  <div class="dash">
+    <div class="dash-title display" id="dash-title">Lista ime</div>
+    <div class="dash-sub sq">Menaxho dhurata dhe ndaj listën me të afërmit tuaj</div>
+    <div class="dash-sub en">Manage gifts and share your list with loved ones</div>
+
     <!-- Stats -->
-    <div class="dash-stats">
-      <div class="stat-box"><div class="stat-big display" id="stat-items">0</div><div class="stat-lbl sq">Dhurata</div><div class="stat-lbl en">Gifts</div></div>
-      <div class="stat-box"><div class="stat-big display" id="stat-collected">€0</div><div class="stat-lbl sq">Mbledhur</div><div class="stat-lbl en">Collected</div></div>
-      <div class="stat-box"><div class="stat-big display" id="stat-contribs">0</div><div class="stat-lbl sq">Kontribues</div><div class="stat-lbl en">Contributors</div></div>
+    <div class="stat-row">
+      <div class="stat-box"><div class="stat-n" id="s-items">0</div><div class="stat-l sq">Dhurata</div><div class="stat-l en">Gifts</div></div>
+      <div class="stat-box"><div class="stat-n" id="s-col">€0</div><div class="stat-l sq">Mbledhur</div><div class="stat-l en">Collected</div></div>
+      <div class="stat-box"><div class="stat-n" id="s-cnt">0</div><div class="stat-l sq">Kontribues</div><div class="stat-l en">Contributors</div></div>
     </div>
+
     <!-- Share -->
-    <div class="dash-share">
-      <h3 class="display sq">📤 Ndaj listën tënde</h3>
-      <h3 class="display en">📤 Share your list</h3>
-      <p class="sq">Dërgo me WhatsApp, Instagram ose email — pa u regjistruar, mysafirët kontribuojnë direkt</p>
-      <p class="en">Send via WhatsApp, Instagram or email — without registering, guests contribute directly</p>
+    <div class="share-card">
+      <div class="share-card-title sq">📤 Ndaj listën tënde</div>
+      <div class="share-card-title en">📤 Share your list</div>
+      <div class="share-card-sub sq">Dërgo linkun — mysafirët hyjnë direkt pa u regjistruar</div>
+      <div class="share-card-sub en">Send the link — guests access directly without registering</div>
       <div class="link-row">
-        <input type="text" class="link-input" id="share-link" readonly/>
-        <button class="btn btn-secondary btn-sm" style="border-color:rgba(255,255,255,.2);color:#fff;white-space:nowrap" onclick="copyLink()">
+        <input type="text" class="link-inp" id="share-inp" readonly/>
+        <button class="link-copy-btn" onclick="copyLink()">
           <span class="sq">Kopjo</span><span class="en">Copy</span>
         </button>
-        <button class="btn btn-whatsapp btn-sm" onclick="shareWA()" style="white-space:nowrap">WhatsApp</button>
+      </div>
+      <div class="share-btns">
+        <button class="share-btn wa" onclick="dashShareWA()">📱 WhatsApp</button>
+        <button class="share-btn" onclick="viewMyList()">
+          <span class="sq">👁️ Shiko listën</span><span class="en">👁️ View list</span>
+        </button>
       </div>
     </div>
-    <!-- Add item -->
-    <div class="dash-add">
-      <h3 class="display sq">➕ Shto dhuratë</h3>
-      <h3 class="display en">➕ Add a gift</h3>
+
+    <!-- ADD ITEM -->
+    <div class="add-card">
+      <div class="add-card-title sq">➕ Shto dhuratë</div>
+      <div class="add-card-title en">➕ Add a gift</div>
+
+      <!-- URL paste -->
+      <div class="url-paste-area">
+        <span class="url-paste-label sq">🔗 Ngjit linkun e produktit (Amazon, IKEA, Gjirafa...)</span>
+        <span class="url-paste-label en">🔗 Paste product link (Amazon, IKEA, Gjirafa...)</span>
+        <input class="url-paste-input" type="url" id="url-input" placeholder="https://www.amazon.com/..." oninput="onUrlInput(this)"/>
+      </div>
+
+      <!-- Preview -->
+      <div class="url-preview" id="url-prev">
+        <div class="url-prev-emoji" id="url-prev-emoji">🎁</div>
+        <div>
+          <div class="url-prev-site" id="url-prev-site"></div>
+          <div class="url-prev-name" id="url-prev-name"></div>
+          <div class="url-prev-price" id="url-prev-price"></div>
+        </div>
+      </div>
+
+      <div class="divider"><span class="sq">ose shto manualisht</span><span class="en">or add manually</span></div>
+
       <div class="field-row">
-        <div class="field"><label class="sq">Emri i dhuratës</label><label class="en">Gift name</label><input type="text" id="dp-name" placeholder="Karroca Chicco"/></div>
-        <div class="field"><label class="sq">Çmimi (€)</label><label class="en">Price (€)</label><input type="number" id="dp-price" placeholder="150" min="1"/></div>
+        <div class="field">
+          <label class="sq">Emri i dhuratës</label><label class="en">Gift name</label>
+          <input type="text" id="d-name" placeholder="Karroca Chicco"/>
+        </div>
+        <div class="field">
+          <label class="sq">Çmimi (€)</label><label class="en">Price (€)</label>
+          <input type="number" id="d-price" placeholder="150" min="1"/>
+        </div>
       </div>
       <div class="field-row">
-        <div class="field"><label class="sq">Emoji / Ikona</label><label class="en">Emoji / Icon</label><input type="text" id="dp-emoji" placeholder="🛏️" maxlength="4"/></div>
-        <div class="field"><label class="sq">Dyqani / URL (opsionale)</label><label class="en">Shop / URL (optional)</label><input type="url" id="dp-url" placeholder="https://..."/></div>
+        <div class="field">
+          <label class="sq">Emoji</label><label class="en">Emoji</label>
+          <input type="text" id="d-emoji" placeholder="🛏️" maxlength="4"/>
+        </div>
+        <div class="field">
+          <label class="sq">Dyqani / URL</label><label class="en">Shop / URL</label>
+          <input type="url" id="d-url" placeholder="https://..."/>
+        </div>
       </div>
-      <button class="btn btn-primary" onclick="addItem()" style="min-width:160px">
+      <button class="btn btn-r" onclick="addItem()" style="min-height:48px;padding:.75rem 1.5rem">
         <span class="sq">Shto dhuratën</span><span class="en">Add gift</span>
       </button>
-      <div class="items-list" id="dash-items-list"></div>
+
+      <div class="item-rows" id="dash-items"></div>
     </div>
-  </div>
-</div>
 
-<!-- ═══ MODALS ══════════════════════════════════════════════ -->
-
-<!-- CREATE LIST -->
-<div class="overlay" id="create-overlay">
-  <div class="modal">
-    <button class="modal-close" onclick="closeModal('create-overlay')">✕</button>
-    <div id="create-step-1">
-      <div class="modal-title display sq">Krijo listën tënde ✨</div>
-      <div class="modal-title display en">Create your list ✨</div>
-      <div class="modal-sub sq">Gati në 2 minuta • Falas • Pa kartë krediti</div>
-      <div class="modal-sub en">Ready in 2 minutes • Free • No credit card</div>
-      <div class="type-grid" id="type-selector">
-        <div class="type-opt sel" data-type="dasma" onclick="selType(this,'dasma')"><span class="to-emoji">💍</span><span class="to-label sq">Dasma</span><span class="to-label en">Wedding</span></div>
-        <div class="type-opt" data-type="lindje" onclick="selType(this,'lindje')"><span class="to-emoji">👶</span><span class="to-label sq">Lindje</span><span class="to-label en">Birth</span></div>
-        <div class="type-opt" data-type="tjeter" onclick="selType(this,'tjeter')"><span class="to-emoji">🎉</span><span class="to-label sq">Tjetër</span><span class="to-label en">Other</span></div>
+    <!-- Premium upsell -->
+    <div class="upsell" id="upsell-box">
+      <div class="upsell-title">✦ <span class="sq">Aktivizo Premium</span><span class="en">Activate Premium</span></div>
+      <p style="font-size:.82rem;color:var(--muted)" class="sq">Shko përtej 15 dhuratave dhe shto foto, ngjyra dhe njoftime emaili.</p>
+      <p style="font-size:.82rem;color:var(--muted)" class="en">Go beyond 15 gifts and add photos, colors and email notifications.</p>
+      <div class="upsell-feats">
+        <div class="upsell-feat sq">Email kur dikush rezervon një dhuratë — menjëherë</div>
+        <div class="upsell-feat en">Email when someone reserves a gift — instantly</div>
+        <div class="upsell-feat sq">Foto e personalizuar në faqen tënde publike</div>
+        <div class="upsell-feat en">Personalized photo on your public page</div>
+        <div class="upsell-feat sq">Zgjedh ngjyrat e listës sate</div>
+        <div class="upsell-feat en">Choose your list's colors</div>
+        <div class="upsell-feat sq">Dhurata të pakufizuara</div>
+        <div class="upsell-feat en">Unlimited gifts</div>
       </div>
-      <div class="field"><label class="sq">Emrat tuaj</label><label class="en">Your names</label><input type="text" id="cr-names" placeholder="Blerim & Ardita"/></div>
-      <div class="field-row">
-        <div class="field"><label class="sq">Data e ngjarjes</label><label class="en">Event date</label><input type="date" id="cr-date"/></div>
-        <div class="field"><label class="sq">Objektivi cagnotte (opsionale) €</label><label class="en">Pot goal (optional) €</label><input type="number" id="cr-target" placeholder="2000" min="0"/></div>
-      </div>
-      <div class="field"><label class="sq">Mesazhi për mysafirët</label><label class="en">Message for guests</label><textarea id="cr-msg" placeholder="Faleminderit që jeni pjesë e festës sonë..."></textarea></div>
-      <button class="btn btn-primary btn-full btn-lg" onclick="createList()">
-        <span class="sq">Krijo listën time →</span><span class="en">Create my list →</span>
+      <button class="btn btn-g mt-1" onclick="openSheet('s-premium')" style="min-height:48px">
+        <span class="sq">Shiko Premium — €14.99</span><span class="en">View Premium — €14.99</span>
       </button>
-      <p style="font-size:.75rem;color:var(--muted);text-align:center;margin-top:.75rem">
-        <span class="sq">Duke klikuar, pranoni kushtet tona të shërbimit</span>
-        <span class="en">By clicking, you accept our terms of service</span>
-      </p>
     </div>
+
   </div>
 </div>
 
-<!-- FIND LIST -->
-<div class="overlay" id="find-overlay">
-  <div class="modal" style="max-width:440px">
-    <button class="modal-close" onclick="closeModal('find-overlay')">✕</button>
-    <div class="modal-title display sq">Gjej një listë 🔍</div>
-    <div class="modal-title display en">Find a list 🔍</div>
-    <div class="modal-sub sq">Fut kodin e listës ose emrat e çiftit</div>
-    <div class="modal-sub en">Enter the list code or couple's names</div>
-    <div class="field"><label class="sq">Kodi i listës</label><label class="en">List code</label><input type="text" id="find-code" placeholder="p.sh. BLE-2025" style="text-transform:uppercase"/></div>
-    <button class="btn btn-primary btn-full" onclick="findList()">
+<!-- ═══════════════════════════════════════════════════════
+     BOTTOM SHEETS
+════════════════════════════════════════════════════════ -->
+
+<!-- ── CREATE LIST ─────────────────────────────────────── -->
+<div class="overlay" id="s-create">
+  <div class="sheet" onclick="stopProp(event)">
+    <div class="sheet-drag"></div>
+    <button class="sheet-close" onclick="closeSheet('s-create')">✕</button>
+    <div class="sheet-title sq">Krijo listën tënde ✨</div>
+    <div class="sheet-title en">Create your list ✨</div>
+    <div class="sheet-sub sq">Gati në 2 minuta · Falas · Pa kartë krediti</div>
+    <div class="sheet-sub en">Ready in 2 minutes · Free · No credit card</div>
+
+    <div class="type-grid">
+      <div class="type-opt sel" id="t-dasma" onclick="selType('dasma',this)">
+        <span class="te">💍</span><span class="tl sq">Dasma</span><span class="tl en">Wedding</span>
+      </div>
+      <div class="type-opt" id="t-lindje" onclick="selType('lindje',this)">
+        <span class="te">👶</span><span class="tl sq">Lindje</span><span class="tl en">Birth</span>
+      </div>
+      <div class="type-opt" id="t-tjeter" onclick="selType('tjeter',this)">
+        <span class="te">🎉</span><span class="tl sq">Tjetër</span><span class="tl en">Other</span>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="sq">Emrat tuaj</label><label class="en">Your names</label>
+      <input type="text" id="c-names" placeholder="Blerim & Ardita"/>
+    </div>
+    <div class="field-row">
+      <div class="field">
+        <label class="sq">Data</label><label class="en">Date</label>
+        <input type="date" id="c-date"/>
+      </div>
+      <div class="field">
+        <label class="sq">Objektivi €</label><label class="en">Goal €</label>
+        <input type="number" id="c-target" placeholder="2000"/>
+      </div>
+    </div>
+    <div class="field">
+      <label class="sq">Mesazhi juaj për mysafirët</label><label class="en">Your message for guests</label>
+      <textarea id="c-msg" placeholder="Faleminderit që jeni pjesë e festës sonë..."></textarea>
+    </div>
+    <button class="btn btn-r btn-full btn-lg" onclick="createList()">
+      <span class="sq">Krijo listën time →</span><span class="en">Create my list →</span>
+    </button>
+    <p style="font-size:.72rem;color:var(--muted);text-align:center;margin-top:.65rem">
+      <span class="sq">Duke klikuar, pranoni kushtet tona</span>
+      <span class="en">By clicking, you accept our terms</span>
+    </p>
+  </div>
+</div>
+
+<!-- ── FIND LIST ───────────────────────────────────────── -->
+<div class="overlay" id="s-find">
+  <div class="sheet" onclick="stopProp(event)" style="max-width:500px;margin:0 auto">
+    <div class="sheet-drag"></div>
+    <button class="sheet-close" onclick="closeSheet('s-find')">✕</button>
+    <div class="sheet-title sq">Gjej një listë 🔍</div>
+    <div class="sheet-title en">Find a list 🔍</div>
+    <div class="sheet-sub sq">Fut kodin e listës (p.sh. BLE-2025)</div>
+    <div class="sheet-sub en">Enter the list code (e.g. BLE-2025)</div>
+    <div class="field">
+      <label class="sq">Kodi i listës</label><label class="en">List code</label>
+      <input type="text" id="find-code" placeholder="BLE-2025" style="text-transform:uppercase" oninput="this.value=this.value.toUpperCase()"/>
+    </div>
+    <button class="btn btn-r btn-full btn-lg" onclick="findList()">
       <span class="sq">Gjej listën →</span><span class="en">Find the list →</span>
     </button>
-    <div class="divider-text"><span class="sq">ose provo listen demo</span><span class="en">or try the demo list</span></div>
-    <button class="btn btn-secondary btn-full" onclick="loadDemo()">
+    <div class="divider"><span class="sq">ose provo demonstrimin</span><span class="en">or try the demo</span></div>
+    <button class="btn btn-out btn-full" onclick="loadDemo()">
       <span class="sq">Shiko listën demo (BLE-2025)</span>
       <span class="en">View demo list (BLE-2025)</span>
     </button>
   </div>
 </div>
 
-<!-- CONTRIBUTE -->
-<div class="overlay" id="contrib-overlay">
-  <div class="modal" style="max-width:460px">
-    <button class="modal-close" onclick="closeModal('contrib-overlay')">✕</button>
-    <div class="modal-title display sq">Dhuro një dhuratë 🎁</div>
-    <div class="modal-title display en">Give a gift 🎁</div>
-    <div class="modal-sub sq">Kontributi juaj shkon direkt tek familja</div>
-    <div class="modal-sub en">Your contribution goes directly to the family</div>
-    <!-- Item preview -->
-    <div style="background:var(--cream2);border-radius:var(--r-md);padding:1rem;display:flex;gap:.85rem;align-items:center;margin-bottom:1.5rem">
-      <div style="font-size:2rem" id="contrib-emoji-el">🎁</div>
-      <div><div style="font-weight:600;font-size:.95rem" id="contrib-name-el">Dhuratë</div><div style="color:var(--pom);font-weight:600;font-size:.88rem" id="contrib-price-el"></div></div>
+<!-- ── CONTRIBUTE ─────────────────────────────────────── -->
+<div class="overlay" id="s-contrib">
+  <div class="sheet" onclick="stopProp(event)" style="max-width:500px;margin:0 auto">
+    <div class="sheet-drag"></div>
+    <button class="sheet-close" onclick="closeSheet('s-contrib')">✕</button>
+    <div class="sheet-title sq">Dhuro një dhuratë 🎁</div>
+    <div class="sheet-title en">Give a gift 🎁</div>
+    <div class="sheet-sub sq">Kontributi juaj shkon direkt tek familja</div>
+    <div class="sheet-sub en">Your contribution goes directly to the family</div>
+
+    <div class="contrib-item-prev">
+      <div class="cip-emoji" id="ci-emoji">🎁</div>
+      <div>
+        <div class="cip-name" id="ci-name">Dhuratë</div>
+        <div class="cip-price" id="ci-price"></div>
+      </div>
     </div>
-    <div class="field"><label class="sq">Emri juaj</label><label class="en">Your name</label><input type="text" id="contrib-donor" placeholder="Artan Hoxha"/></div>
-    <div class="field"><label class="sq">Shuma (€)</label><label class="en">Amount (€)</label><input type="number" id="contrib-amount" placeholder="50" min="1"/></div>
-    <div class="field"><label class="sq">Mesazhi juaj (opsionale)</label><label class="en">Your message (optional)</label><textarea id="contrib-msg" placeholder="Urime të ngrohta! Gezuar..."></textarea></div>
-    <button class="btn btn-primary btn-full btn-lg" onclick="submitContrib()">
+
+    <div class="field">
+      <label class="sq">Emri juaj</label><label class="en">Your name</label>
+      <input type="text" id="ci-donor" placeholder="Artan Hoxha"/>
+    </div>
+
+    <div class="field">
+      <label class="sq">Shuma (€)</label><label class="en">Amount (€)</label>
+      <div class="amount-pills" id="amount-pills"></div>
+      <input type="number" id="ci-amount" placeholder="50" min="1"/>
+    </div>
+
+    <div class="field">
+      <label class="sq">Mesazhi juaj (opsionale)</label><label class="en">Your message (optional)</label>
+      <textarea id="ci-msg" placeholder="Urime të ngrohta! Gëzuar..."></textarea>
+    </div>
+
+    <button class="btn btn-r btn-full btn-lg" onclick="submitContrib()">
       <span class="sq">Konfirmo dhuratën →</span><span class="en">Confirm gift →</span>
     </button>
-    <p style="font-size:.72rem;color:var(--muted);text-align:center;margin-top:.75rem">
+    <p style="font-size:.72rem;color:var(--muted);text-align:center;margin-top:.6rem">
       💳 <span class="sq">Pagesa e sigurt me Stripe — kartë ose bankë</span>
       <span class="en">Secure payment with Stripe — card or bank</span>
     </p>
   </div>
 </div>
 
-<!-- SUCCESS CONTRIB -->
-<div class="overlay" id="success-overlay">
-  <div class="modal" style="max-width:420px">
+<!-- ── SUCCESS ────────────────────────────────────────── -->
+<div class="overlay" id="s-success">
+  <div class="sheet" onclick="stopProp(event)" style="max-width:500px;margin:0 auto">
+    <div class="sheet-drag"></div>
     <div class="success-wrap">
       <span class="success-emoji">🎉</span>
-      <h2 class="success-title display sq">Faleminderit!</h2>
-      <h2 class="success-title display en">Thank you!</h2>
-      <p class="success-sub sq" id="success-text">Kontributi juaj u regjistrua me sukses. Familja do të jetë shumë e lumtur!</p>
-      <p class="success-sub en" id="success-text-en">Your contribution was successfully recorded. The family will be very happy!</p>
-      <button class="btn btn-primary btn-full" onclick="closeModal('success-overlay')">
-        <span class="sq">Mbyll →</span><span class="en">Close →</span>
+      <h2 class="success-title sq">Faleminderit!</h2>
+      <h2 class="success-title en">Thank you!</h2>
+      <p class="success-sub" id="success-text"></p>
+      <button class="btn btn-r btn-full btn-lg" onclick="closeSheet('s-success')">
+        <span class="sq">Perfekt →</span><span class="en">Perfect →</span>
+      </button>
+      <p class="success-share-hint">
+        <span class="sq">Shpërnda edhe ti këtë listë me miqtë tuaj 👇</span>
+        <span class="en">Share this list with your friends too 👇</span>
+      </p>
+      <button class="btn btn-wa btn-full mt-1" onclick="shareSuccessWA()">
+        📱 <span class="sq">Shpërnda me WhatsApp</span><span class="en">Share on WhatsApp</span>
       </button>
     </div>
   </div>
 </div>
 
+<!-- ── PREMIUM ────────────────────────────────────────── -->
+<div class="overlay" id="s-premium">
+  <div class="sheet" onclick="stopProp(event)" style="max-width:500px;margin:0 auto">
+    <div class="sheet-drag"></div>
+    <button class="sheet-close" onclick="closeSheet('s-premium')">✕</button>
+    <div class="sheet-title">Premium ✦</div>
+    <div class="sheet-sub sq">Pagesë e vetme prej €14.99 — pa aboniment, pa surpriza</div>
+    <div class="sheet-sub en">One-time payment of €14.99 — no subscription, no surprises</div>
+
+    <div class="premium-feats-list">
+      <div class="pf-item">
+        <div class="pf-icon">📧</div>
+        <div>
+          <div class="pf-title sq">Email kur dikush rezervon</div>
+          <div class="pf-title en">Email when someone reserves</div>
+          <div class="pf-desc sq">Të njoftohesh menjëherë kur dikush rezervon ose blen një dhuratë nga lista jote. "Ardita Hoxha ka rezervuar Karrucën Chicco."</div>
+          <div class="pf-desc en">Get notified immediately when someone reserves or buys a gift from your list. "Ardita Hoxha has reserved the Chicco Pram."</div>
+        </div>
+      </div>
+      <div class="pf-item">
+        <div class="pf-icon">📸</div>
+        <div>
+          <div class="pf-title sq">Foto e personalizuar</div>
+          <div class="pf-title en">Personalized photo</div>
+          <div class="pf-desc sq">Shto foton tuaj të çiftit ose foton e bebës si sfond i faqes publike të listës suaj. E bukur, e personalizuar, e juaja.</div>
+          <div class="pf-desc en">Add your couple photo or baby photo as the background of your public list page. Beautiful, personalized, yours.</div>
+        </div>
+      </div>
+      <div class="pf-item">
+        <div class="pf-icon">🎨</div>
+        <div>
+          <div class="pf-title sq">Ngjyrat e listës</div>
+          <div class="pf-title en">List colors</div>
+          <div class="pf-desc sq">Zgjidh paleten e ngjyrave të listës tënde — kurrë e njëjta si të tjerët. 8 paleta të zgjedhura nga dizajnerë.</div>
+          <div class="pf-desc en">Choose your list's color palette — never the same as others. 8 designer-curated palettes.</div>
+          <div class="color-swatches" id="color-swatches">
+            <div class="swatch sel" data-color="default" style="background:linear-gradient(135deg,#A82020,#B8861A)" onclick="pickColor(this,'default')"></div>
+            <div class="swatch" data-color="blue" style="background:linear-gradient(135deg,#1A5C9E,#5B9BD5)" onclick="pickColor(this,'blue')"></div>
+            <div class="swatch" data-color="emerald" style="background:linear-gradient(135deg,#0D6B3A,#2EAA6A)" onclick="pickColor(this,'emerald')"></div>
+            <div class="swatch" data-color="purple" style="background:linear-gradient(135deg,#5B2D8E,#9B59B6)" onclick="pickColor(this,'purple')"></div>
+            <div class="swatch" data-color="rose" style="background:linear-gradient(135deg,#B02060,#E85595)" onclick="pickColor(this,'rose')"></div>
+            <div class="swatch" data-color="dark" style="background:linear-gradient(135deg,#1A1A2E,#16213E)" onclick="pickColor(this,'dark')"></div>
+            <div class="swatch" data-color="sand" style="background:linear-gradient(135deg,#8B6914,#C9A84C)" onclick="pickColor(this,'sand')"></div>
+            <div class="swatch" data-color="teal" style="background:linear-gradient(135deg,#0D5C63,#16909A)" onclick="pickColor(this,'teal')"></div>
+          </div>
+        </div>
+      </div>
+      <div class="pf-item">
+        <div class="pf-icon">♾️</div>
+        <div>
+          <div class="pf-title sq">Dhurata të pakufizuara</div>
+          <div class="pf-title en">Unlimited gifts</div>
+          <div class="pf-desc sq">Shtoni sa dhurata të doni — pa kufi prej 15.</div>
+          <div class="pf-desc en">Add as many gifts as you want — no 15-gift limit.</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="background:var(--cream2);border-radius:var(--rad);padding:1rem;text-align:center;margin-bottom:1rem">
+      <div style="font-family:'Cormorant',serif;font-size:2.2rem;font-weight:700;color:var(--r)">€14.99</div>
+      <div style="font-size:.8rem;color:var(--muted)" class="sq">Pagesë e vetme · valide gjatë gjithë jetës</div>
+      <div style="font-size:.8rem;color:var(--muted)" class="en">One-time payment · valid for life</div>
+    </div>
+    <button class="btn btn-g btn-full btn-lg" onclick="activatePremium()">
+      <span class="sq">Aktivizo Premium tani →</span>
+      <span class="en">Activate Premium now →</span>
+    </button>
+    <p style="font-size:.72rem;color:var(--muted);text-align:center;margin-top:.6rem">
+      💳 <span class="sq">Pagesa e sigurt me Stripe</span>
+      <span class="en">Secure payment with Stripe</span>
+    </p>
+  </div>
+</div>
+
 <script>
-// ── STATE ─────────────────────────────────────────────────
+// ─── STATE ─────────────────────────────────────────────
 let lang = 'sq';
 let currentListId = null;
-let currentContribItem = null;
+let currentContribItemId = null;
 let selectedType = 'dasma';
+let selectedColor = 'default';
 
-// ── LANG ──────────────────────────────────────────────────
-function toggleLang() {
-  lang = lang === 'sq' ? 'en' : 'sq';
-  document.documentElement.setAttribute('data-lang', lang);
-  const label = lang === 'sq' ? '🇬🇧 EN' : '🇦🇱 SQ';
-  ['langBtn','langBtn2','langBtn3'].forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.textContent = label;
-  });
-}
-
-// ── NAV SCROLL ────────────────────────────────────────────
-window.addEventListener('scroll', () => {
-  document.getElementById('navbar')?.classList.toggle('scrolled', window.scrollY > 40);
-});
-
-// ── MODALS ────────────────────────────────────────────────
-function openModal(id) { document.getElementById(id).classList.add('open'); }
-function closeModal(id) { document.getElementById(id).classList.remove('open'); }
-document.querySelectorAll('.overlay').forEach(o => {
-  o.addEventListener('click', e => { if (e.target === o) o.classList.remove('open'); });
-});
-
-// ── PAGES ─────────────────────────────────────────────────
-function showPage(page) {
-  ['landing','list','dashboard'].forEach(p => {
-    document.getElementById('page-'+p).classList.toggle('active', p === page);
-  });
-  window.scrollTo(0,0);
-}
-
-// ── LOCAL STORAGE ─────────────────────────────────────────
-function getDB() { try { return JSON.parse(localStorage.getItem('listaime_db') || '{}'); } catch(e){ return {}; } }
-function saveDB(db) { localStorage.setItem('listaime_db', JSON.stringify(db)); }
-function genId() {
-  const c = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
-  let s = '';
-  for (let i=0;i<7;i++) s += c[Math.floor(Math.random()*c.length)];
+// ─── DB ────────────────────────────────────────────────
+const DB_KEY = 'listaime_v3';
+function getDB(){ try{return JSON.parse(localStorage.getItem(DB_KEY)||'{}')}catch(e){return{}} }
+function saveDB(db){ localStorage.setItem(DB_KEY,JSON.stringify(db)) }
+function genId(){
+  const c='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+  let s='';for(let i=0;i<7;i++)s+=c[Math.floor(Math.random()*c.length)];
   return s.slice(0,3)+'-'+s.slice(3);
 }
 
-// ── TYPE SELECTOR ─────────────────────────────────────────
-function selType(el, type) {
-  document.querySelectorAll('.type-opt').forEach(o => o.classList.remove('sel'));
-  el.classList.add('sel');
-  selectedType = type;
-  const ph = { dasma:'Blerim & Ardita', lindje:'Lena Hoxha', tjeter:'Emri & Mbiemri' };
-  document.getElementById('cr-names').placeholder = ph[type] || 'Emri juaj';
+// ─── LANG ──────────────────────────────────────────────
+function toggleLang(){
+  lang = lang==='sq'?'en':'sq';
+  document.body.setAttribute('data-lang',lang);
+  document.querySelectorAll('#lang-btn,[onclick="toggleLang()"]')
+    .forEach(b=>b.textContent=lang==='sq'?'🇬🇧 EN':'🇦🇱 SQ');
 }
 
-// ── CREATE LIST ───────────────────────────────────────────
-function createList() {
-  const names = document.getElementById('cr-names').value.trim();
-  if (!names) { toast('⚠️', lang === 'sq' ? 'Shkruani emrat' : 'Enter names'); return; }
-  const id = genId();
-  const db = getDB();
-  db[id] = {
-    id, type: selectedType,
-    names,
-    date: document.getElementById('cr-date').value,
-    msg: document.getElementById('cr-msg').value.trim(),
-    target: parseFloat(document.getElementById('cr-target').value) || 0,
-    items: demoItems(selectedType),
-    collected: 0,
-    contributors: [],
-    createdAt: Date.now()
+// ─── PAGES ─────────────────────────────────────────────
+function showPage(p){
+  document.querySelectorAll('.page').forEach(el=>el.classList.remove('active'));
+  document.getElementById('p-'+p).classList.add('active');
+  document.getElementById('fab').style.display = p==='dash'?'none':'flex';
+  window.scrollTo(0,0);
+}
+
+// ─── SHEETS ────────────────────────────────────────────
+function openSheet(id){
+  document.getElementById(id).classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeSheet(id){
+  document.getElementById(id).classList.remove('open');
+  document.body.style.overflow='';
+}
+function stopProp(e){ e.stopPropagation() }
+document.querySelectorAll('.overlay').forEach(o=>{
+  o.addEventListener('click',()=>{
+    o.classList.remove('open');
+    document.body.style.overflow='';
+  });
+});
+
+// ─── TYPE SELECT ────────────────────────────────────────
+function selType(type,el){
+  selectedType=type;
+  document.querySelectorAll('.type-opt').forEach(o=>o.classList.remove('sel'));
+  el.classList.add('sel');
+  const ph={dasma:'Blerim & Ardita',lindje:'Lena Hoxha',tjeter:'Emri & Mbiemri'};
+  document.getElementById('c-names').placeholder=ph[type]||'Emri juaj';
+}
+
+// ─── CREATE LIST ────────────────────────────────────────
+function createList(){
+  const names=document.getElementById('c-names').value.trim();
+  if(!names){showToast('⚠️ '+(lang==='sq'?'Shkruani emrat':'Enter names'));return}
+  const id=genId();
+  const db=getDB();
+  db[id]={
+    id,type:selectedType,names,
+    date:document.getElementById('c-date').value,
+    msg:document.getElementById('c-msg').value.trim(),
+    target:parseFloat(document.getElementById('c-target').value)||0,
+    color:selectedColor,
+    items:demoItems(selectedType),
+    collected:0,contributors:[],
+    premium:false,
+    createdAt:Date.now()
   };
   saveDB(db);
-  currentListId = id;
-  closeModal('create-overlay');
-  showDashboard(id);
-  toast('✓', lang === 'sq' ? 'Lista u krijua me sukses!' : 'List created successfully!');
+  currentListId=id;
+  closeSheet('s-create');
+  showDash(id);
+  showToast('✓ '+(lang==='sq'?'Lista u krijua!':'List created!'));
 }
 
-function demoItems(type) {
-  if (type === 'dasma') return [
+function demoItems(type){
+  if(type==='dasma') return [
     {id:'d1',name:'Set kuzhine Zwilling',price:180,emoji:'🍳',taken:false},
-    {id:'d2',name:'Krevat 160×200',price:350,emoji:'🛏️',taken:false},
+    {id:'d2',name:'Krevat 160×200 IKEA',price:350,emoji:'🛏️',taken:false},
     {id:'d3',name:'Robot kuzhinier',price:750,emoji:'🤖',taken:false},
     {id:'d4',name:'Udhëtim Santorini',price:1200,emoji:'✈️',taken:false},
     {id:'d5',name:'Lavatriçe Bosch',price:490,emoji:'🌀',taken:false},
-    {id:'d6',name:'Kamerë Sony A7',price:1100,emoji:'📸',taken:false},
   ];
-  if (type === 'lindje') return [
+  if(type==='lindje') return [
     {id:'b1',name:'Karrocë Chicco',price:220,emoji:'🍼',taken:false},
     {id:'b2',name:'Kolicje Maxi-Cosi',price:180,emoji:'🚗',taken:false},
     {id:'b3',name:'Baby monitor',price:90,emoji:'📡',taken:false},
     {id:'b4',name:'Set rroba 0-3 muaj',price:60,emoji:'👶',taken:false},
-    {id:'b5',name:'Krevat Babybay',price:320,emoji:'🛏️',taken:false},
-    {id:'b6',name:'Lodra & libra',price:45,emoji:'🧸',taken:false},
   ];
   return [
     {id:'e1',name:'Çantë udhëtimi',price:120,emoji:'🎒',taken:false},
@@ -952,266 +1506,394 @@ function demoItems(type) {
   ];
 }
 
-// ── DASHBOARD ─────────────────────────────────────────────
-function showDashboard(id) {
-  const db = getDB();
-  const list = db[id];
-  if (!list) return;
-  currentListId = id;
-  document.getElementById('dash-title').textContent = '✦ ' + list.names;
-  document.getElementById('share-link').value = window.location.origin + window.location.pathname + '#list/' + id;
-  updateDashStats(list);
+// ─── DASHBOARD ──────────────────────────────────────────
+function showDash(id){
+  const db=getDB(); const list=db[id]; if(!list)return;
+  currentListId=id;
+  localStorage.setItem('listaime_lastid',id);
+  const link=window.location.origin+window.location.pathname+'#list/'+id;
+  document.getElementById('share-inp').value=link;
+  document.getElementById('dash-title').textContent='✦ Lista e '+list.names;
+  updateStats(list);
   renderDashItems(list);
-  showPage('dashboard');
+  const isPrem=list.premium||false;
+  document.getElementById('upsell-box').style.display=isPrem?'none':'block';
+  showPage('dash');
 }
 
-function updateDashStats(list) {
-  document.getElementById('stat-items').textContent = (list.items||[]).length;
-  document.getElementById('stat-collected').textContent = '€'+(list.collected||0).toLocaleString();
-  document.getElementById('stat-contribs').textContent = (list.contributors||[]).length;
+function updateStats(list){
+  document.getElementById('s-items').textContent=(list.items||[]).length;
+  document.getElementById('s-col').textContent='€'+(list.collected||0).toLocaleString();
+  document.getElementById('s-cnt').textContent=(list.contributors||[]).length;
 }
 
-function renderDashItems(list) {
-  const c = document.getElementById('dash-items-list');
-  if (!(list.items||[]).length) { c.innerHTML = ''; return; }
-  c.innerHTML = '<div style="font-family:Playfair Display,serif;font-size:1.1rem;font-weight:600;margin:1.5rem 0 .75rem">'+(lang==='sq'?'Dhurata në listë:':'Gifts in list:')+'</div>';
-  list.items.forEach(item => {
-    const row = document.createElement('div');
-    row.className = 'item-row';
-    row.innerHTML = `<span class="item-row-emoji">${item.emoji||'🎁'}</span>
-      <span class="item-row-name">${item.name}</span>
-      <span class="item-row-price">€${item.price}${item.taken?' • <span style="color:var(--grn)">'+(lang==='sq'?'Rezervuar':'Reserved')+'</span>':''}</span>
-      <button class="btn-del" onclick="delItem('${item.id}')" title="Fshi">🗑</button>`;
-    c.appendChild(row);
+function renderDashItems(list){
+  const c=document.getElementById('dash-items');
+  const items=list.items||[];
+  if(!items.length){c.innerHTML='';return}
+  c.innerHTML='<div style="font-size:.82rem;font-weight:600;color:var(--muted);margin:1rem 0 .5rem">'+(lang==='sq'?'Dhurata në listë (':'Gifts in list (')+items.length+')</div>';
+  items.forEach(item=>{
+    const d=document.createElement('div');
+    d.className='item-row-d';
+    d.innerHTML=`<span class="ir-emoji">${item.emoji||'🎁'}</span>
+      <div class="ir-info">
+        <div class="ir-name">${item.name}</div>
+        <div class="ir-price">€${item.price}${item.taken?' · <span style="color:var(--grn)">'+(lang==='sq'?'Rezervuar':'Reserved')+'</span>':''}</div>
+      </div>
+      <button class="ir-del btn" onclick="delItem('${item.id}')" title="Fshi">🗑</button>`;
+    c.appendChild(d);
   });
 }
 
-function addItem() {
-  const name = document.getElementById('dp-name').value.trim();
-  const price = parseFloat(document.getElementById('dp-price').value)||0;
-  const emoji = document.getElementById('dp-emoji').value.trim()||'🎁';
-  const url = document.getElementById('dp-url').value.trim();
-  if (!name||!price) { toast('⚠️', lang==='sq'?'Plotësoni emrin dhe çmimin':'Fill in name and price'); return; }
-  const db = getDB();
-  const list = db[currentListId];
-  if (!list) return;
+// ─── URL DETECTION ──────────────────────────────────────
+function onUrlInput(el){
+  const url=el.value.trim();
+  if(!url){document.getElementById('url-prev').classList.remove('show');return}
+  try{
+    const u=new URL(url);
+    const host=u.hostname.replace('www.','');
+    const emoji=guessEmojiFromUrl(url);
+    const name=guessNameFromUrl(url,host);
+    document.getElementById('url-prev-emoji').textContent=emoji;
+    document.getElementById('url-prev-site').textContent='🔗 '+host;
+    document.getElementById('url-prev-name').textContent=name||lang==='sq'?'Produkt nga '+host:'Product from '+host;
+    document.getElementById('url-prev-price').textContent='';
+    document.getElementById('url-prev').classList.add('show');
+    // Pre-fill form
+    document.getElementById('d-name').value=name||'';
+    document.getElementById('d-emoji').value=emoji;
+    document.getElementById('d-url').value=url;
+  }catch(e){document.getElementById('url-prev').classList.remove('show')}
+}
+
+function guessEmojiFromUrl(url){
+  const u=url.toLowerCase();
+  if(u.includes('ikea'))return '🏠';
+  if(u.includes('amazon'))return '📦';
+  if(u.includes('zara')||u.includes('mango')||u.includes('hm.com'))return '👗';
+  if(u.includes('gjirafa'))return '🛒';
+  if(u.includes('fnac')||u.includes('boulanger'))return '📷';
+  if(u.includes('apple')||u.includes('iphone'))return '📱';
+  if(u.includes('kitchenaid')||u.includes('thermomix'))return '🤖';
+  if(u.includes('chicco')||u.includes('maxi-cosi')||u.includes('babyzen'))return '👶';
+  return '🎁';
+}
+
+function guessNameFromUrl(url,host){
+  // Try to extract from path segments - simple heuristic
+  try{
+    const path=new URL(url).pathname;
+    const seg=path.split('/').filter(s=>s.length>3&&!s.match(/^\d+$/));
+    if(seg.length>0){
+      const last=seg[seg.length-1];
+      return last.replace(/[-_]/g,' ').replace(/\.(html|htm|php)$/,'')
+        .split(' ').map(w=>w.charAt(0).toUpperCase()+w.slice(1)).join(' ').slice(0,60);
+    }
+  }catch(e){}
+  return '';
+}
+
+// ─── ADD ITEM ──────────────────────────────────────────
+function addItem(){
+  const name=document.getElementById('d-name').value.trim();
+  const price=parseFloat(document.getElementById('d-price').value)||0;
+  const emoji=document.getElementById('d-emoji').value.trim()||'🎁';
+  const url=document.getElementById('d-url').value.trim();
+  if(!name||!price){showToast('⚠️ '+(lang==='sq'?'Plotësoni emrin dhe çmimin':'Fill name and price'));return}
+
+  const db=getDB(); const list=db[currentListId]; if(!list)return;
+  const isFreeTier=!list.premium;
+  const itemCount=(list.items||[]).length;
+  if(isFreeTier&&itemCount>=15){
+    closeSheet('s-create');
+    openSheet('s-premium');
+    showToast('⚠️ '+(lang==='sq'?'Keni arritur limitin falas (15 dhurata)':'You have reached the free limit (15 gifts)'));
+    return;
+  }
+
+  list.items=list.items||[];
   list.items.push({id:'i'+Date.now(),name,price,emoji,url,taken:false});
   saveDB(db);
   renderDashItems(list);
-  updateDashStats(list);
-  ['dp-name','dp-price','dp-emoji','dp-url'].forEach(id => document.getElementById(id).value='');
-  toast('✓', lang==='sq'?'Dhurata u shtua!':'Gift added!');
+  updateStats(list);
+  // Clear
+  ['d-name','d-price','d-emoji','d-url'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('url-input').value='';
+  document.getElementById('url-prev').classList.remove('show');
+  showToast('✓ '+(lang==='sq'?'Dhurata u shtua!':'Gift added!'));
 }
 
-function delItem(itemId) {
-  const db = getDB();
-  const list = db[currentListId];
-  if (!list) return;
-  list.items = list.items.filter(i => i.id !== itemId);
-  saveDB(db);
-  renderDashItems(list);
-  updateDashStats(list);
+function delItem(itemId){
+  const db=getDB(); const list=db[currentListId]; if(!list)return;
+  list.items=list.items.filter(i=>i.id!==itemId);
+  saveDB(db); renderDashItems(list); updateStats(list);
 }
 
-function viewMyList() { showListPage(currentListId); }
+function viewMyList(){ if(currentListId)showListPage(currentListId) }
 
-function copyLink() {
-  navigator.clipboard.writeText(document.getElementById('share-link').value).then(() =>
-    toast('✓', lang==='sq'?'Linku u kopjua!':'Link copied!')
-  );
+// ─── SHARE ─────────────────────────────────────────────
+function copyLink(){
+  navigator.clipboard.writeText(document.getElementById('share-inp').value)
+    .then(()=>showToast('✓ '+(lang==='sq'?'Linku u kopjua!':'Link copied!')));
+}
+function dashShareWA(){
+  const db=getDB(); const list=db[currentListId];
+  const link=document.getElementById('share-inp').value;
+  const txt=(lang==='sq'?`Hej! 🎁 Ja lista jonë e dhuratave: ${list?.names||''}\n`:`Hey! 🎁 Here is our gift list: ${list?.names||''}\n`)+link;
+  window.open('https://wa.me/?text='+encodeURIComponent(txt),'_blank');
 }
 
-function shareWA() {
-  const db = getDB();
-  const list = db[currentListId];
-  const link = document.getElementById('share-link').value;
-  const txt = encodeURIComponent((lang==='sq'
-    ? `Hej! 🎁 Ja lista jonë e dhuratave: ${list?.names||''}\n`
-    : `Hey! 🎁 Here is our gift list: ${list?.names||''}\n`) + link);
-  window.open(`https://wa.me/?text=${txt}`,'_blank');
-}
+// ─── LIST PAGE ─────────────────────────────────────────
+function showListPage(id){
+  const db=getDB(); const list=db[id]; if(!list){showToast('⚠️ '+(lang==='sq'?'Lista nuk u gjet':'List not found'));return}
+  currentListId=id;
 
-// ── LIST PAGE ─────────────────────────────────────────────
-function showListPage(id) {
-  const db = getDB();
-  const list = db[id];
-  if (!list) { toast('⚠️', lang==='sq'?'Lista nuk u gjet':'List not found'); return; }
-  currentListId = id;
+  const tl={dasma:{sq:'💍 Dasma',en:'💍 Wedding'},lindje:{sq:'👶 Lindje',en:'👶 Birth'},tjeter:{sq:'🎉 Festë',en:'🎉 Celebration'}};
+  const t=tl[list.type]||tl.dasma;
+  document.getElementById('lh-badge').innerHTML=`<span class="badge badge-r">${t[lang]||t.sq}</span>`;
+  document.getElementById('lh-names').textContent=list.names;
+  document.getElementById('lh-date').textContent=list.date?fmtDate(list.date):'';
+  document.getElementById('lh-msg').textContent=list.msg?`"${list.msg}"` :'';
 
-  const typeLabels = {
-    dasma: {sq:'💍 Dasma', en:'💍 Wedding'},
-    lindje: {sq:'👶 Lindje', en:'👶 Birth'},
-    tjeter: {sq:'🎉 Festë', en:'🎉 Celebration'}
+  // Set hero color
+  const colors={
+    default:'linear-gradient(160deg,#3D1C10,#8B1A1A)',
+    blue:'linear-gradient(160deg,#0D2B4E,#1A5C9E)',
+    emerald:'linear-gradient(160deg,#072A18,#0D6B3A)',
+    purple:'linear-gradient(160deg,#1E0A3C,#5B2D8E)',
+    rose:'linear-gradient(160deg,#3C0825,#B02060)',
+    dark:'linear-gradient(160deg,#0A0A14,#1A1A2E)',
+    sand:'linear-gradient(160deg,#3A2800,#8B6914)',
+    teal:'linear-gradient(160deg,#052028,#0D5C63)',
   };
-  const tl = typeLabels[list.type]||typeLabels.dasma;
-  document.getElementById('list-badge-el').innerHTML = `<span class="badge badge-pom">${tl[lang]||tl.sq}</span>`;
-  document.getElementById('list-names-el').textContent = list.names;
-  document.getElementById('list-date-el').textContent = list.date ? formatDate(list.date) : '';
-  document.getElementById('list-msg-el').textContent = list.msg ? `"${list.msg}"` : '';
+  document.getElementById('lh-area').style.background=colors[list.color||'default'];
+
+  // Photo if premium
+  const photoEl=document.getElementById('lh-photo');
+  if(list.premium&&list.photo){
+    photoEl.src=list.photo;photoEl.style.display='block';
+  }else{photoEl.style.display='none'}
 
   // Cagnotte
-  const cagEl = document.getElementById('cagnotte-area');
-  const col = list.collected||0;
-  const tgt = list.target||0;
-  if (tgt > 0 || col > 0) {
-    const pct = tgt ? Math.min(100, Math.round(col/tgt*100)) : Math.min(100,Math.round(col/500*100));
-    cagEl.innerHTML = `<div class="cagnotte">
-      <div class="cagnotte-info">
-        <h3 class="display">🌸 ${lang==='sq'?'Arka e përbashkët':'Collective pot'}</h3>
-        <p>${lang==='sq'?'Kontribuoni me çfarë dëshironi — çdo shumë ka vlerë':'Contribute whatever you wish — every amount counts'}</p>
-        <div class="progress-bar"><div class="progress-fill" style="--target-w:${pct}%;width:${pct}%;animation:progressFill 1.2s ease"></div></div>
-        <div class="cagnotte-nums">
-          <div><div class="cn-num display t-pom">€${col.toLocaleString()}</div><div class="cn-label">${lang==='sq'?'Mbledhur':'Collected'}</div></div>
-          ${tgt?`<div><div class="cn-num display">${tgt?'€'+tgt.toLocaleString():'—'}</div><div class="cn-label">${lang==='sq'?'Objektiv':'Goal'}</div></div>`:''}
-        </div>
+  const cagEl=document.getElementById('lh-cagnotte');
+  const col=list.collected||0; const tgt=list.target||0;
+  if(tgt>0||col>0){
+    const pct=tgt?Math.min(100,Math.round(col/tgt*100)):Math.min(100,Math.round(col/500*100));
+    cagEl.innerHTML=`<div class="cagnotte">
+      <div class="cag-title">${lang==='sq'?'🌸 Arka e përbashkët':'🌸 Collective pot'}</div>
+      <div class="cag-sub">${lang==='sq'?'Kontribuoni me çfarë dëshironi':'Contribute whatever you wish'}</div>
+      <div class="progress-bar"><div class="progress-fill" style="width:${pct}%"></div></div>
+      <div class="cag-nums">
+        <div><div class="cn-num">€${col.toLocaleString()}</div><div class="cn-lbl">${lang==='sq'?'Mbledhur':'Collected'}</div></div>
+        ${tgt?`<div><div class="cn-num">€${tgt.toLocaleString()}</div><div class="cn-lbl">${lang==='sq'?'Objektiv':'Goal'}</div></div>`:''}
       </div>
-      <button class="btn btn-primary btn-lg" onclick="openContrib(null,'${lang==='sq'?'Arka e përbashkët':'Collective pot'}','${lang==='sq'?'sipas dëshirës':'as you wish'}')">
+      <button class="btn btn-r btn-full" style="min-height:52px" onclick="openContrib(null,'${lang==='sq'?'Arka e përbashkët':'Collective pot'}','${lang==='sq'?'sipas dëshirës':'as you wish'}')">
         ${lang==='sq'?'Kontribuoj tani →':'Contribute now →'}
       </button>
     </div>`;
-  } else { cagEl.innerHTML = ''; }
+  }else cagEl.innerHTML='';
 
   // Items
-  const itemsEl = document.getElementById('items-area');
-  const items = list.items||[];
-  if (items.length) {
-    itemsEl.innerHTML = `<div class="items-title display">${lang==='sq'?'Lista e dhuratave':'Gift list'}</div><div class="items-grid" id="items-render"></div>`;
-    const grid = document.getElementById('items-render');
-    items.forEach(item => {
-      const card = document.createElement('div');
-      card.className = 'item-card'+(item.taken?' taken':'');
-      card.innerHTML = `<div class="item-img">${item.emoji||'🎁'}</div>
-        <span class="item-status ${item.taken?'status-taken':'status-avail'}">${item.taken?(lang==='sq'?'✓ Rezervuar':'✓ Reserved'):(lang==='sq'?'◎ Disponibël':'◎ Available')}</span>
+  const items=list.items||[];
+  const itemsEl=document.getElementById('lh-items');
+  if(items.length){
+    itemsEl.innerHTML=`<div class="items-title">${lang==='sq'?'Lista e dhuratave':'Gift list'}</div><div class="items-grid" id="ig"></div>`;
+    const grid=document.getElementById('ig');
+    items.forEach(item=>{
+      const c=document.createElement('div');
+      c.className='item-card'+(item.taken?' taken':'');
+      c.innerHTML=`<div class="item-img">${item.emoji||'🎁'}</div>
+        <span class="item-status ${item.taken?'s-taken':'s-avail'}">${item.taken?(lang==='sq'?'✓ Rezervuar':'✓ Reserved'):(lang==='sq'?'◎ Disponibël':'◎ Available')}</span>
         <div class="item-name">${item.name}</div>
         <div class="item-price">€${item.price.toLocaleString()}</div>
-        ${!item.taken?`<button class="btn btn-primary btn-full btn-sm" onclick="openContrib('${item.id}','${item.name.replace(/'/g,"\\'")}','€${item.price}')" style="margin-top:.75rem">${lang==='sq'?'Dhuro këtë →':'Give this →'}</button>`:''}`;
-      grid.appendChild(card);
+        ${!item.taken?`<button class="btn btn-r btn-full btn-sm" onclick="openContrib('${item.id}','${item.name.replace(/'/g,"\\'").replace(/"/g,'\\"')}','€${item.price}')" style="margin-top:.4rem">${lang==='sq'?'Dhuro →':'Give →'}</button>`:''}`;
+      if(!item.taken)c.onclick=()=>openContrib(item.id,item.name,'€'+item.price);
+      grid.appendChild(c);
     });
-  } else { itemsEl.innerHTML = ''; }
+  }else itemsEl.innerHTML='';
 
   // Contributors
-  const contribs = list.contributors||[];
-  const contribEl = document.getElementById('contrib-area');
-  if (contribs.length) {
-    contribEl.innerHTML = `<div class="contributors"><div class="contrib-title display">🫶 ${lang==='sq'?'Kontribuesit':'Contributors'}</div><div class="contrib-grid">${
-      contribs.map(c => `<div class="contrib-item"><div class="contrib-av">${c.donor.slice(0,2).toUpperCase()}</div><div><div class="contrib-name">${c.donor}</div><div class="contrib-amount">€${c.amount}${c.msg?' · '+c.msg.slice(0,28):''}</div></div></div>`).join('')
+  const contribs=list.contributors||[];
+  const contribsEl=document.getElementById('lh-contribs');
+  if(contribs.length){
+    contribsEl.innerHTML=`<div class="contribs"><div class="contribs-title">🫶 ${lang==='sq'?'Kontribuesit':'Contributors'}</div><div class="contrib-list">${
+      contribs.map(c=>`<div class="contrib-row"><div class="contrib-av">${c.donor.slice(0,2).toUpperCase()}</div><div><div class="contrib-name">${c.donor}</div><div class="contrib-detail">€${c.amount}${c.msg?' · '+c.msg.slice(0,30):''}</div></div></div>`).join('')
     }</div></div>`;
-  } else { contribEl.innerHTML = ''; }
+  }else contribsEl.innerHTML='';
 
   showPage('list');
 }
 
-// ── CONTRIBUTION ──────────────────────────────────────────
-function openContrib(itemId, name, price) {
-  currentContribItem = itemId;
-  document.getElementById('contrib-emoji-el').textContent = itemId ? getItemEmoji(itemId) : '🌸';
-  document.getElementById('contrib-name-el').textContent = name;
-  document.getElementById('contrib-price-el').textContent = price;
-  document.getElementById('contrib-donor').value = '';
-  document.getElementById('contrib-amount').value = '';
-  document.getElementById('contrib-msg').value = '';
-  openModal('contrib-overlay');
+// ─── CONTRIBUTE ─────────────────────────────────────────
+function openContrib(itemId,name,price){
+  currentContribItemId=itemId;
+  document.getElementById('ci-emoji').textContent=itemId?getItemEmoji(itemId):'🌸';
+  document.getElementById('ci-name').textContent=name;
+  document.getElementById('ci-price').textContent=price;
+  document.getElementById('ci-donor').value='';
+  document.getElementById('ci-amount').value='';
+  document.getElementById('ci-msg').value='';
+  // Suggested amounts
+  const suggested=itemId?[20,50,100]:[20,50,100,200];
+  const pillsEl=document.getElementById('amount-pills');
+  pillsEl.innerHTML=suggested.map(a=>`<button class="amount-pill" onclick="setAmount(${a},this)">€${a}</button>`).join('');
+  openSheet('s-contrib');
 }
 
-function getItemEmoji(itemId) {
-  const db = getDB();
-  const list = db[currentListId];
-  if (!list) return '🎁';
-  const item = (list.items||[]).find(i => i.id === itemId);
-  return item ? item.emoji||'🎁' : '🎁';
+function setAmount(a,el){
+  document.getElementById('ci-amount').value=a;
+  document.querySelectorAll('.amount-pill').forEach(p=>p.classList.remove('sel'));
+  el.classList.add('sel');
 }
 
-function submitContrib() {
-  const donor = document.getElementById('contrib-donor').value.trim();
-  const amount = parseFloat(document.getElementById('contrib-amount').value)||0;
-  const msg = document.getElementById('contrib-msg').value.trim();
-  if (!donor) { toast('⚠️', lang==='sq'?'Shkruani emrin tuaj':'Enter your name'); return; }
-  if (!amount) { toast('⚠️', lang==='sq'?'Shkruani shumën':'Enter the amount'); return; }
-  const db = getDB();
-  const list = db[currentListId];
-  if (!list) return;
-  list.collected = (list.collected||0) + amount;
-  list.contributors = list.contributors||[];
-  list.contributors.push({donor, amount, msg, itemId:currentContribItem, date:new Date().toLocaleDateString()});
-  if (currentContribItem) {
-    const item = (list.items||[]).find(i => i.id === currentContribItem);
-    if (item && amount >= item.price * 0.75) { item.taken = true; item.takenBy = donor; }
+function getItemEmoji(itemId){
+  const db=getDB(); const list=db[currentListId]; if(!list)return'🎁';
+  return(list.items||[]).find(i=>i.id===itemId)?.emoji||'🎁';
+}
+
+function submitContrib(){
+  const donor=document.getElementById('ci-donor').value.trim();
+  const amount=parseFloat(document.getElementById('ci-amount').value)||0;
+  const msg=document.getElementById('ci-msg').value.trim();
+  if(!donor){showToast('⚠️ '+(lang==='sq'?'Shkruani emrin tuaj':'Enter your name'));return}
+  if(!amount){showToast('⚠️ '+(lang==='sq'?'Shkruani shumën':'Enter the amount'));return}
+
+  const db=getDB(); const list=db[currentListId]; if(!list)return;
+  list.collected=(list.collected||0)+amount;
+  list.contributors=list.contributors||[];
+  list.contributors.push({donor,amount,msg,itemId:currentContribItemId,date:new Date().toLocaleDateString()});
+  if(currentContribItemId){
+    const item=(list.items||[]).find(i=>i.id===currentContribItemId);
+    if(item&&amount>=item.price*.7){item.taken=true;item.takenBy=donor}
   }
   saveDB(db);
-  closeModal('contrib-overlay');
-  document.getElementById('success-text').textContent = `${lang==='sq'?'Faleminderit':'Thank you'}, ${donor}! ${lang==='sq'?'Kontributi juaj prej':'Your contribution of'} €${amount} ${lang==='sq'?'u regjistrua.':'was recorded.'} ${lang==='sq'?'Familja do të jetë shumë e lumtur!':'The family will be very happy!'}`;
-  openModal('success-overlay');
+  closeSheet('s-contrib');
+
+  // Show success
+  const txt=lang==='sq'
+    ?`Faleminderit, ${donor}! Kontributi juaj prej €${amount} u regjistrua. Familja do të jetë shumë e lumtur! 💝`
+    :`Thank you, ${donor}! Your contribution of €${amount} was recorded. The family will be very happy! 💝`;
+  document.getElementById('success-text').textContent=txt;
+  openSheet('s-success');
+  launchConfetti();
   showListPage(currentListId);
 }
 
-// ── FIND LIST ─────────────────────────────────────────────
-function findList() {
-  const code = document.getElementById('find-code').value.trim().toUpperCase();
-  if (!code) { toast('⚠️', lang==='sq'?'Shkruani kodin':'Enter the code'); return; }
-  const db = getDB();
-  if (db[code]) {
-    closeModal('find-overlay');
-    showListPage(code);
-  } else {
-    toast('⚠️', lang==='sq'?'Lista nuk u gjet. Kontrolloni kodin.':'List not found. Check the code.');
+function shareSuccessWA(){
+  const db=getDB(); const list=db[currentListId];
+  const link=window.location.origin+window.location.pathname+'#list/'+currentListId;
+  const txt=(lang==='sq'
+    ?`🎁 Sapo kontribuova në listën e dhuratave të ${list?.names||''}! Ndaj edhe ti:\n`
+    :`🎁 I just contributed to ${list?.names||''}'s gift list! Share it too:\n`)+link;
+  window.open('https://wa.me/?text='+encodeURIComponent(txt),'_blank');
+}
+
+function sharePageWA(){
+  const db=getDB(); const list=db[currentListId];
+  const link=window.location.href;
+  const txt=(lang==='sq'
+    ?`Hej! 🎁 Shiko listën e dhuratave të ${list?.names||''}: `
+    :`Hey! 🎁 Check out ${list?.names||''}'s gift list: `)+link;
+  window.open('https://wa.me/?text='+encodeURIComponent(txt),'_blank');
+}
+
+// ─── PREMIUM ────────────────────────────────────────────
+function pickColor(el,color){
+  selectedColor=color;
+  document.querySelectorAll('.swatch').forEach(s=>s.classList.remove('sel'));
+  el.classList.add('sel');
+}
+
+function activatePremium(){
+  if(!currentListId){showToast('⚠️ '+(lang==='sq'?'Krijo fillimisht listën':'Create a list first'));return}
+  const db=getDB(); const list=db[currentListId]; if(!list)return;
+  list.premium=true;
+  list.color=selectedColor;
+  saveDB(db);
+  closeSheet('s-premium');
+  showToast('✦ '+(lang==='sq'?'Premium aktiv! Mirë se vini.':'Premium active! Welcome.'));
+  if(document.getElementById('p-dash').classList.contains('active')){
+    document.getElementById('upsell-box').style.display='none';
   }
 }
 
-function loadDemo() {
-  closeModal('find-overlay');
-  showListPage('BLE-2025');
+// ─── FIND LIST ─────────────────────────────────────────
+function findList(){
+  const code=document.getElementById('find-code').value.trim().toUpperCase();
+  if(!code){showToast('⚠️ '+(lang==='sq'?'Shkruani kodin':'Enter code'));return}
+  const db=getDB();
+  if(db[code]){closeSheet('s-find');showListPage(code);}
+  else showToast('⚠️ '+(lang==='sq'?'Lista nuk u gjet':'List not found'));
+}
+function loadDemo(){closeSheet('s-find');showListPage('BLE-2025')}
+
+// ─── TOAST ─────────────────────────────────────────────
+let tTimer;
+function showToast(msg){
+  const el=document.getElementById('toast');
+  el.textContent=msg;el.classList.add('show');
+  clearTimeout(tTimer);
+  tTimer=setTimeout(()=>el.classList.remove('show'),3000);
 }
 
-// ── UTILS ─────────────────────────────────────────────────
-function formatDate(d) {
-  if (!d) return '';
-  const months_sq = ['Janar','Shkurt','Mars','Prill','Maj','Qershor','Korrik','Gusht','Shtator','Tetor','Nëntor','Dhjetor'];
-  const months_en = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-  const [y,m,day] = d.split('-');
-  const months = lang === 'sq' ? months_sq : months_en;
-  return `${parseInt(day)} ${months[parseInt(m)-1]} ${y}`;
+// ─── CONFETTI ──────────────────────────────────────────
+function launchConfetti(){
+  const wrap=document.createElement('div');
+  wrap.className='confetti-wrap';
+  document.body.appendChild(wrap);
+  const colors=['#A82020','#C83030','#B8861A','#D4A030','#FEF8EC','#E8D0A8'];
+  for(let i=0;i<40;i++){
+    const p=document.createElement('div');
+    p.className='confetti-piece';
+    p.style.cssText=`left:${Math.random()*100}%;background:${colors[i%colors.length]};
+      animation-delay:${Math.random()*.6}s;animation-duration:${.6+Math.random()*.6}s;
+      border-radius:${Math.random()>.5?'50%':'2px'};
+      transform:rotate(${Math.random()*360}deg)`;
+    wrap.appendChild(p);
+  }
+  setTimeout(()=>wrap.remove(),1500);
 }
 
-let toastTimer;
-function toast(icon, msg) {
-  const el = document.getElementById('toast');
-  el.textContent = icon + ' ' + msg;
-  el.classList.add('show');
-  clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => el.classList.remove('show'), 3200);
+// ─── DATE FORMAT ────────────────────────────────────────
+function fmtDate(d){
+  if(!d)return'';
+  const mSQ=['Janar','Shkurt','Mars','Prill','Maj','Qershor','Korrik','Gusht','Shtator','Tetor','Nëntor','Dhjetor'];
+  const mEN=['January','February','March','April','May','June','July','August','September','October','November','December'];
+  const[y,m,day]=d.split('-');
+  const months=lang==='sq'?mSQ:mEN;
+  return`${parseInt(day)} ${months[parseInt(m)-1]} ${y}`;
 }
 
-// ── HASH ROUTING ──────────────────────────────────────────
-function handleHash() {
-  const h = window.location.hash;
-  if (h.startsWith('#list/')) { showListPage(h.replace('#list/','')); }
-  else if (h.startsWith('#dashboard/')) { showDashboard(h.replace('#dashboard/','')); }
-  else { showPage('landing'); }
+// ─── HASH ROUTING ──────────────────────────────────────
+function handleHash(){
+  const h=window.location.hash;
+  if(h.startsWith('#list/')){showListPage(h.replace('#list/',''))}
+  else if(h.startsWith('#dash/')){const id=h.replace('#dash/','');currentListId=id;showDash(id)}
+  else showPage('home');
 }
-window.addEventListener('hashchange', handleHash);
+window.addEventListener('hashchange',handleHash);
 handleHash();
 
-// ── SCROLL REVEAL ─────────────────────────────────────────
-const obs = new IntersectionObserver((entries) => {
-  entries.forEach((e,i) => {
-    if (e.isIntersecting) {
-      setTimeout(() => e.target.classList.add('in'), i * 90);
-      obs.unobserve(e.target);
+// ─── SCROLL REVEAL ─────────────────────────────────────
+const ro=new IntersectionObserver((entries)=>{
+  entries.forEach((e,i)=>{
+    if(e.isIntersecting){
+      setTimeout(()=>e.target.classList.add('in'),i*80);
+      ro.unobserve(e.target);
     }
   });
-}, {threshold:.1});
-document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+},{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
 
-// ── DEMO DATA ─────────────────────────────────────────────
-(function seedDemo() {
-  const db = getDB();
-  if (!db['BLE-2025']) {
-    db['BLE-2025'] = {
-      id:'BLE-2025', type:'dasma',
-      names:'Blerim & Ardita',
+// ─── DEMO DATA ─────────────────────────────────────────
+(function seed(){
+  const db=getDB();
+  if(!db['BLE-2025']){
+    db['BLE-2025']={
+      id:'BLE-2025',type:'dasma',names:'Blerim & Ardita',
       date:'2025-06-14',
       msg:'Faleminderit që jeni pjesë e ditës sonë më të lumtur! Thank you for being part of our happiest day!',
-      target:3000, collected:1140,
+      target:3000,collected:1340,color:'default',premium:false,
       items:[
         {id:'d1',name:'Set kuzhine Zwilling',price:180,emoji:'🍳',taken:false},
         {id:'d2',name:'Krevat 160×200 IKEA',price:350,emoji:'🛏️',taken:true,takenBy:'Artan Hoxha'},
@@ -1221,11 +1903,11 @@ document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
         {id:'d6',name:'Kamerë Sony A7',price:1100,emoji:'📸',taken:false},
       ],
       contributors:[
-        {donor:'Artan Hoxha',amount:350,msg:'Urime! Gezuar!',itemId:'d2',date:'01/06/2025'},
-        {donor:'Familja Krasniqi - Zürich',amount:500,msg:'Me dashuri nga Zvicra 🇨🇭',itemId:null,date:'03/06/2025'},
-        {donor:'Beni & Vjosa',amount:290,msg:'Gezuar jetën e re!',itemId:null,date:'05/06/2025'},
+        {donor:'Artan Hoxha',amount:350,msg:'Urime! Gëzuar!',itemId:'d2',date:'01/06/2025'},
+        {donor:'Familja Krasniqi — Zürich 🇨🇭',amount:590,msg:'Me dashuri nga Zvicra!',itemId:null,date:'03/06/2025'},
+        {donor:'Beni & Vjosa',amount:400,msg:'Gëzuar jetën e re! 💝',itemId:null,date:'05/06/2025'},
       ],
-      createdAt: Date.now()
+      createdAt:Date.now()
     };
     saveDB(db);
   }
@@ -1233,3 +1915,5 @@ document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 </script>
 </body>
 </html>
+ENDOFFILE
+echo "Done: $(wc -l < /home/claude/listaime_v3.html) lines"
