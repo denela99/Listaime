@@ -679,6 +679,36 @@ footer{background:var(--dark2);padding:2rem 1.5rem;display:flex;flex-direction:c
 }
 .swatch.sel{border-color:var(--dark);transform:scale(1.15)}
 
+/* ─── CREATE — 2 STEPS ──────────────────────────────────── */
+.create-progress{display:flex;align-items:center;gap:.5rem;margin-bottom:1.5rem}
+.cp-step{display:flex;align-items:center;gap:.5rem;font-size:.78rem;font-weight:600;color:var(--muted);transition:color .3s;flex-shrink:0}
+.cp-step.active{color:var(--r)}
+.cp-step.done{color:var(--grn)}
+.cp-dot{width:26px;height:26px;border-radius:50%;background:var(--cream3);color:var(--muted);display:flex;align-items:center;justify-content:center;font-size:.78rem;font-weight:700;transition:all .3s;flex-shrink:0}
+.cp-step.active .cp-dot{background:var(--r);color:white}
+.cp-step.done .cp-dot{background:var(--grn);color:white}
+.cp-line{flex:1;height:2px;background:var(--cream3);border-radius:1px;transition:background .3s}
+.cp-line.done{background:var(--grn)}
+.honey-info{background:linear-gradient(135deg,rgba(184,134,26,.08),rgba(168,32,32,.05));border:1.5px solid rgba(184,134,26,.25);border-radius:var(--rad);padding:.9rem 1rem;margin-bottom:1rem;text-align:center}
+.type-new{display:inline-block;background:var(--r);color:white;font-size:.58rem;font-weight:700;padding:.1rem .35rem;border-radius:3px;margin-top:.25rem;letter-spacing:.04em;text-transform:uppercase}
+.list-preview-card{background:linear-gradient(135deg,var(--dark),var(--dark2));border-radius:var(--rad-lg);padding:1.1rem 1.25rem;display:flex;align-items:center;gap:.85rem;margin-bottom:1rem}
+.lpc-emoji{font-size:2rem;flex-shrink:0}
+.lpc-names{font-family:'Cormorant',serif;font-size:1.2rem;font-weight:700;color:white;line-height:1.2}
+.lpc-type{font-size:.75rem;color:rgba(255,255,255,.5);margin-top:.15rem}
+.lpc-check{margin-left:auto;width:28px;height:28px;border-radius:50%;background:var(--grn2);color:white;display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700;flex-shrink:0}
+.save-warning{display:flex;gap:.75rem;align-items:flex-start;background:rgba(168,32,32,.06);border:1.5px solid rgba(168,32,32,.18);border-radius:var(--rad-sm);padding:.9rem 1rem;margin-bottom:1.25rem}
+.sw-icon{font-size:1.1rem;flex-shrink:0;margin-top:.05rem}
+.sw-title{font-weight:600;font-size:.88rem;margin-bottom:.18rem}
+.sw-sub{font-size:.78rem;color:var(--muted);line-height:1.5}
+.auth-tabs{display:grid;grid-template-columns:1fr 1fr;border:1.5px solid var(--cream3);border-radius:var(--rad-sm);overflow:hidden;margin-bottom:1.1rem}
+.auth-tab{padding:.65rem .5rem;border:none;background:transparent;font-size:.85rem;font-weight:600;color:var(--muted);cursor:pointer;transition:all .2s;min-height:auto;border-radius:0}
+.auth-tab.active{background:var(--r);color:white}
+.auth-or{display:flex;align-items:center;gap:.65rem;color:var(--muted);font-size:.78rem;margin:1rem 0}
+.auth-or-line{flex:1;height:1px;background:var(--cream3)}
+.user-chip{display:none;align-items:center;gap:.4rem;background:rgba(168,32,32,.08);border:1px solid rgba(168,32,32,.18);border-radius:100px;padding:.32rem .75rem;font-size:.75rem;font-weight:600;color:var(--r);cursor:pointer}
+.user-chip.show{display:flex}
+.user-dot{width:7px;height:7px;border-radius:50%;background:var(--grn2)}
+
 /* ═══════════════════════════════════════════════════════════
    UTILITY
 ═══════════════════════════════════════════════════════════ */
@@ -706,6 +736,10 @@ footer{background:var(--dark2);padding:2rem 1.5rem;display:flex;flex-direction:c
   <nav class="top-nav">
     <div class="nav-logo">lista<span>.</span>ime</div>
     <div class="nav-right">
+      <div class="user-chip" id="user-chip" onclick="showMyDashboard()">
+        <div class="user-dot"></div>
+        <span class="uc-name"></span>
+      </div>
       <button class="nav-find btn-sm" onclick="openSheet('s-find')">
         <span class="sq">Gjej listën</span><span class="en">Find list</span>
       </button>
@@ -1191,48 +1225,178 @@ footer{background:var(--dark2);padding:2rem 1.5rem;display:flex;flex-direction:c
   <div class="sheet" onclick="stopProp(event)">
     <div class="sheet-drag"></div>
     <button class="sheet-close" onclick="closeSheet('s-create')">✕</button>
-    <div class="sheet-title sq">Krijo listën tënde ✨</div>
-    <div class="sheet-title en">Create your list ✨</div>
-    <div class="sheet-sub sq">Gati në 2 minuta · Falas · Pa kartë krediti</div>
-    <div class="sheet-sub en">Ready in 2 minutes · Free · No credit card</div>
 
-    <div class="type-grid">
-      <div class="type-opt sel" id="t-dasma" onclick="selType('dasma',this)">
-        <span class="te">💍</span><span class="tl sq">Dasma</span><span class="tl en">Wedding</span>
+    <!-- ── PROGRESS BAR ─────────────────────── -->
+    <div class="create-progress">
+      <div class="cp-step active" id="cp1">
+        <div class="cp-dot">1</div>
+        <span class="sq">Lista jote</span><span class="en">Your list</span>
       </div>
-      <div class="type-opt" id="t-lindje" onclick="selType('lindje',this)">
-        <span class="te">👶</span><span class="tl sq">Lindje</span><span class="tl en">Birth</span>
-      </div>
-      <div class="type-opt" id="t-tjeter" onclick="selType('tjeter',this)">
-        <span class="te">🎉</span><span class="tl sq">Tjetër</span><span class="tl en">Other</span>
+      <div class="cp-line"></div>
+      <div class="cp-step" id="cp2">
+        <div class="cp-dot">2</div>
+        <span class="sq">Ruaj & Shpërnda</span><span class="en">Save & Share</span>
       </div>
     </div>
 
-    <div class="field">
-      <label class="sq">Emrat tuaj</label><label class="en">Your names</label>
-      <input type="text" id="c-names" placeholder="Blerim & Ardita"/>
-    </div>
-    <div class="field-row">
-      <div class="field">
-        <label class="sq">Data</label><label class="en">Date</label>
-        <input type="date" id="c-date"/>
+    <!-- ══ STEP 1 ══════════════════════════════ -->
+    <div id="create-s1">
+      <div class="sheet-title sq">Çfarë lloj liste? ✨</div>
+      <div class="sheet-title en">What type of list? ✨</div>
+      <div class="sheet-sub sq">Zgjidh llojin — do ta personalizojmë për ty</div>
+      <div class="sheet-sub en">Choose the type — we'll personalize it for you</div>
+
+      <div class="type-grid" style="grid-template-columns:repeat(2,1fr)">
+        <div class="type-opt sel" id="t-dasma" onclick="selType('dasma',this)">
+          <span class="te">💍</span>
+          <span class="tl sq">Dasma</span><span class="tl en">Wedding</span>
+        </div>
+        <div class="type-opt" id="t-lindje" onclick="selType('lindje',this)">
+          <span class="te">👶</span>
+          <span class="tl sq">Lindje & Bebe</span><span class="tl en">Birth & Baby</span>
+        </div>
+        <div class="type-opt" id="t-udhetim" onclick="selType('udhetim',this)">
+          <span class="te">✈️</span>
+          <span class="tl sq">Udhëtim Nusërie</span><span class="tl en">Honeymoon</span>
+          <span class="type-new sq">Cagnotte</span><span class="type-new en">Cagnotte</span>
+        </div>
+        <div class="type-opt" id="t-tjeter" onclick="selType('tjeter',this)">
+          <span class="te">🎉</span>
+          <span class="tl sq">Tjetër</span><span class="tl en">Other</span>
+        </div>
       </div>
-      <div class="field">
-        <label class="sq">Objektivi €</label><label class="en">Goal €</label>
-        <input type="number" id="c-target" placeholder="2000"/>
+
+      <!-- Honeymoon explain banner -->
+      <div class="honey-info" id="honey-info" style="display:none">
+        <div style="font-size:1.1rem;margin-bottom:.3rem">✈️</div>
+        <div style="font-weight:600;font-size:.88rem;margin-bottom:.2rem" class="sq">Cagnotte Udhëtim Nusërie</div>
+        <div style="font-weight:600;font-size:.88rem;margin-bottom:.2rem" class="en">Honeymoon Cagnotte</div>
+        <div style="font-size:.78rem;line-height:1.6" class="sq">Mysafirët kontribuojnë direkt për udhëtimin tuaj të ëndrrave. Asnjë dhuratë fizike — vetëm para për aventurën tuaj.</div>
+        <div style="font-size:.78rem;line-height:1.6" class="en">Guests contribute directly to your dream trip. No physical gift — just money for your adventure.</div>
       </div>
+
+      <div class="field">
+        <label class="sq" id="names-label">Emrat e çiftit</label>
+        <label class="en" id="names-label-en">Couple's names</label>
+        <input type="text" id="c-names" placeholder="Blerim & Ardita"/>
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label class="sq">Data</label><label class="en">Date</label>
+          <input type="date" id="c-date"/>
+        </div>
+        <div class="field" id="target-field">
+          <label class="sq" id="target-label">Objektivi € <span style="font-size:.72rem;color:var(--muted)" class="sq">(opsionale)</span></label>
+          <label class="en">Goal € <span style="font-size:.72rem;color:var(--muted)">(optional)</span></label>
+          <input type="number" id="c-target" placeholder="3000"/>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="sq">Mesazhi për mysafirët</label><label class="en">Message for guests</label>
+        <textarea id="c-msg" placeholder="Faleminderit që jeni pjesë e festës sonë..."></textarea>
+      </div>
+
+      <button class="btn btn-r btn-full btn-lg" onclick="goToStep2()">
+        <span class="sq">Vazhdoni — Hapi 2 nga 2 →</span>
+        <span class="en">Continue — Step 2 of 2 →</span>
+      </button>
+      <p style="font-size:.72rem;color:var(--muted);text-align:center;margin-top:.6rem">
+        <span class="sq">Falas · Pa kartë krediti · 2 minuta</span>
+        <span class="en">Free · No credit card · 2 minutes</span>
+      </p>
     </div>
-    <div class="field">
-      <label class="sq">Mesazhi juaj për mysafirët</label><label class="en">Your message for guests</label>
-      <textarea id="c-msg" placeholder="Faleminderit që jeni pjesë e festës sonë..."></textarea>
+
+    <!-- ══ STEP 2 : REGISTER ════════════════════ -->
+    <div id="create-s2" style="display:none">
+
+      <!-- List preview card -->
+      <div class="list-preview-card" id="lpc">
+        <div class="lpc-emoji" id="lpc-emoji">💍</div>
+        <div>
+          <div class="lpc-names" id="lpc-names">Blerim & Ardita</div>
+          <div class="lpc-type" id="lpc-type">Dasma · 14 Qershor 2025</div>
+        </div>
+        <div class="lpc-check">✓</div>
+      </div>
+
+      <!-- Save warning -->
+      <div class="save-warning">
+        <span class="sw-icon">⚠️</span>
+        <div>
+          <div class="sw-title sq">Regjistrohu për ta ruajtur listën</div>
+          <div class="sw-title en">Register to save your list</div>
+          <div class="sw-sub sq">Pa llogari, lista humbet kur mbyllni faqen.</div>
+          <div class="sw-sub en">Without an account, the list is lost when you close the page.</div>
+        </div>
+      </div>
+
+      <!-- Register / Login tabs -->
+      <div class="auth-tabs">
+        <button class="auth-tab active" id="tab-reg" onclick="switchAuthTab('reg')">
+          <span class="sq">Llogari e re</span><span class="en">New account</span>
+        </button>
+        <button class="auth-tab" id="tab-login" onclick="switchAuthTab('login')">
+          <span class="sq">Kam llogari</span><span class="en">I have an account</span>
+        </button>
+      </div>
+
+      <!-- REGISTER FORM -->
+      <div id="auth-reg-form">
+        <div class="field">
+          <label class="sq">Email-i juaj</label><label class="en">Your email</label>
+          <input type="email" id="reg-email" placeholder="emri@gmail.com" autocomplete="email"/>
+        </div>
+        <div class="field">
+          <label class="sq">Fjalëkalimi</label><label class="en">Password</label>
+          <input type="password" id="reg-pass" placeholder="Minimum 6 karaktere" autocomplete="new-password"/>
+        </div>
+        <button class="btn btn-r btn-full btn-lg" onclick="registerAndCreate()">
+          <span class="sq">Krijo llogarinë dhe hap listën →</span>
+          <span class="en">Create account and open list →</span>
+        </button>
+        <div class="auth-or">
+          <div class="auth-or-line"></div>
+          <span class="sq">ose</span><span class="en">or</span>
+          <div class="auth-or-line"></div>
+        </div>
+        <button class="btn btn-out btn-full" onclick="continueWithoutAccount()">
+          <span class="sq">Vazhdo pa llogari (lista nuk ruhet)</span>
+          <span class="en">Continue without account (list won't be saved)</span>
+        </button>
+        <p style="font-size:.7rem;color:var(--muted);text-align:center;margin-top:.6rem;line-height:1.5">
+          <span class="sq">Duke u regjistruar, pranoni <a href="#" style="color:var(--r);text-decoration:underline">kushtet tona</a></span>
+          <span class="en">By registering, you accept our <a href="#" style="color:var(--r);text-decoration:underline">terms</a></span>
+        </p>
+      </div>
+
+      <!-- LOGIN FORM -->
+      <div id="auth-login-form" style="display:none">
+        <div class="field">
+          <label class="sq">Email-i juaj</label><label class="en">Your email</label>
+          <input type="email" id="login-email" placeholder="emri@gmail.com" autocomplete="email"/>
+        </div>
+        <div class="field">
+          <label class="sq">Fjalëkalimi</label><label class="en">Password</label>
+          <input type="password" id="login-pass" placeholder="Fjalëkalimi juaj" autocomplete="current-password"/>
+        </div>
+        <button class="btn btn-r btn-full btn-lg" onclick="loginAndCreate()">
+          <span class="sq">Hyr dhe hap listën →</span>
+          <span class="en">Login and open list →</span>
+        </button>
+        <div style="text-align:center;margin-top:.75rem">
+          <a href="#" style="font-size:.8rem;color:var(--r)" class="sq">Harrova fjalëkalimin</a>
+          <a href="#" style="font-size:.8rem;color:var(--r)" class="en">Forgot password</a>
+        </div>
+      </div>
+
+      <button class="btn btn-out btn-sm" onclick="backToStep1()" style="margin-top:.75rem">
+        <span class="sq">← Kthehu tek hapi 1</span>
+        <span class="en">← Back to step 1</span>
+      </button>
     </div>
-    <button class="btn btn-r btn-full btn-lg" onclick="createList()">
-      <span class="sq">Krijo listën time →</span><span class="en">Create my list →</span>
-    </button>
-    <p style="font-size:.72rem;color:var(--muted);text-align:center;margin-top:.65rem">
-      <span class="sq">Duke klikuar, pranoni kushtet tona</span>
-      <span class="en">By clicking, you accept our terms</span>
-    </p>
+
   </div>
 </div>
 
@@ -1457,14 +1621,142 @@ function selType(type,el){
   selectedType=type;
   document.querySelectorAll('.type-opt').forEach(o=>o.classList.remove('sel'));
   el.classList.add('sel');
-  const ph={dasma:'Blerim & Ardita',lindje:'Lena Hoxha',tjeter:'Emri & Mbiemri'};
+  const ph={
+    dasma:'Blerim & Ardita',
+    lindje:'Lena Hoxha',
+    udhetim:'Blerim & Ardita',
+    tjeter:'Emri & Mbiemri'
+  };
   document.getElementById('c-names').placeholder=ph[type]||'Emri juaj';
+  // Honeymoon special UX
+  const hi=document.getElementById('honey-info');
+  if(hi) hi.style.display=type==='udhetim'?'block':'none';
+  // Update label & target label
+  if(type==='udhetim'){
+    document.getElementById('target-label').innerHTML=lang==='sq'
+      ?'Objektivi i udhëtimit €':'Travel goal €';
+    document.getElementById('c-target').placeholder='5000';
+    document.getElementById('c-msg').placeholder=
+      lang==='sq'
+      ?'Ëndrra jonë është të shkojmë në Santorini...'
+      :'Our dream is to go to Santorini...';
+  } else {
+    document.getElementById('target-label').innerHTML=lang==='sq'
+      ?'Objektivi € <span style="font-size:.72rem;color:var(--muted)">(opsionale)</span>'
+      :'Goal € <span style="font-size:.72rem;color:var(--muted)">(optional)</span>';
+    document.getElementById('c-target').placeholder='2000';
+    document.getElementById('c-msg').placeholder='Faleminderit që jeni pjesë e festës sonë...';
+  }
 }
 
-// ─── CREATE LIST ────────────────────────────────────────
-function createList(){
+// ─── STEP NAVIGATION ────────────────────────────────────
+function goToStep2(){
   const names=document.getElementById('c-names').value.trim();
   if(!names){showToast('⚠️ '+(lang==='sq'?'Shkruani emrat':'Enter names'));return}
+
+  // Update step indicator
+  document.getElementById('cp1').classList.remove('active');
+  document.getElementById('cp1').classList.add('done');
+  document.getElementById('cp-line')||document.querySelector('.cp-line').classList.add('done');
+  document.querySelector('.cp-line').classList.add('done');
+  document.getElementById('cp2').classList.add('active');
+
+  // Update preview card
+  const typeEmojis={dasma:'💍',lindje:'👶',udhetim:'✈️',tjeter:'🎉'};
+  document.getElementById('lpc-emoji').textContent=typeEmojis[selectedType]||'💍';
+  document.getElementById('lpc-names').textContent=names;
+  const date=document.getElementById('c-date').value;
+  const typeLabels={
+    dasma:lang==='sq'?'Dasma':'Wedding',
+    lindje:lang==='sq'?'Lindje & Bebe':'Birth & Baby',
+    udhetim:lang==='sq'?'Udhëtim Nusërie':'Honeymoon',
+    tjeter:lang==='sq'?'Festë':'Celebration'
+  };
+  document.getElementById('lpc-type').textContent=
+    (typeLabels[selectedType]||'Lista')+(date?' · '+fmtDate(date):'');
+
+  // Pre-fill email if user exists
+  const u=getCurrentUser();
+  if(u&&u.email){
+    document.getElementById('reg-email').value=u.email;
+  }
+
+  // Switch steps
+  document.getElementById('create-s1').style.display='none';
+  document.getElementById('create-s2').style.display='block';
+
+  // Scroll sheet to top
+  document.querySelector('#s-create .sheet').scrollTop=0;
+}
+
+function backToStep1(){
+  document.getElementById('cp1').classList.add('active');
+  document.getElementById('cp1').classList.remove('done');
+  document.querySelector('.cp-line').classList.remove('done');
+  document.getElementById('cp2').classList.remove('active');
+  document.getElementById('create-s2').style.display='none';
+  document.getElementById('create-s1').style.display='block';
+}
+
+function switchAuthTab(tab){
+  document.getElementById('tab-reg').classList.toggle('active',tab==='reg');
+  document.getElementById('tab-login').classList.toggle('active',tab==='login');
+  document.getElementById('auth-reg-form').style.display=tab==='reg'?'block':'none';
+  document.getElementById('auth-login-form').style.display=tab==='login'?'block':'none';
+}
+
+// ─── AUTH (simulated — replace with real backend) ────────
+const USER_KEY='listaime_user';
+function getCurrentUser(){
+  try{return JSON.parse(localStorage.getItem(USER_KEY))||null}catch(e){return null}
+}
+function saveUser(u){ localStorage.setItem(USER_KEY,JSON.stringify(u)) }
+
+function registerAndCreate(){
+  const email=document.getElementById('reg-email').value.trim();
+  const pass=document.getElementById('reg-pass').value;
+  if(!email||!email.includes('@')){showToast('⚠️ '+(lang==='sq'?'Shkruani email-in':'Enter valid email'));return}
+  if(!pass||pass.length<6){showToast('⚠️ '+(lang==='sq'?'Fjalëkalimi duhet të ketë 6+ karaktere':'Password must be 6+ characters'));return}
+  // Simulate registration (in production: API call)
+  const user={email,name:email.split('@')[0],createdAt:Date.now()};
+  saveUser(user);
+  updateUserChip(user);
+  closeSheet('s-create');
+  createListNow();
+  showToast('✓ '+(lang==='sq'?`Mirë se vini, ${user.name}!`:`Welcome, ${user.name}!`));
+}
+
+function loginAndCreate(){
+  const email=document.getElementById('login-email').value.trim();
+  const pass=document.getElementById('login-pass').value;
+  if(!email||!pass){showToast('⚠️ '+(lang==='sq'?'Plotësoni të gjitha fushat':'Fill all fields'));return}
+  // Simulate login
+  const user={email,name:email.split('@')[0]};
+  saveUser(user);
+  updateUserChip(user);
+  closeSheet('s-create');
+  createListNow();
+  showToast('✓ '+(lang==='sq'?`Mirë se vini sërish!`:`Welcome back!`));
+}
+
+function continueWithoutAccount(){
+  closeSheet('s-create');
+  createListNow();
+  showToast('ℹ️ '+(lang==='sq'?'Lista nuk do të ruhet pas mbylljes':'List won\'t be saved after closing'));
+}
+
+function updateUserChip(user){
+  if(!user) return;
+  const chip=document.getElementById('user-chip');
+  if(chip){
+    chip.querySelector('.uc-name').textContent=user.email.split('@')[0];
+    chip.classList.add('show');
+  }
+}
+
+function createListNow(){
+  const names=document.getElementById('c-names').value.trim();
+  if(!names) return;
   const id=genId();
   const db=getDB();
   db[id]={
@@ -1473,19 +1765,46 @@ function createList(){
     msg:document.getElementById('c-msg').value.trim(),
     target:parseFloat(document.getElementById('c-target').value)||0,
     color:selectedColor,
-    items:demoItems(selectedType),
+    items:selectedType==='udhetim'?[]:demoItems(selectedType),
     collected:0,contributors:[],
     premium:false,
+    isHoneymoon:selectedType==='udhetim',
     createdAt:Date.now()
   };
   saveDB(db);
   currentListId=id;
-  closeSheet('s-create');
+  resetCreateSheet();
   showDash(id);
   showToast('✓ '+(lang==='sq'?'Lista u krijua!':'List created!'));
 }
 
+function resetCreateSheet(){
+  // Reset to step 1
+  document.getElementById('create-s1').style.display='block';
+  document.getElementById('create-s2').style.display='none';
+  document.getElementById('cp1').classList.add('active');
+  document.getElementById('cp1').classList.remove('done');
+  document.querySelector('.cp-line').classList.remove('done');
+  document.getElementById('cp2').classList.remove('active');
+  // Reset type
+  selectedType='dasma';
+  document.querySelectorAll('.type-opt').forEach(o=>o.classList.remove('sel'));
+  document.getElementById('t-dasma').classList.add('sel');
+  // Clear fields
+  ['c-names','c-date','c-target','c-msg'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el) el.value='';
+  });
+  document.getElementById('reg-email').value='';
+  document.getElementById('reg-pass').value='';
+  document.getElementById('honey-info').style.display='none';
+}
+
+// ─── CREATE LIST (kept for backwards compat) ─────────────
+function createList(){ goToStep2() }
+
 function demoItems(type){
+  if(type==='udhetim'||type==='honeymoon') return []; // Honeymoon = cagnotte only
   if(type==='dasma') return [
     {id:'d1',name:'Set kuzhine Zwilling',price:180,emoji:'🍳',taken:false},
     {id:'d2',name:'Krevat 160×200 IKEA',price:350,emoji:'🛏️',taken:false},
@@ -1506,6 +1825,12 @@ function demoItems(type){
   ];
 }
 
+function showMyDashboard(){
+  const lastId=localStorage.getItem('listaime_lastid');
+  if(lastId&&getDB()[lastId]) showDash(lastId);
+  else openSheet('s-create');
+}
+
 // ─── DASHBOARD ──────────────────────────────────────────
 function showDash(id){
   const db=getDB(); const list=db[id]; if(!list)return;
@@ -1513,11 +1838,46 @@ function showDash(id){
   localStorage.setItem('listaime_lastid',id);
   const link=window.location.origin+window.location.pathname+'#list/'+id;
   document.getElementById('share-inp').value=link;
-  document.getElementById('dash-title').textContent='✦ Lista e '+list.names;
+
+  // Honeymoon special title
+  const typeIcons={dasma:'💍',lindje:'👶',udhetim:'✈️',tjeter:'🎉'};
+  const icon=typeIcons[list.type]||'🎁';
+  document.getElementById('dash-title').textContent=icon+' Lista e '+list.names;
+
+  // Show honeymoon banner if applicable
+  let honeyBanner=document.getElementById('honey-dash-banner');
+  if(list.type==='udhetim'||list.isHoneymoon){
+    if(!honeyBanner){
+      honeyBanner=document.createElement('div');
+      honeyBanner.id='honey-dash-banner';
+      honeyBanner.style.cssText='background:linear-gradient(135deg,rgba(184,134,26,.1),rgba(168,32,32,.07));border:1.5px solid rgba(184,134,26,.3);border-radius:var(--rad-lg);padding:1.1rem;margin-bottom:1.25rem;text-align:center';
+      honeyBanner.innerHTML=`
+        <div style="font-size:1.5rem;margin-bottom:.35rem">✈️</div>
+        <div style="font-family:Cormorant,serif;font-size:1.15rem;font-weight:700;margin-bottom:.25rem">${lang==='sq'?'Cagnotte Udhëtim Nusërie':'Honeymoon Cagnotte'}</div>
+        <div style="font-size:.8rem;color:var(--muted);line-height:1.6" class="sq">Mysafirët kontribuojnë direkt për udhëtimin tuaj. Vendosni një objektiv dhe ndajeni me familjen!</div>
+        <div style="font-size:.8rem;color:var(--muted);line-height:1.6" class="en">Guests contribute directly to your trip. Set a goal and share it with family!</div>
+      `;
+      const addCard=document.querySelector('.add-card');
+      if(addCard) addCard.parentNode.insertBefore(honeyBanner,addCard);
+    }
+    // Hide add-item form for honeymoon (cagnotte only)
+    const addCard=document.querySelector('.add-card');
+    if(addCard) addCard.style.display='none';
+  } else {
+    if(honeyBanner) honeyBanner.remove();
+    const addCard=document.querySelector('.add-card');
+    if(addCard) addCard.style.display='block';
+  }
+
   updateStats(list);
   renderDashItems(list);
   const isPrem=list.premium||false;
   document.getElementById('upsell-box').style.display=isPrem?'none':'block';
+
+  // Restore user chip
+  const u=getCurrentUser();
+  if(u) updateUserChip(u);
+
   showPage('dash');
 }
 
@@ -1648,7 +2008,7 @@ function showListPage(id){
   const db=getDB(); const list=db[id]; if(!list){showToast('⚠️ '+(lang==='sq'?'Lista nuk u gjet':'List not found'));return}
   currentListId=id;
 
-  const tl={dasma:{sq:'💍 Dasma',en:'💍 Wedding'},lindje:{sq:'👶 Lindje',en:'👶 Birth'},tjeter:{sq:'🎉 Festë',en:'🎉 Celebration'}};
+  const tl={dasma:{sq:'💍 Dasma',en:'💍 Wedding'},lindje:{sq:'👶 Lindje',en:'👶 Birth'},udhetim:{sq:'✈️ Udhëtim Nusërie',en:'✈️ Honeymoon'},tjeter:{sq:'🎉 Festë',en:'🎉 Celebration'}};
   const t=tl[list.type]||tl.dasma;
   document.getElementById('lh-badge').innerHTML=`<span class="badge badge-r">${t[lang]||t.sq}</span>`;
   document.getElementById('lh-names').textContent=list.names;
@@ -1873,6 +2233,12 @@ function handleHash(){
 }
 window.addEventListener('hashchange',handleHash);
 handleHash();
+
+// Restore user session on load
+(function restoreSession(){
+  const u=getCurrentUser();
+  if(u) updateUserChip(u);
+})();
 
 // ─── SCROLL REVEAL ─────────────────────────────────────
 const ro=new IntersectionObserver((entries)=>{
